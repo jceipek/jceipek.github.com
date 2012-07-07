@@ -1,0 +1,45 @@
+#centerpiece {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  top: 36%;
+  margin-top: 0px;
+}
+#name {
+  font-size: 4.4em;
+  line-height: 1em;
+  font-family: 'Dosis', sans-serif;
+  font-weight: normal;
+}
+#links {
+  margin: 0;
+  padding-top: 15px;
+  font-size: 1.5em;
+  text-align: center;
+}
+#links li {
+  margin: 0em 1em;
+  display: inline;
+}
+#projects {
+  width: 100%;
+  position: static;
+  text-align: center;
+  background-color: #79efff;
+  height: 5000px;
+  margin-top: 20%;
+}
+#projects h2 {
+  color: white;
+  padding-top: 20px;
+  font-size: 3em;
+  margin-bottom: 100px;
+  text-shadow: #cccccc -1px -3px 0px;
+}
+#map {
+  background-color: #575757;
+  height: 500px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-color: #242424;
+}
