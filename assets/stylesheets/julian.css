@@ -1,9 +1,7 @@
 #centerpiece {
+  margin: 1em 0em;
   width: 100%;
   text-align: center;
-  position: relative;
-  top: 36%;
-  margin-top: 0px;
 }
 #name {
   font-size: 4.4em;
@@ -21,19 +19,24 @@
   margin: 0em 1em;
   display: inline;
 }
+#links li img {
+  width: 63px;
+}
+#links li img:hover {
+  opacity: 0.3;
+}
 #projects {
+  top: 100%;
   width: 100%;
-  position: static;
   text-align: center;
   background-color: #79efff;
   height: 5000px;
-  margin-top: 20%;
 }
 #projects h2 {
   color: white;
-  padding-top: 20px;
+  padding-top: 0.6em;
   font-size: 3em;
-  margin-bottom: 100px;
+  margin-bottom: 1.76em;
   text-shadow: #cccccc -1px -3px 0px;
 }
 #map {

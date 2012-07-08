@@ -1,12 +1,14 @@
 @brand-color: rgb(121, 239, 255);
 @disabled-color: rgb(162,162,162);
 
+body#b {
+  //background-color: red;  
+}
+
 #centerpiece {
+  margin: 1em 0em;
   width: 100%;
   text-align: center;
-  position: relative;
-  top: 36%;
-  margin-top: 0px;
 }
 
 #name {
@@ -25,22 +27,30 @@
   li {
     margin: 0em 1em;
     display: inline;
+
+    img {
+      width: 63px;  
+    }
+
+    img:hover {
+      opacity: 0.3;  
+    }
   }
 }
 
 #projects {
+  top: 100%;
+  
   width: 100%;
-  position: static;
   text-align: center; 
   background-color: @brand-color;
   height: 5000px;
-  margin-top: 20%;  
 
   h2 {
     color: white;
-    padding-top: 20px;
+    padding-top: 0.6em;
     font-size: 3em;
-    margin-bottom: 100px;
+    margin-bottom: 1.76em;
     text-shadow: rgb(204, 204, 204) -1px -3px 0px;
   }
 }

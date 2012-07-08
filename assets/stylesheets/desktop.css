@@ -3,3 +3,7 @@
   position: absolute;
   margin-top: -10em;
 }
+#centerpiece {
+  bottom: 57%;
+  position: absolute;
+}
