@@ -19,17 +19,32 @@ body#b {
 }
 
 #links {
-  margin: 0;
+  margin: 0 auto;
   padding-top: 15px;  
   font-size: 1.5em;
   text-align: center;
+  width: 18em;
+  height: 4em;
 
-  li {
+  .nav-item {
     margin: 0em 1em;
     display: inline;
+    float: left;
+
+    a {
+      display: block;  
+    }
+
+    figure {
+      margin: 0;  
+    }
+
+    figcaption {
+      padding-top: 0.2em;  
+    }
 
     img {
-      width: 63px;  
+      width: 63px;
     }
 
     img:hover {

@@ -10,19 +10,31 @@
   font-weight: normal;
 }
 #links {
-  margin: 0;
+  margin: 0 auto;
   padding-top: 15px;
   font-size: 1.5em;
   text-align: center;
+  width: 18em;
+  height: 4em;
 }
-#links li {
+#links .nav-item {
   margin: 0em 1em;
   display: inline;
+  float: left;
 }
-#links li img {
+#links .nav-item a {
+  display: block;
+}
+#links .nav-item figure {
+  margin: 0;
+}
+#links .nav-item figcaption {
+  padding-top: 0.2em;
+}
+#links .nav-item img {
   width: 63px;
 }
-#links li img:hover {
+#links .nav-item img:hover {
   opacity: 0.3;
 }
 #projects {
