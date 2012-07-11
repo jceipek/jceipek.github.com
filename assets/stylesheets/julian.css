@@ -25,6 +25,9 @@
 #links .nav-item a {
   display: block;
 }
+#links .nav-item a:hover {
+  text-decoration: none;
+}
 #links .nav-item figure {
   margin: 0;
 }
@@ -34,7 +37,7 @@
 #links .nav-item img {
   width: 63px;
 }
-#links .nav-item img:hover {
+#links .nav-item:hover {
   opacity: 0.3;
 }
 #projects {
