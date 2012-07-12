@@ -37,9 +37,6 @@ body {
 #links .nav-item figcaption {
   padding-top: 0.2em;
 }
-#links .nav-item img {
-  width: 63px;
-}
 #links .nav-item:hover {
   opacity: 0.3;
 }
@@ -48,7 +45,7 @@ body {
   width: 100%;
   text-align: center;
   background-color: #79efff;
-  height: 5000px;
+  height: 72em;
 }
 #projects h2 {
   color: white;
@@ -61,10 +58,32 @@ body {
 #projects img {
   padding-bottom: 0.2em;
 }
+.label {
+  font-size: 0.5em;
+  line-height: 1em;
+  padding: 0.1em 0.3em;
+}
+h3 {
+  font-size: 4em;
+  line-height: 1em;
+  margin: 0.5em 0em;
+}
 #map {
   background-color: #575757;
-  height: 500px;
+  height: 57em;
   border-top-style: solid;
   border-top-width: 2px;
   border-color: #242424;
+}
+#map img {
+  float: left;
+  margin-left: -1em;
+  margin-right: 2em;
+  border-radius: 1.5em;
+}
+#map p {
+  font-size: 5em;
+  line-height: 1em;
+  text-align: left;
+  color: #a3a3a3;
 }
