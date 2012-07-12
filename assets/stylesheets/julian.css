@@ -52,10 +52,14 @@ body {
 }
 #projects h2 {
   color: white;
-  padding-top: 0.6em;
-  font-size: 3.6em;
-  margin-bottom: 1.76em;
-  text-shadow: #cccccc -1px -3px 0px;
+  padding-top: 0.4em;
+  padding-bottom: 0.1em;
+  font-size: 4.6em;
+  font-family: 'Dosis', sans-serif;
+  font-weight: normal;
+}
+#projects img {
+  padding-bottom: 0.2em;
 }
 #map {
   background-color: #575757;
