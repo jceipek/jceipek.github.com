@@ -8,14 +8,15 @@
       content="Engineering Beautiful Interaction"
     />
     <link href="assets/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" />
-    <link href='http://fonts.googleapis.com/css?family=Dosis:200' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Dosis:200|Raleway:100' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="width=device-width initial-scale=1"> <!-- , maximum-scale=1" -->
     <link href="assets/stylesheets/julian.css" media="screen" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" media="screen and (min-height: 410px)" href="assets/stylesheets/desktop.css" />
   </head>
     <div id='centerpiece'>
-      <h1 id='name'>Jul&middot;i&middot;an Cei&middot;pek</h1>
-      <div id='subtitle'>learning to make beautiful things that work for people</div>
+      <div class='intro-text'>Hi, I'm</div>
+      <h1 id='name' title='ˈjo͞o&middot;li&middot;an CHī&middot;pek'>Julian Ceipek</h1>
+      <div class='intro-text'>I strive to make beautiful things that work for people</div>
       <nav id='links'>
         <ul>
           <li class='nav-item'>
@@ -45,15 +46,87 @@
         </ul>
       </nav>
     </div>
+
     <div id='projects'>
-      <h2>Stuff I've Done</h2>
+      <h2>stuff I've done</h2>
       <img alt='down arrow' src="assets/images/arrow.png" />
+      
+      <section class='project' id='engulf'>
+        <h3 class='project-title'>engulf</h3>
+        <img alt="engulf" src="assets/images/projects/engulf.png"></img>
+        <div class='description'>
+          <h4 class='tagline'>Endless gesture-driven consumption</h4>
+          <p>
+            This day-long project began as an attempt to make an interesting
+            demo for my Python drawing library, pyshiva. As soon as I 
+            connected the library to the Kinect, I knew that I wanted to make
+            a game.
+          </p>
+          <p>
+            In Engulf, your avatar is a cell-like organism searching
+            for food. You move it and control its size with one hand and
+            manipulate its color with the other -- you can only eat food of 
+            the same color that you are.
+          </p>
+        </div>
+      </section>
+      <section class='project' id='pyshiva'>
+        <h3 class='project-title'>pyShiva</h3>
+        <img alt="pyShiva" src="assets/images/projects/pyshiva.png"></img>
+        <div class='description'>
+          <h4 class='tagline'>Simple 2D vector graphics for Python</h4>
+          <p>
+            With pyshiva, graphics programming is fun again. The pyshiva python module provides
+            a simple, object-oriented programming interface for creating stunning 2D graphics
+            for realtime data visualization, games, and general 2D experimentation.
+          </p>
+          <p>
+            Technical details: pyshiva is a high level Cython extension built on the OpenGL-based ANSI-C ShivaVG graphics library and the cross-platform GLFW windowing library. It abstracts the process of drawing objects via an object-oriented API that enables programmers to create persistent vector graphics objects.
+          </p>
+          <a href='https://github.com/jceipek/pyShiva/'>Try it now!</a>
+        </div>
+      </section>
+      <section class='project' id='pix'>
+        <h3 class='project-title'>Pix.</h3>
+        <img alt="Pix." src="assets/images/projects/pix.png"></img>
+        <div class='description'>
+          <h4 class='tagline'>A 16-bit platformer in Assembly</h4>
+          <p>
+            @notch, esteemed creator of Minecraft, is making a new game, 
+            0x10<sup>c</sup>, in which players program spaceships with
+            virtual "DCPU-16" processors. 
+          </p>
+          <p>
+            Pix is a 16-bit arcade platformer game that
+            will run on these virtual processors once 0x10<sup>c</sup> is
+            released.
+          </p>
+          <a href='http://0x10co.de/ly99i'>Play it now!</a>
+        </div>
+      </section>
+      <!--
+      <section class='project' id='n-transit'>
+        <h3 class='project-title'>Nietzsche Transit</h3>
+        <img alt="Nietzsche Transit" src="assets/images/projects/engulf.png"></img>
+        <div class='description'>
+          <h4 class='tagline'>Humanizing MBTA Transportation</h4>
+          <p>
+            ???
+          </p>
+        </div>
+      </section>
+    -->
       <section class='project' id='map'>
-        <h3>The Marauder's Map @ Olin <span class="label label-info">Work in Progress</span></h3>
-        <img alt="marauder's map" src="assets/images/projects/map.png">
-        <p>
-          What if you could find your friends, <em>all the time</em>?
-        </p>
+        <h3 class='project-title'>Marauder's Map @ Olin</h3>
+        <img alt="Marauder's Map @ Olin" src="assets/images/projects/map.png"></img>
+        <div class='description'>
+          <h4 class='tagline'>Never lose your friends again</h4>
+          <p>
+            Olin is a small community of engineers that work on projects together.
+            But how can people find each other to work on those projects? Enter the Marauder's Map @ Olin,
+            a voluntary automated tracking system that uses Wifi access points to locate student laptops.
+          </p>
+        </div>
       </section>
     </div>
   </body>
