@@ -75,6 +75,7 @@ h3 {
   line-height: 1em;
   margin: 0.5em 0em;
   font-family: 'Raleway', sans-serif;
+  font-weight: normal;
 }
 #map h3,
 #pyshiva h3 {
@@ -94,6 +95,7 @@ h3 {
   padding-top: 0.25em;
   padding-bottom: 0.25em;
   font-family: 'Raleway', sans-serif;
+  font-weight: normal;
   color: #acacac;
   position: absolute;
   max-width: 9em;
@@ -112,6 +114,7 @@ h3 {
 }
 .project .tagline {
   font-family: 'Dosis', sans-serif;
+  font-weight: normal;
   font-style: italic;
   font-size: 2.5em;
   margin-bottom: 0.5em;
