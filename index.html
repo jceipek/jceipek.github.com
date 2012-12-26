@@ -48,88 +48,118 @@
     </div>
 
     <div id='projects'>
-      <h2>stuff I've done</h2>
-      <img alt='down arrow' src="assets/images/arrow.png" />
-      
-      <section class='project' id='engulf'>
-        <h3 class='project-title'>engulf</h3>
-        <img alt="engulf" src="assets/images/projects/engulf.png"></img>
-        <div class='description'>
-          <h4 class='tagline'>Endless gesture-driven consumption</h4>
-          <p>
-            Engulf is a frantic quest to consume nutrients and grow larger while escaping
-            a cloud of enemies. The gameplay and control scheme are finely tuned to
-            take advantage of the Kinect; you must change your avatar's appearance and
-            size in order to eat food of the appropriate color while dodging between narrow
-            gaps formed by enemies harrowing you at every turn.
-          </p>
-          <p>
-            This day-long project began as an attempt to make a
-            demo for my Python drawing library, pyshiva. As soon as I 
-            connected the library to the Kinect, I knew that I wanted to make
-            a game.
-          </p>
+      <div id='projects-header'>
+        <h2>stuff I've done</h2>
+        <img alt='down arrow' src="assets/images/arrow.png" />
+      </div>
 
-        </div>
-      </section>
-      <section class='project' id='pyshiva'>
-        <h3 class='project-title'>pyShiva</h3>
-        <img alt="pyShiva" src="assets/images/projects/pyshiva.png"></img>
-        <div class='description'>
-          <h4 class='tagline'>Simple 2D vector graphics for Python</h4>
-          <p>
-            With pyshiva, graphics programming is fun again. The pyshiva Python module provides
-            a simple, object-oriented programming interface for creating stunning 2D graphics
-            for realtime data visualization, games, and general 2D experimentation.
-          </p>
-          <p>
-            Technical details: pyshiva is a high level Cython extension built on the OpenGL-based ANSI-C ShivaVG graphics library and the cross-platform GLFW windowing library. It abstracts the process of drawing objects via an object-oriented API that enables programmers to create persistent vector graphics objects.
-          </p>
-          <a href='https://github.com/jceipek/pyShiva/'>Try it now!</a>
-        </div>
-      </section>
-      <section class='project' id='pix'>
-        <h3 class='project-title'>Pix.</h3>
-        <img alt="Pix." src="assets/images/projects/pix.png"></img>
-        <div class='description'>
-          <h4 class='tagline'>A 16-bit platformer in Assembly</h4>
-          <p>
-            @notch, esteemed creator of Minecraft, is making a new game, 
-            0x10<sup>c</sup>, in which players program spaceships with
-            virtual "DCPU-16" processors. 
-          </p>
-          <p>
-            Pix is a 16-bit arcade platformer game that
-            will run on these virtual processors once 0x10<sup>c</sup> is
-            released.
-          </p>
-          <a href='http://0x10co.de/ly99i'>Play it now!</a>
-        </div>
-      </section>
-      <!--
-      <section class='project' id='n-transit'>
-        <h3 class='project-title'>Nietzsche Transit</h3>
-        <img alt="Nietzsche Transit" src="assets/images/projects/engulf.png"></img>
-        <div class='description'>
-          <h4 class='tagline'>Humanizing MBTA Transportation</h4>
-          <p>
-            ???
-          </p>
-        </div>
-      </section>
-    -->
-      <section class='project' id='map'>
-        <h3 class='project-title'>Marauder's Map @ Olin</h3>
-        <img alt="Marauder's Map @ Olin" src="assets/images/projects/map.png"></img>
-        <div class='description'>
-          <h4 class='tagline'>Never lose your friends again</h4>
-          <p>
-            Olin is a small community of engineers that work on projects together.
-            But how can people find each other to work on those projects? Enter the Marauder's Map @ Olin,
-            a voluntary automated tracking system that uses Wifi access points to locate student laptops.
-          </p>
-        </div>
-      </section>
+      <div id='project-container'>
+
+        <section class='project' id='engulf'>
+          <h3 class='project-title'>engulf</h3>
+          <img alt="engulf" src="assets/images/projects/engulf.png"></img>
+          <div class='meta'>
+            <div><span class='category'>Skills:</span><span class='value'>Game Design, Interaction Design, Python</span></div>
+            <div><span class='category'>Roles:</span><span class='value'>Design &amp; Implementation</span></div>
+            <div><span class='category'>Status:</span><span class='value'>Complete</span></div>
+          </div>
+          <div class='description'>
+            <h4 class='tagline'>Endless gesture-driven consumption</h4>
+            <p>
+              Engulf is a frantic quest to consume nutrients and grow larger while escaping
+              a cloud of enemies. The gameplay and control scheme are finely tuned to
+              take advantage of the Kinect; you must change your avatar's appearance and
+              size in order to eat food of the appropriate color while dodging between narrow
+              gaps formed by enemies harrowing you at every turn.
+            </p>
+            <p>
+              This day-long project began as an attempt to make a
+              demo for my Python drawing library, pyshiva. As soon as I 
+              connected the library to the Kinect, I knew that I wanted to make
+              a game.
+            </p>
+
+          </div>
+        </section>
+        <section class='project' id='pyshiva'>
+          <h3 class='project-title'>pyShiva</h3>
+          <img alt="pyShiva" src="assets/images/projects/pyshiva.png"></img>
+          <div class='meta'>
+            <div><span class='category'>Collaborators:</span><span class='value'>Berit Johnson, Diana Vermilya, Charles Gwennap</span></div>
+            <div><span class='category'>Skills:</span><span class='value'>API Design, C, Cython, Python</span></div>
+            <div><span class='category'>Roles:</span><span class='value'>Design &amp; Implementation</span></div>
+            <div><span class='category'>Status:</span><span class='value'>Under Active Development</span></div>
+          </div>
+          <div class='description'>
+            <h4 class='tagline'>Simple 2D vector graphics for Python</h4>
+            <p>
+              With pyshiva, graphics programming is fun again. The pyshiva Python module provides
+              a simple, object-oriented programming interface for creating stunning 2D graphics
+              for realtime data visualization, games, and general 2D experimentation.
+            </p>
+            <p>
+              Technical details: pyshiva is a high level Cython extension built on the OpenGL-based ANSI-C ShivaVG graphics library and the cross-platform GLFW windowing library. It abstracts the process of drawing objects via an object-oriented API that enables programmers to create persistent vector graphics objects.
+            </p>
+            <a href='https://github.com/jceipek/pyShiva/'>Try it now!</a>
+          </div>
+        </section>
+        <section class='project' id='pix'>
+          <h3 class='project-title'>Pix.</h3>
+          <img alt="Pix." src="assets/images/projects/pix.png"></img>
+          <div class='meta'>
+            <div><span class='category'>Collaborators:</span><span class='value'>Reilly Butler, Alyssa Bawgus, Jazmin Gonzalez-Rivero</span></div>
+            <div><span class='category'>Skills:</span><span class='value'>Game Design, Tool Development, Python, DCPU-16 Assembly</span></div>
+            <div><span class='category'>Roles:</span><span class='value'>Art, Design, Tools, Implementation</span></div>
+            <div><span class='category'>Status:</span><span class='value'>Complete</span></div>
+          </div>
+          <div class='description'>
+            <h4 class='tagline'>A 16-bit platformer in Assembly</h4>
+            <p>
+              @notch, esteemed creator of Minecraft, is making a new game, 
+              0x10<sup>c</sup>, in which players program spaceships with
+              virtual "DCPU-16" processors. 
+            </p>
+            <p>
+              Pix is a 16-bit arcade platformer game that
+              will run on these virtual processors once 0x10<sup>c</sup> is
+              released.
+            </p>
+            <a href='http://0x10co.de/ly99i'>Play it now!</a>
+          </div>
+        </section>
+        <!--
+        <section class='project' id='n-transit'>
+          <h3 class='project-title'>Nietzsche Transit</h3>
+          <img alt="Nietzsche Transit" src="assets/images/projects/engulf.png"></img>
+          <div class='description'>
+            <h4 class='tagline'>Humanizing MBTA Transportation</h4>
+            <p>
+              ???
+            </p>
+          </div>
+        </section>
+      -->
+        <section class='project' id='map'>
+          <h3 class='project-title'>Marauder's Map @ Olin</h3>
+          <img alt="Marauder's Map @ Olin" src="assets/images/projects/map.png"></img>
+          <div class='meta'>
+            <div><span class='category'>Collaborators:</span><span class='value'>Tim Ryan, Lisa Park, Cory Dolphin, others</span></div>
+            <div><span class='category'>Original Implementation:</span><span class='value'>Ben Fischer, Andrew Barry</span></div>
+            <div><span class='category'>Skills:</span><span class='value'>Design, Python Prototyping, Objective C, Web Technologies</span></div>
+            <div><span class='category'>Roles:</span><span class='value'>Design &amp; Development of Web App and OS X Client</span></div>
+            <div><span class='category'>Status:</span><span class='value'>Work in Progress</span></div>
+          </div>
+          <div class='description'>
+            <h4 class='tagline'>Never lose your friends again</h4>
+            <p>
+              Olin is a small community of engineers that work on projects together.
+              But how can people find each other to work on those projects? Enter the Marauder's Map @ Olin,
+              a voluntary automated tracking system that uses Wifi access points to locate student laptops.
+            </p>
+          </div>
+        </section>
+
+      <div>
     </div>
   </body>
 </html>
