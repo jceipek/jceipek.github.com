@@ -1,3 +1,6 @@
 [submodule "Shades-Unity"]
 	path = Shades-Unity
 	url = git://github.com/jceipek/Shades-Unity.git
+[submodule "LudumDare23"]
+	path = LudumDare23
+	url = git://github.com/jceipek/LudumDare23.git
