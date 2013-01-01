@@ -1,0 +1,3 @@
+[submodule "Shades-Unity"]
+	path = Shades-Unity
+	url = git://github.com/jceipek/Shades-Unity.git
