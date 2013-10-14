@@ -10,3 +10,6 @@
 [submodule "Scrubbing-Calc"]
 	path = Scrubbing-Calc
 	url = git://github.com/jceipek/Scrubbing-Calc.git
+[submodule "p-draw"]
+	path = p-draw
+	url = git@github.com:jceipek/P-Draw.git
