@@ -10,3 +10,6 @@
 [submodule "p-draw"]
 	path = p-draw
 	url = git://github.com/jceipek/P-Draw.git
+[submodule "Olin-Coding-Tutorials"]
+	path = Olin-Coding-Tutorials
+	url = https://github.com/jceipek/Olin-Coding-Tutorials.git
