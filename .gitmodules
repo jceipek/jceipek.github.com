@@ -4,9 +4,6 @@
 [submodule "LudumDare23"]
 	path = LudumDare23
 	url = git://github.com/jceipek/LudumDare23.git
-[submodule "Olin-Coding-Tutorials"]
-	path = Olin-Coding-Tutorials
-	url = git://github.com/jceipek/Olin-Coding-Tutorials.git
 [submodule "Scrubbing-Calc"]
 	path = Scrubbing-Calc
 	url = git://github.com/jceipek/Scrubbing-Calc.git
