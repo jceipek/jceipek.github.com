@@ -1,13 +1,13 @@
 window.onload=function() {
-  var playing = false;
-
-  var sound = new Howl({
-    urls: ['sounds.m4a', 'sounds.ogg', 'sounds.wav'],
-    sprite: {
-      beat: [0, 453],
-      brrp: [453, 917]
-    }
-  });
+  var playing = false
+    , penalties = 0
+    , sound = new Howl({
+        urls: ['sounds.m4a', 'sounds.ogg', 'sounds.wav'],
+        sprite: {
+          beat: [0, 453],
+          brrp: [453, 917]
+        }
+      });
 
   function clear_bg () {
     document.body.classList.remove("good");
@@ -15,6 +15,8 @@ window.onload=function() {
   }
 
   function start_game () {
+      penalties = 0;
+      document.getElementById('js-penalties').innerHTML = penalties;
       this.onclick = stop_game;
       this.innerHTML = "Stop";
       playing = true;
@@ -25,6 +27,8 @@ window.onload=function() {
           var total = Math.pow(event.acceleration.x, 2) + Math.pow(event.acceleration.y, 2) + Math.pow(event.acceleration.z, 2);
           if (total > 1 && !can_move) {
               document.body.classList.add("bad");
+              penalties += 1;
+              document.getElementById('js-penalties').innerHTML = penalties;
               sound.play('brrp');
               console.log("Brrp");
           }

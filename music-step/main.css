@@ -15,3 +15,8 @@ button {
   margin-left: -2.5em;
   margin-top: -1.5em;
 }
+
+.penalties {
+  padding: 0.1em 0.7em;
+  font-size: 2em;
+}
