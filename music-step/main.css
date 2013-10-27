@@ -1,0 +1,17 @@
+body.bad {
+  background: #ff6666;
+}
+
+body.good, body.bad.good {
+  background: #6666ff;
+}
+
+button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height:3em;
+  width: 5em;
+  margin-left: -2.5em;
+  margin-top: -1.5em;
+}
