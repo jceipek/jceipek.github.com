@@ -1,6 +1,5 @@
 window.onload=function() {
   var playing = false
-    , penalties = 0
     , sound = new Howl({
         urls: ['sounds.m4a', 'sounds.ogg', 'sounds.wav'],
         sprite: {
@@ -15,43 +14,41 @@ window.onload=function() {
   }
 
   function start_game () {
-      penalties = 0;
-      document.getElementById('js-penalties').innerHTML = penalties;
       this.onclick = stop_game;
       this.innerHTML = "Stop";
       playing = true;
 
       console.log("Start Clicked");
       var can_move = false;
-      window.ondevicemotion = function(event) {  
+      var penalty_added = false;
+      window.ondevicemotion = function(event) {
           var total = Math.pow(event.acceleration.x, 2) + Math.pow(event.acceleration.y, 2) + Math.pow(event.acceleration.z, 2);
           if (total > 1 && !can_move) {
-              document.body.classList.add("bad");
-              penalties += 1;
-              document.getElementById('js-penalties').innerHTML = penalties;
-              sound.play('brrp');
-              console.log("Brrp");
-          }
-          else {
-              document.body.classList.remove("bad");
+              if (!penalty_added) {
+                document.body.classList.add("bad");
+                penalty_added = true;
+                sound.play('brrp');
+              };
           }
       }
 
       function start_moving() {
+          can_move = true;
+          penalty_added = false;
+          document.body.classList.remove("bad");
+          document.body.classList.add("good");
+
           setTimeout(function(){
               sound.play('beat');
-              console.log("Beat");
               if (playing) {
-                setTimeout(stop_moving, 900);
-                clear_bg();
+                setTimeout(stop_moving, 1900);
               }
-          }, 500);
-          can_move = true;
-          document.body.classList.add("good");
+          }, 700);
       }
 
       function stop_moving() {
           can_move = false;
+          clear_bg();
           document.body.classList.remove("good");
           if (playing) {
             setTimeout(start_moving, 400);
@@ -60,7 +57,7 @@ window.onload=function() {
           }
       }
 
-      start_moving(); 
+      start_moving();
   };
 
   function stop_game () {
