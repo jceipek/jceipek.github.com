@@ -1,0 +1,113 @@
+@charset "utf-8";
+
+body {
+  background: #d4d4d4 url("../images/background.png");
+  background-attachment: fixed;
+  font-family: sans-serif;
+  color: #333;
+}
+
+header {
+  text-shadow: 1px 1px 2px #eee;
+  text-align: center;
+  border-top: 20px solid;
+  border-bottom: 7px solid;
+  border-color: #333;
+  padding:1em;
+  font-family: 'Fredericka the Great', cursive;
+}
+
+h1 {
+  margin-top: 0.5em;
+  font-size: 2.5em;
+  margin-bottom: 0;
+}
+
+.subtitle {
+  font-size: 1.2em;
+  margin-top: 0.2em;
+  font-family: 'Fredericka the Great', cursive;
+}
+
+.intro {
+  font-size: 1.5em;
+  font-family: sans-serif;
+}
+
+section {
+  font-size: 1.2em;
+  line-height: 1.2em;
+}
+
+section p {
+  padding: 0 2em;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  padding-left: 1em;
+  font-size: 3em;
+  line-height: 3em;
+  background-color: rgba(1,0,0,0.1);
+  background-attachment: fixed;
+  font-family: 'Fredericka the Great', cursive;
+  color: #fff;
+  margin: 0;
+}
+
+.subsection {
+  margin: 0 1em;
+}
+
+h3 {
+  padding-left: 1em;
+  font-size: 2em;
+  line-height: 2em;
+  background-color: rgba(1,0,0,0.1);
+  background-attachment: fixed;
+  font-family: 'Fredericka the Great', cursive;
+  color: #fff;
+}
+
+.motivation {
+
+}
+
+/* For game demo */
+.demo {
+  /*background-color: red;*/
+
+  border-left: 5px #33a solid;
+  width: 80%;
+  height: 20em;
+}
+
+.demo .controls {
+  background-color: #333;
+  padding: 0.1em 0.5em;
+
+  display: inline-block;
+  vertical-align: top;
+  zoom: 1; /* Fix for IE7 */
+  *display: inline; /* Fix for IE7 */
+}
+
+.controls a {
+  color: #eee;
+}
+
+.demo-content {
+  height: 18.5em;
+  overflow: scroll;
+  margin-bottom: 1em;
+}
+
+footer {
+  margin-top: 1em;
+  background-color: #333;
+  height: 20px;
+}
