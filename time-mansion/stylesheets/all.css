@@ -51,7 +51,8 @@ section p {
 h2 {
   padding-left: 1em;
   font-size: 3em;
-  line-height: 3em;
+  line-height: 1em;
+  padding: 1em 1em;
   background-color: rgba(1,0,0,0.1);
   background-attachment: fixed;
   font-family: 'Fredericka the Great', cursive;
@@ -110,4 +111,9 @@ footer {
   margin-top: 1em;
   background-color: #333;
   height: 20px;
+}
+
+.ref {
+  color: #dd3333;
+  font-style: italic;
 }
