@@ -16,122 +16,126 @@
       <h1>Time Mansion</h1>
       Take Back the Future
       <div class='subtitle'>Game Design Document</div>
-      <small>Work in Progress - last updated 11/25/2013</small>
+      <small>Work in Progress - last updated 11/26/2013</small>
     </header>
     <blockquote class='intro'>"[Gameplay feel summary]</blockquote>
-    <section>
-      <h2>Vision</h2>
-      <p>Imagine a game that changes based on how you play it. A game that tells a story in which things happen, but you have full control over what they are. The events in the story are not predetermined; they evolve as you travel back and forth in time in order to change the ultimate course of events. You have free reign to change what has happened by interacting with characters that have motivations and behaviors inspired by classic mystery fiction -- the kind of fiction that features characters trapped in a mansion, having sordid affairs, and murdering one another over petty squabbles.</p>
-      <p>You play as a time traveler thrust into this mess and need to figure out how to shape events so that they play out in your favor. Maybe you decide to play the hero, saving lives by preventing characters from meeting under unfortunate circumstances. Perhaps you thrive on chaos and want to see if you can make all of the mansion's inhabitants attack one another.</p>
-      <p>It's all up to you.</p>
-      <p><span class='ref game-name'>Time mansion</span> is a point-and-click adventure game that puts you in control of the story. No longer is the outcome a linear slog through some pre-scripted sequence designed by writers hundreds of miles away for "all audiences." Instead, each short playthrough is unique and won't have been experienced before by you or anyone else in the world.</p>
-    </section>
-    <aside>
-      <h2>Contents</h2>
-      <ol>
-        <li>Vision</li>
-        <li>Motivation</li>
-        <li>Gameplay</li>
+    <div class='center-column'>
+      <section>
+        <h2>Vision</h2>
+        <p>Imagine a game that changes based on how you play it. A game that tells a story in which things happen, but you have full control over what they are. The events in the story are not predetermined; they evolve as you travel back and forth in time in order to change the ultimate course of events. You have free reign to change what has happened by interacting with characters that have motivations and behaviors inspired by classic mystery fiction -- the kind of fiction that features characters trapped in a mansion, having sordid affairs, and murdering one another over petty squabbles.</p>
+        <p>You play as a time traveler thrust into this mess and need to figure out how to shape events so that they play out in your favor. Maybe you decide to play the hero, saving lives by preventing characters from meeting under unfortunate circumstances. Perhaps you thrive on chaos and want to see if you can make all of the mansion's inhabitants attack one another.</p>
+        <p>It's all up to you.</p>
+        <p><span class='ref game-name'>Time mansion</span> is a point-and-click adventure game that puts you in control of the story. No longer is the outcome a linear slog through some pre-scripted sequence designed by writers hundreds of miles away for "all audiences." Instead, each short playthrough is unique and won't have been experienced before by you or anyone else in the world.</p>
+        <h2>Contents</h2>
         <ol>
-          <li>Mechanics</li>
-          <ul>
-            <li>Actions</li>
-            <li>Relationships</li>
-            <li>Emotions</li>
-          </ul>
+          <li>Vision</li>
+          <li>Motivation</li>
+          <li>Gameplay</li>
+          <ol>
+            <li><a href='#mechanics'>Mechanics</a></li>
+            <ul>
+              <li>Actions</li>
+              <li>Relationships</li>
+              <li>Emotions</li>
+            </ul>
+          </ol>
+          <li>Storytelling and AI</li>
+          <ol>
+            <li>Wordless Stories</li>
+          </ol>
+          <li>Aesthetics</li>
+          <ol>
+            <li>Visuals</li>
+            <li>Music</li>
+          </ol>
+          <li>Business Concerns</li>
+          <ol>
+            <li>Target Audience</li>
+            <li>Target Platforms</li>
+          </ol>
         </ol>
-        <li>Storytelling and AI</li>
-        <ol>
-          <li>Wordless Stories</li>
-        </ol>
-        <li>Aesthetics</li>
-        <ol>
-          <li>Visuals</li>
-          <li>Music</li>
-        </ol>
-        <li>Business Concerns</li>
-        <ol>
-          <li>Target Audience</li>
-          <li>Target Platforms</li>
-        </ol>
-      </ol>
-    </aside>
-    <section>
-      <h2>Motivation</h2>
-      <p>Existing games are mostly linear (come up with some examples)</p>
-      <p>Existing games mostly focus on long play times, but once you're done, you don't want to play again unless you are a completionist and want to get some "achievements" the game designers put in to make the game seem richer and more valuable.</p>
-      <p>There is a place for games that are short but can be played again and again (think of board games that change based on the people you play them with and the strategies those people use)</p>
-      <p>Computer games have the benefit that they can be played alone and that people don't have to enforce rules themselves. Complex rules are not well-suited to board games</p>
-      <p>Games let you explore situations and rule systems without real consequences</p>
-      <p>How is this different from <a class='ref' href='#'>Moonligters</a>, <a class='ref' href="#">Quicksilver: Infinite Story</a> -- those games require a lot of authorial content. This only requires a DB of reactions.</p>
-      <p><span class='ref game-name'>Time Mansion</span> explores the concept of long-term consequence chains. Reminiscent of time travel movies like Back to the Future. Real butterfly effect. Also, concept of <a class='ref' href="#">Rashomon</a> -- that your perspective changes the way you interpret a story. Maybe you think someone is a villain, but you realize that their actions would never have happened if someone else hadn't done something earlier on.</p>
-    </section>
-    <section>
-      <h2>Gameplay</h2>
-      <p><span class='ref game-name'>Time Mansion</span> plays like a first person adventure game in the style of Myst. The mechanics consist of</p>
-      <ul>
-        <li>Moving from room to room</li>
-        <li>Interacting with characters (the same actions other characters can take)</li>
-        <li>Going back in time</li>
-      </ul>
-      <div class='subsection'>
-        <h3>Mechanics</h3>
-        <p>Note that the mechanics of <span class='ref game-name'>Time Mansion</span> are very simple. The core of the game is uncovering and manipulating chains of causality -- there is no place for first-person-shooter style movement controls (is there, though? Not sure if it might be possible to emphasize the theme of temporal freedom with movement freedom, maybe intentional contrast).</p>
-        <p>The only advantages you have over the computer-controlled characters is that you have temporal awareness -- you know what other characters will do if you don't change anything -- and you are more capable of making intelligent decisions than the characters in the game.</p>
-      </div>
-      <div class='subsubsection'>
-        <h4>Actions</h4>
-      </div>
-      <div class='subsubsection'>
-        <h4>Relationships</h4>
-      </div>
-      <div class='subsubsection'>
-        <h4>Emotions</h4>
-      </div>
-    </section>
-    <section>
-      <h2>Storytelling and AI</h2>
-      <p>Story is inseparable from game</p>
-      <p>Story must be as deterministic as possible. Why? Because of time travel mechanic. Must feel like your actions have power.</p>
-      <p>Are dynamic stories possible? Yes. See this example:</p>
-      <div class='demo js-game'>
-        <div class='controls'>
-          <a class='js-new-story' href='#' title='New Story'>New Story</a>
-        </div>
-        <div class='demo-content js-content'></div>
-      </div>
-      <div class='subsection'>
-        <h3>Wordless Stories</h3>
-        <p>When we think of stories, we usually think of explicit narratives. In novels, these narratives are conveyed purely through words. In films, narratives are traditionally expressed through a combination of moving images, music, and verbal dialog.</p>
-        <p>However, words are not essential to storytelling. Consider the short story <a class='ref' href="#">Luxo the Lamp</a> created by Pixar. That story conveys a simple narrative without any spoken dialog whatsoever. The images and sounds tell the story. Interpretive dance is another medium that conveys narrative without words.</p>
-        <p>Wordless stories can be just as powerful as stories that use elegant language (something that is conspicuously missing from many game stories today). They have the additional benefit that they are more universal between cultures.</p>
-        <p>Computers are notoriously bad at forming compelling sentences. Well-written dialog requires lots of up-front work by writers and inevitably leads to strictly or largely linear stories. Mention <a class='ref' href="#">Quicksilver: Infinite Story</a></p>
-        <p><span class='ref game-name'>Time Mansion</span>'s stories will avoid this problem; the stories will be told using simple body language and iconic imagery.</p>
-      </div>
-    </section>
-    <section>
-      <h2>Aesthetics</h2>
-      <div class='subsection'>
-        <h3>Visuals</h3>
-      </div>
-      <div class='subsection'>
-        <h3>Music</h3>
-      </div>
-    </section>
-    <section>
-      <h2>Business Concerns</h2>
-      <div class='subsection'>
-        <h3>Target Audience</h3>
-        <p>Not fast-paced action</p>
-        <p>Fans of point+click adventure games, mysteries</p>
-        <p>Not demographically targeted for female or male gamers [mention Women and Games: Technologies of the Gendered Self]</p>
-        <h3>Target Platforms</h3>
-        <p><span class='ref game-name'>Time Mansion</span> doesn't require a platform with a powerful processor or graphics card. It is best-suited to platforms that are associated with with medium-large screens, two dimensional input methods, and short playsessions.</p>
+      </section>
+    </div>
+    <div class='center-column'>
+      <section>
+        <h2>Motivation</h2>
+        <p>The story in most games is separate from the gameplay. <span class='sidenote'><span class='note'><span class='quote'>most games melded with stories tend to be Frankenstein monsters. Players tend to either skip the story or skip the game.</span> - <a href='http://www.amazon.com/A-Theory-Fun-Game-Design/dp/1932111972'>A Theory of Fun for Game Design</a> pg 128</span><span class='note'><img src='images/reference-images/longest-journey.jpg' alt='Longest Journey Screenshot'/> Solving puzzles like this one is the core gameplay in adventure games like <a href='http://www.longestjourney.com/'>The Longest Journey</a>, but the narrative is primarily conveyed through conversations and video cutscenes.</span></span> One of the most common approaches is to gradually reveal sections of a story upon completion of gameplay challenges.</p>
+        <p>Existing games are mostly linear (come up with some examples)</p>
+        <p>Existing games mostly focus on long play times, but once you're done, you don't want to play again unless you are a completionist and want to get some "achievements" the game designers put in to make the game seem richer and more valuable.</p>
+        <p>There is a place for games that are short but can be played again and again (think of board games that change based on the people you play them with and the strategies those people use)</p>
+        <p>Computer games have the benefit that they can be played alone and that people don't have to enforce rules themselves. Complex rules are not well-suited to board games</p>
+        <p>Games let you explore situations and rule systems without real consequences</p>
+        <p>How is this different from <a class='ref' href='#'>Moonligters<span class='sidenote'><img src='images/reference-images/moonlighters.png'/>The Moonlighters</span></a>, <a class='ref' href="#">Quicksilver: Infinite Story</a> -- those games require a lot of authorial content. This only requires a DB of reactions.</p>
+        <p><span class='ref game-name'>Time Mansion</span> explores the concept of long-term consequence chains. Reminiscent of time travel movies like Back to the Future. Real butterfly effect. Also, concept of <a class='ref' href="#">Rashomon</a> -- that your perspective changes the way you interpret a story. Maybe you think someone is a villain, but you realize that their actions would never have happened if someone else hadn't done something earlier on.</p>
+      </section>
+      <section>
+        <h2>Gameplay</h2>
+        <p><span class='ref game-name'>Time Mansion</span> plays like a first person adventure game in the style of Myst. The mechanics consist of</p>
         <ul>
-          <li>Mobile Tablet (iOS, Android)</li>
+          <li>Moving from room to room</li>
+          <li>Interacting with characters (the same actions other characters can take)</li>
+          <li>Going back in time</li>
         </ul>
-      </div>
-    </section>
+        <div class='subsection'>
+          <h3 id='mechanics'>Mechanics</h3>
+          <p>Mechanically, <span class='ref game-name'>Time Mansion</span> is very simple. The core of the game is uncovering and manipulating chains of causality -- there is no place for first-person-shooter style movement controls (is there, though? Not sure if it might be possible to emphasize the theme of temporal freedom with movement freedom, maybe intentional contrast).</p>
+          <p>The only advantages you have over the computer-controlled characters is that you have temporal awareness -- you know what other characters will do if you don't change anything -- and you are more capable of making intelligent decisions than the characters in the game.</p>
+        </div>
+        <div class='subsubsection'>
+          <h4>Actions</h4>
+        </div>
+        <div class='subsubsection'>
+          <h4>Relationships</h4>
+        </div>
+        <div class='subsubsection'>
+          <h4>Emotions</h4>
+        </div>
+      </section>
+      <section>
+        <h2>Storytelling and AI</h2>
+        <p><span class='ref game-name'>Time Mansion</span>'s unique approach to storytelling ensures that every action you take as a player directly affects the story. [TODO: Give an example]</p>
+        <p>Because of the time travel mechanic, the story needs to be completely deterministic: unless you intervene, a given story should always have the same outcome no matter how often you travel back in time. Without this property, you will come to suspect that your actions are meaningless. In order for a game to be fun to play, it needs to empower the player.  <span class='sidenote'><span class='note'>[TODO: Provide a reference]</span></span></p>
+        <p>The heart of <span class='ref game-name'>Time Mansion</span> is the <strong class='key-term'>story simulator</strong>: a system that simulates the behavior of a set of characters with initial relationships, personalities, emotions, and locations within a world.</p>
+        <p>I've created a prototype of the story simulator for you to try out (try clicking the "New Story" button):</p>
+        <div class='demo js-game'>
+          <div class='controls'>
+            <a class='js-new-story' href='#' title='New Story'>New Story</a>
+          </div>
+          <div class='demo-content js-content'></div>
+        </div>
+        <div class='subsection'>
+          <h3>Wordless Stories</h3>
+          <p>When we think of stories, we usually think of explicit narratives. In novels, these narratives are conveyed purely through words. In films, narratives are traditionally expressed through a combination of moving images, music, and verbal dialog.</p>
+          <p>However, words are not essential to storytelling. Consider the short story <a class='ref' href="#">Luxo the Lamp</a> created by Pixar. That story conveys a simple narrative without any spoken dialog whatsoever. The images and sounds tell the story. Interpretive dance is another medium that conveys narrative without words.</p>
+          <p>Wordless stories can be just as powerful as stories that use elegant language (something that is conspicuously missing from many game stories today). They have the additional benefit that they are more universal between cultures.</p>
+          <p>Computers are notoriously bad at forming compelling sentences. Well-written dialog requires lots of up-front work by writers and inevitably leads to strictly or largely linear stories. Mention <a class='ref' href="#">Quicksilver: Infinite Story</a></p>
+          <p><span class='ref game-name'>Time Mansion</span>'s stories will avoid this problem; the stories will be told using simple body language and iconic imagery.</p>
+        </div>
+      </section>
+      <section>
+        <h2>Aesthetics</h2>
+        <div class='subsection'>
+          <h3>Visuals</h3>
+        </div>
+        <div class='subsection'>
+          <h3>Music</h3>
+        </div>
+      </section>
+      <section>
+        <h2>Business Concerns</h2>
+        <div class='subsection'>
+          <h3>Target Audience</h3>
+          <p>Not fast-paced action</p>
+          <p>Fans of point+click adventure games, mysteries</p>
+          <p>Not demographically targeted for female or male gamers [mention Women and Games: Technologies of the Gendered Self]</p>
+          <h3>Target Platforms</h3>
+          <p><span class='ref game-name'>Time Mansion</span> doesn't require a platform with a powerful processor or graphics card. It is best-suited to platforms that are associated with with medium-large screens, two dimensional input methods, and short playsessions.</p>
+          <ul>
+            <li>Mobile Tablet (iOS, Android)</li>
+          </ul>
+        </div>
+      </section>
+    </div>
     <footer></footer>
   </body>
 </html>
