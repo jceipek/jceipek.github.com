@@ -43,9 +43,16 @@ h1 {
   font-family: 'Fredericka the Great', cursive;
 }
 
+.style-quote {
+  font-size: 2em;
+  font-family: 'Fredericka the Great', cursive;
+}
+
 .intro {
   font-size: 1.5em;
   font-family: sans-serif;
+  color: #555555;
+  text-shadow: 1px 1px 2px #eee;
 }
 
 aside {
