@@ -16,4 +16,6 @@ $('document').ready(function () {
           }, 500);
     });
   }, 1000);
+
+  $('.js-rewrite-email').attr('href', 'mailto:'+'julian'+'.ceipek'+'@'+'gmail.com')
 });
