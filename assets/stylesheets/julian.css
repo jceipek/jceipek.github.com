@@ -161,6 +161,12 @@ h3 {
   text-align: left;
   color: #c5c5c5;
 }
+
+.project ul {
+  font-size: 1.8em;
+  color: #c5c5c5;
+}
+
 .project p a {
   font-size: 1em;
 }
