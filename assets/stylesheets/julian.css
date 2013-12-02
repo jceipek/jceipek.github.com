@@ -95,7 +95,7 @@ h3 {
   margin-right: auto;
 }
 #map h3,
-#pyshiva h3 {
+.project-title-dark {
   background-color: rgba(0, 0, 0, 0.57);
 }
 .project {
