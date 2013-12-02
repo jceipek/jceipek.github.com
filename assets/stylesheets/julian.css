@@ -68,6 +68,7 @@ body {
   font-weight: normal;
 }
 #projects-header img {
+  position: relative;
   padding-bottom: 0.2em;
 }
 #projects {
