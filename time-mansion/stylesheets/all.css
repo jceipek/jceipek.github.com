@@ -62,6 +62,7 @@ aside {
 
 .center-column {
   max-width: 50em;
+  margin-right: 20em;
   /*float: left;*/
 }
 
