@@ -232,7 +232,7 @@ var Action = {
         character2.state.emotion = ENUMS.emotions.value['happy'];
 
         return {  plaintext: character1.traits.name + " COMPLIMENTS " + character2.traits.name + "!"
-                , html: character1.traits.name + " <span class='game-action'>compliments</span> " + character2.traits.name + "!"};
+                , html: "<p class='game-event'>" + character1.traits.name + " <span class='game-action'>compliments</span> " + character2.traits.name + "!</p>"};
       }
         if (character1.state.emotion == ENUMS.emotions.value['happy']) {
           character2.state.emotion = ENUMS.emotions.value['happy'];
