@@ -16,7 +16,7 @@
       <h1>Time Mansion</h1>
       Take Back the Future
       <div class='subtitle'>Game Design Document</div>
-      <small>Draft - last updated 11/27/2013</small>
+      <small>Draft - last updated 12/03/2013</small>
     </header>
     <div class='center-column'>
       <blockquote class='intro'><strong class='style-quote'>T</strong>he moment you enter the room, you know that something has gone wrong. Carlos is splayed out on the floor, eyes wide and unblinking, his right arm twisted at an impossible angle. You were sure that Christopher murdered Carlos in the other timeline, but you stopped him. Unless... Before the flash of realization passes, you're already leaping back through time to prevent the crime. If Beatrice hadn't spoken to Christopher and Katherine before the attack, none of this would have happened.</blockquote>
@@ -28,31 +28,31 @@
         <p><span class='ref game-name'>Time mansion</span> is a point-and-click puzzle adventure game that puts you in control of the story. No longer is the outcome a linear slog through pre-scripted sequence designed by writers hundreds of miles away. Instead, each short playthrough is unique and won't have been experienced before by you or anyone else in the world.</p>
         <h2>Contents</h2>
         <ol>
-          <li><a href='#motivation'>Motivation</a></li>
-          <li><a href='#gameplay'>Gameplay</a></li>
+          <li><a class='internal-ref' href='#motivation'>Motivation</a></li>
+          <li><a class='internal-ref' href='#gameplay'>Gameplay</a></li>
           <ul>
-            <li><a href='#mechanics'>Mechanics</a></li>
+            <li><a class='internal-ref' href='#mechanics'>Mechanics</a></li>
             <ul>
-              <li><a href='#movement'>Movement</a></li>
-              <li><a href='#interacting'>Interacting</a></li>
-              <li><a href='#time-travel'>Time Travel</a></li>
+              <li><a class='internal-ref' href='#movement'>Movement</a></li>
+              <li><a class='internal-ref' href='#interacting'>Interacting</a></li>
+              <li><a class='internal-ref' href='#time-travel'>Time Travel</a></li>
             </ul>
-            <li><a href='#end-conditions'>End Conditions</a></li>
+            <li><a class='internal-ref' href='#end-conditions'>End Conditions</a></li>
           </ul>
-          <li><a href='#storytelling-and-ai'>Storytelling and AI</a></li>
+          <li><a class='internal-ref' href='#storytelling-and-ai'>Storytelling and AI</a></li>
           <ul>
-            <li><a href='#simulating-interactions'>Simulating Interactions</a></li>
-            <li><a href='#wordless-stories'>Wordless Stories</a></li>
+            <li><a class='internal-ref' href='#simulating-interactions'>Simulating Interactions</a></li>
+            <li><a class='internal-ref' href='#wordless-stories'>Wordless Stories</a></li>
           </ul>
-          <li><a href='#aesthetics'>Aesthetics</a></li>
+          <li><a class='internal-ref' href='#aesthetics'>Aesthetics</a></li>
           <ul>
-            <li><a href='#visuals'>Visuals</a></li>
-            <li><a href='#music'>Music</a></li>
+            <li><a class='internal-ref' href='#visuals'>Visuals</a></li>
+            <li><a class='internal-ref' href='#music'>Music</a></li>
           </ul>
-          <li><a href='#business-concerns'>Business Concerns</a></li>
+          <li><a class='internal-ref' href='#business-concerns'>Business Concerns</a></li>
           <ul>
-            <li><a href='#target-audience'>Target Audience</a></li>
-            <li><a href='#target-platforms'>Target Platforms</a></li>
+            <li><a class='internal-ref' href='#target-audience'>Target Audience</a></li>
+            <li><a class='internal-ref' href='#target-platforms'>Target Platforms</a></li>
           </ul>
         </ol>
       </section>
@@ -115,7 +115,7 @@
             <li><strong>relationships</strong> (a set of connections with every other character specifying if they are friends, foes, or lovers)</li>
           </ul>
           <p>When one character meets another, their states change based on their traits and their current states. This change is classified as an <strong class='key-term'>action</strong>.</p>
-          <p>As a consequence of this system, <span class='ref game-name'>Time Mansion</span> can provide real-time character description and development. <span class='sidenote'><span class='note'><span class='quote'>Character description and development is either ignored or done in cut-scenes (since this is too hard to implement in game form).</span>- <span class='ref'>Games Telling Stories: A Brief Note on Games and Narratives</span> in <a href='http://www.amazon.com/New-Media-Cybercultures-Anthology/dp/1405183071'>The New Media and Cybercultures Anthology</a></span></span> In the <a href='#story-simulator'>story simulator prototype</a>, characters can engage in the actions</p>
+          <p>As a consequence of this system, <span class='ref game-name'>Time Mansion</span> can provide real-time character description and development. <span class='sidenote'><span class='note'><span class='quote'>Character description and development is either ignored or done in cut-scenes (since this is too hard to implement in game form).</span>- <span class='ref'>Games Telling Stories: A Brief Note on Games and Narratives</span> in <a href='http://www.amazon.com/New-Media-Cybercultures-Anthology/dp/1405183071'>The New Media and Cybercultures Anthology</a></span></span> In the <a class='internal-ref internal-ref-up' href='#story-simulator'>story simulator prototype</a>, characters can engage in the actions</p>
           <ul>
             <li><strong>murder</strong></li>
             <li><strong>insult</strong></li>
@@ -125,7 +125,7 @@
             <li><strong>suffer guilt</strong></li>
             <li><strong>plan retribution</strong></li>
           </ul>
-          <p>These actions are highly contextual. For example, in the <a href='#story-simulator'>prototype</a>, character A will only murder character B if they are both alive, there are no other individuals in the room, and they are enemies.</p>
+          <p>These actions are highly contextual. For example, in the <a class='internal-ref internal-ref-up' href='#story-simulator'>prototype</a>, character A will only murder character B if they are both alive, there are no other individuals in the room, and they are enemies.</p>
           <p>One of the biggest challenges in creating <span class='ref game-name'>Time Mansion</span> will be balancing the need to make the actions complex enough to create compelling stories and simple/obvious enough for players to predict.</p>
         </div>
         <div class='subsection'>
@@ -137,7 +137,7 @@
           <p>Interpretive dance is a medium that is dedicated to conveying narrative without words. Wordless tales can be just as powerful as stories that use elegant language. Language agnostic narratives provide the additional benefit of being more universal between cultures.</p>
           <p>One of the early inspirations for <span class='ref game-name'>Time Mansion</span> was <a class='ref' href='http://en.wikipedia.org/wiki/Sleep_No_More_(2011_play)'>Punchdrunk's Sleep No More</a>, a post-modern theatrical performance featuring interpretive dance and a repeating story that invited the audience to explore it from different perspectives.</p>
           <p>Computers are notoriously bad at forming compelling sentences. Well-written dialog requires significant up-front work by writers and almost inevitably leads to strictly or largely linear stories. Games with dynamic stories like <a class='ref' href="http://quicksilverinfinitestory.wordpress.com/">Quicksilver: Infinite Story</a> usually need even more content than linear games do because they need to combine lists of situations and entities to generate passable dialog.</p>
-          <p><span class='ref game-name'>Time Mansion</span>'s stories will largely avoid this content problem; the stories will be told using simple body language and iconic imagery. The main content challenge in the game will be the database of contextual actions required by the <a href='#storytelling-and-ai'>story simulator</a>.</p>
+          <p><span class='ref game-name'>Time Mansion</span>'s stories will largely avoid this content problem; the stories will be told using simple body language and iconic imagery. The main content challenge in the game will be the database of contextual actions required by the <a class='internal-ref internal-ref-up' href='#storytelling-and-ai'>story simulator</a>.</p>
         </div>
       </section>
       <section>
