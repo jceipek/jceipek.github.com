@@ -190,3 +190,24 @@ footer {
   background-color: #333;
   height: 20px;
 }
+
+
+.game-turn {
+  font-weight: bold;
+}
+
+.game-action {
+  font-style: italic;
+}
+
+.game-emotion {
+  font-style: italic;
+}
+
+.game-event {
+  margin-left: 1em;
+}
+
+.game-relationship {
+  color: #338833;
+}

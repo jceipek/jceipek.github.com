@@ -12,7 +12,7 @@ function log () {
   for (var i = 0; i < arguments.length; i++) {
     res += " " + arguments[i];
   }
-  EL.html(EL.html()+"<p>"+res+"</p>");
+  EL.html(EL.html()+res);
 }
 
 var Utils = {
@@ -186,14 +186,17 @@ var Action = {
     if (character2.state.alive) {
       if (character1.state.emotion == ENUMS.emotions.value['angry'] && everyone.length < 3) {
         character2.state.alive = false;
-        return character1.traits.name + " MURDERS " + character2.traits.name + "!";
+        return {  plaintext: character1.traits.name + " MURDERS " + character2.traits.name + "!"
+                , html: "<p class='game-event'>" + character1.traits.name + " <span class='game-action'>murders</span> " + character2.traits.name + "!</p>"};
       } else {
         character2.state.emotion = ENUMS.emotions.value['angry'];
-        return character1.traits.name + " INSULTS " + character2.traits.name + "!";
+        return {  plaintext: character1.traits.name + " INSULTS " + character2.traits.name + "!"
+                , html: "<p class='game-event'>" + character1.traits.name + " <span class='game-action'>insults</span> " + character2.traits.name + "!</p>"};
       }
     } else {
       character1.state.emotion = ENUMS.emotions.value['guilty'];
-      return character1.traits.name + " feels GUILTY after seeing the dead body of " + character2.traits.name + "!";
+      return {  plaintext: character1.traits.name + " feels GUILTY after seeing the dead body of " + character2.traits.name + "!"
+              , html: "<p class='game-event'>" + character1.traits.name + " feels <span class='game-emotion'>guilty</span> after seeing the dead body of " + character2.traits.name + "!</p>"};
     }
   },
   friend: function (character1, character2, everyone) {
@@ -206,22 +209,27 @@ var Action = {
           character1.state.emotion = ENUMS.emotions.value['happy'];
           character1.state.relationships[character2.traits.name] = relationship;
           character2.state.relationships[character1.traits.name] = relationship;
-          return character1.traits.name + " FLIRTS WITH " + character2.traits.name + "!";
+          return {  plaintext: character1.traits.name + " FLIRTS WITH " + character2.traits.name + "!"
+                  , html: "<p class='game-event'>" + character1.traits.name + " <span class='game-action'>flirts with</span> " + character2.traits.name + "!</p>"};
         }
 
         character2.state.emotion = ENUMS.emotions.value['happy'];
 
-        return character1.traits.name + " COMPLIMENTS " + character2.traits.name + "!";
+        return {  plaintext: character1.traits.name + " COMPLIMENTS " + character2.traits.name + "!"
+                , html: character1.traits.name + " <span class='game-action'>compliments</span> " + character2.traits.name + "!"};
       }
         if (character1.state.emotion == ENUMS.emotions.value['happy']) {
           character2.state.emotion = ENUMS.emotions.value['happy'];
-          return character1.traits.name + " COMPLIMENTS " + character2.traits.name + "!";
+          return {  plaintext: character1.traits.name + " COMPLIMENTS " + character2.traits.name + "!"
+                  , html: "<p class='game-event'>" + character1.traits.name + " <span class='game-action'>compliments</span> " + character2.traits.name + "!</p>"};
         }
         character2.state.emotion = ENUMS.emotions.value['angry'];
-        return character1.traits.name + " COMPLAINS TO " + character2.traits.name + "!";
+        return {  plaintext: character1.traits.name + " COMPLAINS TO " + character2.traits.name + "!"
+                , html: "<p class='game-event'>" + character1.traits.name + " <span class='game-action'>complains to</span> " + character2.traits.name + "!</p>"};
     } else {
       character1.state.emotion = ENUMS.emotions.value['angry'];
-      return character1.traits.name + " feels ANGRY after seeing the dead body of " + character2.traits.name + "!";
+      return {  plaintext: character1.traits.name + " feels ANGRY after seeing the dead body of " + character2.traits.name + "!"
+              , html: "<p class='game-event'>" + character1.traits.name + " feels <span class='game-emotion'>angry</span> after seeing the dead body of " + character2.traits.name + "!</p>"};
     }
   },
   lover: function (character1, character2, everyone) {
@@ -240,15 +248,18 @@ var Action = {
         character1.state.relationships[character2.traits.name] = relationship;
         character2.state.relationships[character1.traits.name] = relationship;
 
-        return character1.traits.name + " REJECTS " + character2.traits.name + "!";
+        return {  plaintext: character1.traits.name + " REJECTS " + character2.traits.name + "!"
+                , html: "<p class='game-event'>" + character1.traits.name + " <span class='game-action'>rejects</span> " + character2.traits.name + "!</p>"};
       }
 
       character1.state.emotion = ENUMS.emotions.value['happy'];
       character2.state.emotion = ENUMS.emotions.value['happy'];
-      return character1.traits.name + " FLIRTS WITH " + character2.traits.name + "!";
+      return {  plaintext: character1.traits.name + " FLIRTS WITH " + character2.traits.name + "!"
+              , html: "<p class='game-event'>" + character1.traits.name + " <span class='game-action'>flirts with</span> " + character2.traits.name + "!</p>"};
     } else {
       character1.state.emotion = ENUMS.emotions.value['angry'];
-      return character1.traits.name + " feels ANGRY after seeing the dead body of " + character2.traits.name + "!";
+      return {  plaintext: character1.traits.name + " feels ANGRY after seeing the dead body of " + character2.traits.name + "!"
+              , html: "<p class='game-event'>" + character1.traits.name + " feels <span class='game-emotion'>angry</span> after seeing the dead body of " + character2.traits.name + "!</p>"};
     }
   }
 };
@@ -276,15 +287,15 @@ var Simulate = {
     other_people = rooms[new_loc];
     for (var i = 0; i < other_people.length; i++) {
       var rel = ENUMS.relationships.name[character.state.relationships[other_people[i].traits.name]];
-      other_people_names = other_people_names + " " + other_people[i].traits.name + " (" + rel + (other_people[i].state.alive ? '' : ', dead') + ")";
+      other_people_names = other_people_names + " " + other_people[i].traits.name + " (" + "<span class='game-relationship'>" + rel + "</span>" + (other_people[i].state.alive ? '' : ', dead') + ")";
       if (i < other_people.length - 1) {other_people_names = other_people_names + " and";}
     }
     rooms[new_loc].push(character);
-    log(character.traits.name +
-      " walks from the " + prev_loc + " to the " + new_loc +
+    log("<p class='game-event'>" + character.traits.name +
+      " <span class='game-action'>walks</span> from the " + prev_loc + " to the " + new_loc +
       (other_people_names.length > 0 ? (", where " + lower_pronoun + " encounters" + other_people_names + ". ") : ". ") +
       upper_pronoun + " is " +
-      ENUMS.emotions.name[character.state.emotion] + ".");
+      "<span class='game-emotion'>" + ENUMS.emotions.name[character.state.emotion] + "</span>" + ".</p>");
     for (var i = 0; i < rooms[new_loc].length; i++) {
       if (rooms[new_loc][i] != character) this.interact(character, rooms[new_loc][i], rooms[new_loc]); // FIXME!!!!!!
     }
@@ -295,7 +306,7 @@ var Simulate = {
     //log("INTERACT", relationship);
     if (Action[relationship]) {
       result = Action[relationship](character1, character2, everyone);
-      log(result);
+      log(result.html);
     }
   }
 };
@@ -351,11 +362,10 @@ var init = function () {
   var characters = setupCharacters(6)
     , rooms = setupRooms(characters);
   for (var i = 0; i < 10; i++) {
-    log("Turn " + (i + 1));
+    log("<p class='game-turn'>Turn " + (i + 1)+"</p>");
     for (var j = 0; j < characters.length; j++) {
       Simulate.step(characters[j], rooms);
     }
-    log("");
   }
 }
 
