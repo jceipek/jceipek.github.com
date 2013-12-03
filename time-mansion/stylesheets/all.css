@@ -93,12 +93,15 @@ aside {
 .quote {
   border-left: 2px solid #bbb;
   display: inline-block;
-  padding-left: 0.5em;
+  padding-left: 0.7em;
 }
 
 .quote::before {
   content: "\201C";
   font-size: 1.5em;
+  position: absolute;
+  left: 0.15em;
+  color: #777;
 }
 
 .sidenote img {
