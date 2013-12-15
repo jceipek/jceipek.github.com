@@ -39,6 +39,18 @@ a {
   color: #777;
 }
 
+.sidenote-marker {
+  font-size: 0.6em;
+  color: #777;
+}
+
+.sidenote-marker-ref {
+  color: #777;
+  position: relative;
+  left: -1em;
+  top: 1em;
+}
+
 .internal-ref-up::after {
   content: url('../images/icons/up-reference.png');
 }
@@ -94,6 +106,10 @@ aside {
   border-left: 2px solid #bbb;
   display: inline-block;
   padding-left: 0.7em;
+}
+
+.quote-context {
+  display: inline-block;
 }
 
 .quote::before {
