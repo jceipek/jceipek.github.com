@@ -33,17 +33,26 @@ window.onload=function() {
       }
 
       function start_moving() {
-          can_move = true;
-          penalty_added = false;
-          document.body.classList.remove("bad");
-          document.body.classList.add("good");
+          if (penalty_added) {
+            setTimeout(enable_movement, 3000);
+          }
+          else {
+            enable_movement();
+          }
+      }
 
-          setTimeout(function(){
-              sound.play('beat');
-              if (playing) {
-                setTimeout(stop_moving, 1900);
-              }
-          }, 700);
+      function enable_movement() {
+        can_move = true;
+        penalty_added = false;
+        document.body.classList.remove("bad");
+        document.body.classList.add("good");
+
+        setTimeout(function(){
+            sound.play('beat');
+            if (playing) {
+              setTimeout(stop_moving, 1900);
+            }
+        }, 700);
       }
 
       function stop_moving() {
