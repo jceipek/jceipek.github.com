@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css">
 <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
-<link rel="stylesheet" type="text/css" href="stylesheets/Tanglekit.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/TangleKit.css">
 <script data-main="javascripts/main" src="javascripts/3rdparty/require.js"></script>
 <script type="text/javascript" src="javascripts/3rdparty/TangleKit/sprintf.js"></script>
 
