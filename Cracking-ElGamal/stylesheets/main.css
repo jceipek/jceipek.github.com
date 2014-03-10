@@ -1,0 +1,190 @@
+
+body {
+	width: 50em;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	/*font-family: 'Open Sans',Helvetica,Arial,sans-serif;*/
+	color: #666;
+	line-height: 1.5em;
+}
+
+h1, h2, h3, h4 {
+	color: #226;
+}
+
+.bob-column-start {
+	counter-reset: bob-counter;
+	margin-left: 25em;
+	float: right;
+}
+
+.alice-column-start {
+	counter-reset: alice-counter;
+}
+
+.example {
+	width: 42em;
+	padding: 0em 2em;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px #999 solid;
+	border-bottom: 2px #999 solid;
+	margin-bottom: 1em;
+}
+
+.alice-column:before {
+	content: counter(alice-counter) ". ";
+    counter-increment: alice-counter;
+    position: relative;
+    margin-left: -1em;
+}
+
+.alice-column {
+	width: 17em;
+}
+
+.bob-column:before {
+	content: counter(bob-counter) ". ";
+    counter-increment: bob-counter;
+    position: relative;
+    margin-left: -1em;
+}
+
+.bob-column {
+	width: 17em;
+	margin-left: 25em;
+}
+
+.send-left:before {
+	content: url(../images/left-arrow.svg);
+	display: block;
+	position: relative;
+	left: -12em;
+	top: 1.2em;
+}
+
+.bob-column.send-left:before {
+	content: url(../images/left-arrow.svg) counter(bob-counter) ". ";
+	display: block;
+	position: relative;
+	left: -10.6em;
+	top: 1.2em;
+}
+
+.send-right:after {
+	content: url(../images/right-arrow.svg);
+	display: block;
+	position: relative;
+	left: 15em;
+	top: -1.2em;
+}
+
+.center-example {
+	display: block;
+	text-align: center;
+}
+
+.undefined-number {
+	color: red;
+}
+
+.hidden {
+	display: none;
+}
+
+
+
+
+
+
+/* Table adapted from http://rhojs.org/ */
+table {
+  border-collapse: collapse;
+  max-width: 100%;
+  /*margin: 0;*/
+  border-spacing:0;
+}
+
+table.centered {
+  margin: 0 auto;
+  margin-bottom: 1em;
+}
+
+table td, table th {
+  padding: 4px 12px;
+  margin: 0;
+  text-align: left;
+}
+
+table th {
+  font-weight: 400;
+  font-size: 18px;
+}
+
+table td.align-left,
+table th.align-left {
+  text-align: left;
+}
+
+table td.align-right,
+table th.align-right {
+  text-align: right;
+}
+
+table td.align-center,
+table th.align-center {
+  text-align: center;
+}
+
+table.rows td, table.rows th {
+  border-top: 1px solid #ddd;
+}
+
+table.rows tr:first-child td,
+table.rows tr:first-child th {
+  border-top-width: 0;
+}
+
+table.rows thead + tbody tr:first-child td,
+table.rows thead + tbody tr:first-child th {
+  border-top-width: 1px
+}
+
+table.bordered {
+  border-collapse: separate;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+}
+
+table.alt tbody tr:nth-child(2n + 1) td,
+table.alt tbody tr:nth-child(2n + 1) th {
+  background: rgba(0,0,0,.03);
+}
+
+
+/* #Graphite Flat Button (adapted from http://cssdeck.com/labs/beautiful-flat-buttons)
+==================================================*/
+.graphite-flat-button {
+  position: relative;
+  vertical-align: top;
+  /*width: 5em;*/
+  height: 30px;
+  padding: 0 0.8em;
+  /*font-size: 10px;*/
+  color:white;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  background: #454545;
+  border: 0;
+  border-bottom: 2px solid #2f2e2e;
+  cursor: pointer;
+  -webkit-box-shadow: inset 0 -2px #2f2e2e;
+  box-shadow: inset 0 -2px #2f2e2e;
+}
+.graphite-flat-button:active {
+  top: 1px;
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

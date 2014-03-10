@@ -1,0 +1,340 @@
+<p>
+  <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/Tanglekit.css">
+  <script data-main="javascripts/main" src="javascripts/3rdparty/require.js"></script>
+  <script type="text/javascript" src="javascripts/3rdparty/TangleKit/sprintf.js"></script>
+</p>
+
+<h1>Cracking ElGamal for fun and profit</h1>
+<p><small>Julian Ceipek, Mar 10, 2014</small>
+</p>
+<p><strong>ElGamal</strong> is an <em>asymmetric encryption algorithm</em> used
+  to securely exchange messages over long distances. Unfortunately, if the
+  message being encrypted is short enough, the algorithm is susceptible to
+  a <strong>Meet in the Middle attack</strong>. In this <a href="http://worrydream.com/ExplorableExplanations/">reactive document</a>,
+  we'll look at how <strong>ElGamal</strong> works and how to break it in order
+  to steal a fraction of the credit card numbers sent to a hypothetical web
+  store called <em>Alice Inc.</em>
+</p>
+<p class="js-example-example">Since this is a reactive document, make sure to experiment with the
+  <span
+  class='FakeAdjustableNumber'><span>adjustable values</span> </span>in the examples to make sure you
+    understand them. For example, the factors of %%n=%%
+<span class='TKAdjustableNumber'
+    data-var="exampleN" data-min="2" data-max="99999"> </span>
+are {<span data-var="exampleFactors"><span>}.</p>
+<h2>ElGamal</h2><p>The objective of encryption algorithms is to help people share secret or sensitive information with one another by using the information equivalent of physical keys. To make the discussion easier to follow, we say that Bob wants to send Alice a message without Eve ever being able to see it. With a <em>symmetric encryption algorithm</em>, the key used to encrypt a message is the same as the key used to decrypt it. This is analogous to Bob putting his message in a box, locking it, and sending it to Alice to unlock. A big problem with this approach is that Alice needs a copy of the key that Bob used. This is a chicken and egg problem: in order to securely exchange information with one another in this way, Alice and Bob must already have exchanged secret information. If Bob ever sends a key to Alice, Eve can easily intercept it and use it to read his messages. In theory, Bob could give Alice a key in person, but that doesn't work well in practice. Imagine having to drive to Amazon's offices in order to give them your credit card number before you could buy something online. Inconceivable!</p>
+<p>The solution can be found with <em>asymmetric encryption algorithms</em>, which don't use the same key for encryption and decryption. Continuing our analogy of boxes and physical keys, Alice sends an unlocked lock to everyone who wants to send messages to her. Bob puts his message in a box, locks it with Alice's lock, and sends it back to Alice. Since Alice is the only one with the key to the lock, only she can read the message once it is in the locked box. <strong>ElGamal</strong> is an example of an information algorithm that works on this principle.</p>
+<h3>Background Theory: Modulo, Subgroups, and Cycles</h3><p>Before we can explore ElGamal, we need to understand some of the principles that are involved.</p>
+<div class="example js-modulo-example"><h2>Modulo: What and Why?</h2><p>The %%modulus%% operator is an integral part of many encryption systems. For positive numbers, %%a \bmod b%% computes the remainder after dividing %%a%% by %%b%%, which ensures that the result is between %%0%% and %%b-1%%. Try it out:</p>
+<p class="center-example">
+<span class="TKAdjustableNumber" data-var="moduloA" data-min="-100" data-max="100"></span>
+%%
+    \bmod %%
+<span class="TKAdjustableNumber" data-var="moduloB" data-min="-100"
+    data-max="100"></span>
+%% = %%
+<span data-var="moduloRes"></span>
+</p>
+<p>The aspect of modulo that makes it so useful for encryption algorithms
+  is that the result of %%a \bmod b%% doesn't reveal any information about
+  %%a%%.</p>
+<p class="js-modulo-example-possibly-broken">The result
+<span data-var="moduloRes"> </span>
+could just as easily be
+  <span
+  data-var="moduloALookalike"> <span> </span></span>%% \bmod %% <span data-var="moduloB"></span>
+as
+    <span
+    data-var="moduloA"> <span> </span></span>%% \bmod %% <span data-var="moduloB"></span>. We say
+      <span
+      data-var="moduloA"> <span> </span></span>and <span data-var="moduloALookalike"></span> are congruent
+        modulo <span data-var="moduloB"></span>:</p>
+<p class="js-modulo-example-possibly-broken center-example">
+<span data-var="moduloA"></span> %% \equiv %% <span data-var="moduloALookalike"></span> (%%
+  \bmod %% <span data-var="moduloB"></span>)</p>
+<p>Conveniently for cryptography purposes (encryption algorithms deal with
+  very large numbers), the operator distributes over multiplication, addition,
+  and subtraction.</p>
+<p>Read more about modular arithmetic on <a href="http://en.wikipedia.org/wiki/Modular_arithmetic"
+  target="_blank">Wikipedia</a>.</p>
+</div>
+<div class="example js-subgroup-example">
+  <h2>Finite Cyclic Groups and Subgroups</h2>
+  <p>A <em>cyclic group</em> is a mathematical group generated by one of the
+    elements in the group, %%g%%. As far as <strong>ElGamal</strong> is concerned,
+    we are only interested in two types of groups:</p>
+  <ul>
+    <li>The group of integers from %%1%% to %%p-1%% under multiplication %%\pmod{p}%%
+      for some prime number %%p%%, which is known as %%\mathbb{Z}_p^*%%</li>
+    <li>The subgroups of %%\mathbb{Z}_p^*%% of prime order</li>
+  </ul>
+  <p>If %%p=%% <span class="TKAdjustableNumberWithDataSource" data-var="primeP primes"
+    data-min="3" data-max="100"></span>, the factors of %%p-1=%% <span data-var="pminusOne"> </span> are
+    {<span data-var="factors"></span>}.</p>
+  <p>The integer <span data-var="fullGenerator"> </span> is the smallest generator
+    %%g%% for the full group of order %% n = p-1 = %% <span data-var="pminusOne"> </span> containing
+    all the elements from 1 to <span data-var="pminusOne"></span>.</p>
+  <p>We can produce the sequence {<span data-var="fullGeneratorList"> </span>}
+    by raising <span data-var="fullGenerator"> </span> to successive powers (%%
+    \bmod %% <span data-var="primeP"></span>). This is a <em>finite</em> cyclic
+    group because it wraps around such that %%g^{n} = g^0 = 1%%, %%g^{n+1}
+    = g^1 = g%% and so on.</p>
+  <p class="js-subgroup-example-possibly-broken">One of the cyclic subgroups of %%\mathbb{Z}_p^*%% of prime order
+    <span
+    data-var="subgroupListOrder"> <span> </span></span>is {<span data-var="subgroupList"> </span>}, generated
+      by <span data-var="subgroupGenerator"> </span>.</p>
+  <p class="js-subgroup-example-possibly-broken">All the elements of a subgroup can also act as generators. For example,
+    <span
+    data-var="subgroupGenerator2"><span> </span> </span>generates the subgroup in a different order: {
+      <span
+      data-var="subgroupList2"></span>}.</p>
+  <p>Read more about cyclic groups on <a href="http://en.wikipedia.org/wiki/Cyclic_group"
+    target="_blank">Wikipedia</a>.</p>
+</div>
+
+<h2>Encrypting and Decrypting with ElGamal</h2>
+<p>Alice wants to enable people to send secret messages to her, so she creates
+  a <strong>public key</strong> %%(p,g,y)%% that she shares with the world
+  and a <strong>private key</strong> %%x%% that she never rveals to anyone
+  else. Bob wants to send Alice a secret message, so he uses Alice's public
+  key and a one-time <strong>ephemeral key</strong> %%k%% to produce the encrypted <strong>ciphertext</strong> %%(u,v)%%.
+  Here's how it works:</p>
+<div class="example">
+  <h2>ElGamal: How Does it Work?</h2>
+  <p class="alice-column-start">
+    <img src="images/Alice.svg" alt="Alice" />
+  </p>
+  <p class="bob-column-start">
+    <img src="images/Bob.svg" alt="Bob" />
+  </p>
+  <p class="alice-column">Choose a prime number %%p%%.</p>
+  <p class="alice-column">Choose an integer %%g%% in %%\mathbb{Z}_p^*%% that generates a cyclic
+    subgroup of %%\mathbb{Z}_p^*%% of order %%n%%.</p>
+  <p class="alice-column">Choose a private key %%x%% such that %%1 \leq x \leq n-1%%.</p>
+  <p class="alice-column">Find %%y = g^x \pmod{p}%%.</p>
+  <p class="alice-column send-right">Publish the public key %%(p,g,y)%%.</p>
+  <p class="bob-column">Look at Alice's public key %%(p,g,y)%%.</p>
+  <p class="bob-column">Choose a random integer %%k%% such that %%1 \leq k \leq n-1%%. Note that
+    this means that Bob needs to know %%n%% in order to send a message.</p>
+  <p
+  class="bob-column">Determine %%m%% such that %%1 \leq m \leq p-1%%. If the full message is
+    too long, split up the message into chunks in order to encrypt them separately.</p>
+    <p
+    class="bob-column">Compute %%u = g^k \pmod{p}%%.</p>
+      <p class="bob-column">Compute %%v = m y^k \pmod{p}%%.</p>
+      <p class="bob-column send-left">Publish the ciphertext %%(u,v)%%.</p>
+      <p class="alice-column">Look at Bob's ciphertext %%(u,v)%%.</p>
+      <p class="alice-column">Decrypt the message with %%m = u^{-x} v \pmod{p}%%.</p>
+</div>
+
+<h2>Meet in the Middle: Attacking Alice Inc.</h2>
+<p>
+  <img src="images/Eve.svg" alt="Eve" />While Alice and Bob have been exchanging secrets, Eve has been feeling
+  left out. In order to make her happy, lets explore one of the ways that
+  Eve can read Bob's messages to Alice: the <em>Meet in the Middle Attack</em>.
+  The <em>Meet in the Middle Attack</em> is very different from the <a href="http://en.wikipedia.org/wiki/Man-in-the-middle_attack"
+  target="_blank"><em>Man in the Middle Attack</em></a> which involves Eve
+  pretending to be Alice and Bob, reading messages that Bob encrypts with
+  her key instead of Alice's and sending the messages to Alice after encrypting
+  them with Alice's key.</p>
+<p>If a number of conditions are met and the message %%m%% Bob sends Alice
+  is short enough, Eve can recover %%m%% if she can intercept %%v%% as Bob
+  sends his ciphertext to Alice. Specifically, the <em>Meet in the Middle Attack</em> only
+  works if</p>
+<ul>
+  <li>%%m%% consists of at most %%b%% bits, Eve knows %%b%%, and %%b%% is small.
+    This is not unreasonable if Eve knows that Bob is purchasing something
+    from Alice Inc. and wants to send the company a %%54%% bit credit card
+    number, for example.</li>
+  <li>%%m%% can be factored into two parts such that %%m = (m_1)(m_2)%%. Let
+    %%m_1%% consist of %%b_1%% bits and %%m_2%% consist of %%b_2%% bits.</li>
+  <li>Eve knows %%n%%. Since Bob's ephemeral key %%k%% has the property %%1
+    \leq k \leq n-1%%, he also needs to determine %%n%% somehow. If he can,
+    Eve can, too.</li>
+  <li>%%m%% happens not to be an element of the subgroup generated by %%g%%.
+    This seems quite unlikely. However, according to the thesis <a href="http://www.math.iastate.edu/thesisarchive/MST/AllenBMSTF08.pdf"
+    target="_blank">Implementing several attacks on plain ElGamal encryption</a>,
+    %%n%%, the order %%n%% of the subgroup generated by %%g%%, is frequently
+    chosen to be small for efficiency reasons.</li>
+  <li>The order %%n%% of the subgroup generated by %%g%% has the property that
+    %% n \leq (p-1)2^{-b} %%. Again, it is possible that %%n%% is small for
+    efficiency reasons.</li>
+</ul>
+
+<h3>Mathematical Theory</h3>
+<p>If all the assumptions are met, Eve can proceed as follows:</p>
+<p>She knows that</p>
+<p>$$y = g^x \pmod{p}$$</p>
+<p>and that</p>
+<p class="center-example">%%v = my^k \pmod{p}%%.</p>
+<p>Raising both sides to %%n%%,</p>
+<p class="center-example">%%v^n = (m^n)(y^{kn}) \pmod{p}%%.</p>
+<p>This is useless as part of an attack if %%m%% is an element of the subgroup
+  generated by %%g%% because then %%m^n = 1%% (since all the elements of
+  a subgroup generate that subgroup, albeit in a different order, and wrap
+  around to %%1%% once they are raised to the order of the subgroup).</p>
+<p>If that is not the case, however, remember that %%g^n = g^0 = 1%% because
+  the subgroup generated by %%g%% is cyclic, so</p>
+<p>$$ y^{kn} = g^{xkn} = (g^{n})^{xk} = 1^{xk} = 1 $$</p>
+<p>which simplifies %%(m^n)(y^{kn})%% substantially:</p>
+<p class="center-example">%%v^n = m^n \pmod{p}%%.</p>
+<p>Using the assumption that %%m = (m_1)(m_2)%%,</p>
+<p>$$v^n = (m_1^n)(m_2^n) \pmod{p}$$</p>
+<p class="center-example">%%(v^n)(m_2^{-n}) = m_1^n \pmod{p}%%.</p>
+<div class="example">
+  <h2>Dictionaries: More than Outdated Reference Books</h2>
+  <p>To implement the <em>Meet in the Middle Attack</em>, Eve will need to use <em>dictionaries</em> &mdash;
+    the computer science ones.</p>
+  <p>A traditional dictionary is organized so that it is very easy to look
+    up a word to find its definition. The reverse &mdash; looking for a definition
+    in order to match it to a word &mdash; is really time consuming, especially
+    as the amount of entries in the dictionary grows.</p>
+  <table class="centered bordered rows alt">
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Definition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Dictionary</td>
+        <td>What this is.</td>
+      </tr>
+      <tr>
+        <td>Eve</td>
+        <td>The coolest hacker on the planet.</td>
+      </tr>
+      <tr>
+        <td>Meet in the Middle</td>
+        <td>Eve's favorite attack.</td>
+      </tr>
+      <tr>
+        <td>...</td>
+        <td>...</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>A computer science dictionary is very similar, and it can even be used
+    for the same purpose. The only difference is that the element to look up
+    is called a <em>key</em> and the element stored under that key is called
+    a <em>value</em>.</p>
+  <table class="centered bordered rows alt">
+    <thead>
+      <tr>
+        <th>Key</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Dictionary</td>
+        <td>What this is.</td>
+      </tr>
+      <tr>
+        <td>Eve</td>
+        <td>The coolest hacker on the planet.</td>
+      </tr>
+      <tr>
+        <td>Meet in the Middle</td>
+        <td>Eve's favorite attack.</td>
+      </tr>
+      <tr>
+        <td>...</td>
+        <td>...</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>The Attack in Practice</h3>
+<p>With the theory out of the way, we can finally help Eve with her attack:</p>
+<div
+class="example js-attack-example">
+  <h2>Running the Attack</h2>
+  <p>Given that the prime %%p%% has <span class="TKAdjustableNumber" data-var="pBits"
+    data-min="8" data-max="128"></span> bits,</p>
+  <p>
+    <button class="graphite-flat-button js-attack-example-pick-p">Click to pick a random p</button>
+  </p>
+  <p>The public key might be: ( %%p = %% <span data-var="primeP"></span>, %%g
+    = %% <span data-var="generatorG"></span>, %%y = %% <span data-var="valueY"></span> )</p>
+  <!--
+  the factors of %%p-1%% are -->
+  <p>where the order of the subgroup generated by %%g%% is %%n=%% <span data-var="orderN"></span>,</p>
+  <p>and the private key might be: %%x = %% <span data-var="keyX"></span>
+  </p>
+  <p>
+    <button class="graphite-flat-button js-attack-example-pick-p">Click to pick a random m</button>
+  </p>
+  <p>Assuming that %%b = %% <span class="TKAdjustableNumber" data-var="bBits"
+    data-min="8" data-max="64"></span> bits and that %%b_1 = %% <span class="TKAdjustableNumber"
+    data-var="b1Bits" data-min="2" data-max="64"></span> bits meaning that %%b_2=%%
+    <span
+    data-var="b2Bits"></span>bits,</p>
+  <ol>
+    <li>For all %%m_1=1,...,2^{b_1}%%, create a dictionary mapping from %%m_1^n
+      \pmod{p} \to m_1%%</li>
+    <li>For all %%m_2=1,...,2^{b_2}%%, compute %%v^n m_2^{-n} \pmod{p}%% and look
+      it up in the dictionary.</li>
+    <li>If we find a match in the dictionary, we have found a solution %%(m_1,m_2)%%
+      to %%(v^n)(m_2^{-n}) = m_1^n \pmod{p}%% and %%m%% is probably equal to
+      %%(m_1)(m_2)%%.</li>
+  </ol>
+  <p>Since the dictionary only depends on the public key %%(p,g,y)%% and the
+    length of the message %%b%%, we can use it again. Notably, it doesn't depend
+    on the ephemeral key %%k%% in any way.</p>
+  </div>
+  
+<h2>Resources</h2>
+  <ul>
+    <li><a href="http://www.math.iastate.edu/thesisarchive/MST/AllenBMSTF08.pdf"
+      target="_blank">Implementing several attacks on plain ElGamal encryption</a>
+
+    </li>
+    <li><a href="http://www.cs.colorado.edu/~srirams/classes/doku.php/pollard_rho_tutorial"
+      target="_blank">A Quick Tutorial on Pollard's Rho Algorithm</a>
+
+    </li>
+    <li><a href="http://blog.renzuocheng.com/2012/11/generate-cyclic-group-of-prime-order-and-one-of-its-generator/"
+      target="_blank">Generate cyclic group of prime order and one of its generator</a>
+
+    </li>
+    <li><a href="http://www.cc.gatech.edu/~aboldyre/teaching/F11cs6260/numbertheory.pdf"
+      target="_blank">CS 6260: Some number theory</a>
+
+    </li>
+    <li><a href="http://en.wikipedia.org/wiki/Multiplicative_order" target="_blank">Wikipedia: Multiplicative order</a>
+
+    </li>
+    <li><a href="http://en.wikipedia.org/wiki/Cyclic_group" target="_blank">Wikipedia: Cyclic group</a>
+
+    </li>
+    <li><a href="http://en.wikipedia.org/wiki/Group_(mathematics)" target="_blank">Wikipedia: Group (mathematics)</a>
+
+    </li>
+    <li><a href="http://en.wikipedia.org/wiki/Multiplicative_group_of_integers_modulo_n"
+      target="_blank">Wikipedia: Multiplicative group of integers modulo n</a>
+
+    </li>
+    <li><a href="http://en.wikipedia.org/wiki/Pollard's_rho_algorithm" target="_blank">Wikipedia: Pollard's rho algorithm</a>
+
+    </li>
+  </ul>
+  
+<h3>Special Thanks to the Creators of</h3>
+  <ul>
+    <li><a href="www.leemon.com/crypto/BigInt.html" target="_blank">www.leemon.com/crypto/BigInt.html</a>
+
+    </li>
+    <li><a href="http://worrydream.com/Tangle/" target="_blank">http://worrydream.com/Tangle/</a>
+
+    </li>
+    <li><a href="http://requirejs.org/" target="_blank">http://requirejs.org/</a>
+
+    </li>
+    <li><a href="http://rhojs.org" target="_blank">http://rhojs.org</a>
+    </li>
+  </ul>
