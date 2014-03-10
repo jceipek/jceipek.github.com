@@ -778,6 +778,7 @@ function isProbablyPrime(big,n) {
          , stringifyBI: function (x) {return BigInt.bigInt2str(x,10);}
          , findPrimeAndGenerator: findPrimeAndGenerator
          , findY: findY
+         , encrypt: encrypt
          };
 
 });
