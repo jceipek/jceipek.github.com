@@ -44,10 +44,11 @@ page "projects/*", :layout => :project
 # Methods defined in the helpers block are available in templates
 helpers do
   def andify(lst, joiner=' &amp; ')
+    newlst = Array.new(lst)
     if lst.length > 1
-      lst[-2..-1] = (lst.length >= 2 and lst[-2..-1])? lst[-2..-1].join(joiner) : []
+      newlst[-2..-1] = (lst.length >= 2 and lst[-2..-1])? lst[-2..-1].join(joiner) : []
     end
-    lst.join(', ')
+    newlst.join(', ')
   end
 end
 

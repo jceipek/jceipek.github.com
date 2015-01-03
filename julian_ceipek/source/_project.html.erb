@@ -1,12 +1,12 @@
-<a class='project' href='<%= link %>' <%= "target='_blank'" unless link == '#' %>>
+<a class='project' href='<%= link %>' <%= "target='_blank'" unless link == '#' or (not (defined?(opens_new_page)).nil? and !opens_new_page) %>>
 	<span class='overlay'>
 		<span class='overlay-description'>
 			<%= link_text %>
 		</span>
 	</span>
 
-	<h3><%= title %></h3>
 	<span class='project-description'>
+		<h3><%= title %></h3>
 		<span class='project-tagline'><%= tagline %></span>
 	</span>
 	<span class='img-container <%= 'img-container--dark' if dark %>'>
@@ -15,9 +15,6 @@
 	<span class='project-details'>
 		<span class='project-roles'><%= andify roles %></span>
 		<% unless collaborators.empty? %>
-			<% if false %>
-			<span class='project-collaborators'><span class='with'><%= collaborators.length > 1? 'collaborators:':'collaborator:'  %></span> <%= andify collaborators %></span>
-			<% end %>
 			<span class='project-collaborators'><span class='with'>with</span> <%= andify collaborators %></span>
 		<% end %>
 	</span>

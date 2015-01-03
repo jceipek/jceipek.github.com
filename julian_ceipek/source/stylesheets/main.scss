@@ -7,6 +7,7 @@ $description-text-color: #898989;
 $project-bg-color: #f0f0f0;
 $project-bg-dark-color: #222222;
 $link-color: #08c;
+$visited-link-color: #CC00C9;
 $overlay-bg-color: rgba(51,51,51,0.5);
 $overlay-color: white;
 
@@ -71,14 +72,18 @@ body {
   width: 3em;
   height: 3em;
 }
+a {
+  color: $link-color;
+  text-decoration: none;
+}
+a:visited {
+  color: $visited-link-color;
+}
 a.circle--small {
   @include flexbox;
   @include flex-direction(column);
   @include align-items(center);
   @include justify-content(center);
-
-  color: $link-color;
-  text-decoration: none;
 
   transition: width 0.5s, height 0.5s;
 }
@@ -182,7 +187,7 @@ a.project {
   height: 10em;
 }
 
-.project .img-container {
+.img-container {
   background-color: $project-bg-color;
   line-height: 0;
   text-align: center;
@@ -190,6 +195,66 @@ a.project {
   margin: 0.1em 0;
 }
 
-.project .img-container--dark {
+.img-container--dark {
   background-color: $project-bg-dark-color;
+}
+
+.project-expl-container {
+max-width: 52em;
+  margin: auto;
+  background-color: $bg-color;
+  margin-bottom: 3em;
+  padding: 2em;
+}
+
+.project-expl {
+  margin-top: 1em;
+}
+
+.project-expl img {
+  height: 10em;
+}
+
+.project-expl .img-container {
+  float: left;
+  width: 20em;
+  margin-right: 1em;
+}
+
+.project-expl h2 {
+  margin: 0;
+}
+
+.project-about h3 {
+  margin: 0.7em 0 0.1em 0;
+}
+
+.project-about p {
+  margin: 0 0 0.5em 0;
+}
+
+.project-expl-container a img {
+  height: 0.8em;
+}
+
+.project-about {
+  padding-top: 0.5em;
+  clear: both;
+  font-size: 1.2em;
+}
+
+// From http://css-tricks.com/NetMag/FluidWidthVideo/Article-FluidWidthVideo.php
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

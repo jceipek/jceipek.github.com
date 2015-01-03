@@ -1,5 +1,5 @@
 ---
-link: '#'
+link: 'projects/whatMattersMost.html'
 link_text: coming soon!
 img: wmm-thumb.png
 dark: false
@@ -9,7 +9,7 @@ collaborators:
   - Graham Hooton
   - Chase Kernan
   - Chelsea Nayback
-  - Juliana Nazar&eacute;
+  - "Juliana Nazar&eacute;"
   - Ted Dintersmith
   - Tony Wagner
   - Mark Somerville
