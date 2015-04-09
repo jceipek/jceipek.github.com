@@ -4,7 +4,16 @@ title: Julian Ceipek
 
 <%= partial(:header) %>
 <div class='project-container'>
-  <% data.project_list.each do |p| %>
-    <%= partial(:project,  :locals => sitemap.find_resource_by_path((Pathname('projects')+p).to_s).data) %>
-  <% end %>
+	<h2>Experiments</h2>
+	<div class='project-container'>
+	  <% data.project_list.each do |p| %>
+	    <%= partial(:project,  :locals => sitemap.find_resource_by_path((Pathname('projects')+p).to_s).data) %>
+	  <% end %>
+  </div>
+	<h2>Education</h2>
+	<div class='project-container'>
+	  <% data.education_list.each do |p| %>
+	    <%= partial(:project,  :locals => sitemap.find_resource_by_path((Pathname('projects')+p).to_s).data) %>
+	  <% end %>
+  </div>
 </div>
