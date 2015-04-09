@@ -25,14 +25,14 @@
         <%= image_tag 'icons/email-icon.png', style: 'margin-bottom: -.7em;' %>
         <span>contact</span>
     </a>
-    <a class='circle circle--small' href='#' style='right: 9em; top: -24em;'>
-        <span>inspiration</span>
+    <a class='circle circle--small' href=<%= if target == 'projects' then '/inspiration.html' else '/index.html' end %> style='right: 9em; top: -24em;'>
+        <span><%= if target == 'projects' then 'inspiration' else 'projects' end %></span>
     </a>
-    <a class='circle circle--small' href='http://jceipek.com/thoughts' style='right: 11em; top: -17em;'>
+    <a class='circle circle--small' href='http://jceipek.com/thoughts' target="_blank" style='right: 11em; top: -17em;'>
         <span>thoughts</span>
     </a>
     <div class='circle circle--focused circle--down' style='right: -4em; top: -2em;'>
-        <h3>projects</h3>
+        <h3><%= target %></h3>
     </div>
 </div>
 <div class='expansion-line'></div>
