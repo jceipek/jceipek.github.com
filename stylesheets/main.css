@@ -278,7 +278,7 @@ a.project {
   background-color: #222222; }
 
 /* line 202, /Users/jceipek/Development/jceipek.github.com/julian_ceipek/source/stylesheets/main.scss */
-.project-expl-container {
+.project-expl-container, .inspiration-container {
   max-width: 52em;
   margin: auto;
   background-color: white;
