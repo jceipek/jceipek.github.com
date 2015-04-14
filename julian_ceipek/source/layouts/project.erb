@@ -1,5 +1,5 @@
 <% wrap_layout :layout do %>
-	<%= partial(:header) %>
+	<%= partial(:header, :locals => {:target => 'projects'}) %>
 	<div class='project-expl-container'>
 		<a href="/"><%= image_tag 'icons/left-icon.png' %>All projects</a>
 		<div class='project-expl'>
