@@ -1,6 +1,6 @@
 ---
 link: 'projects/timeline.html'
-link_text: coming soon!
+link_text: about
 opens_new_page: false
 img: Timeline_f.png
 dark: false
