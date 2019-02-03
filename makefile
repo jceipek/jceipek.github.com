@@ -9,7 +9,7 @@ deploy:
 	@echo "Emptied public"
 	rmdir public
 	git add .
-	echo "Automated commit at" (date) | git commit -m
+	git commit -m "Automated commit at" $(date)
 	git push origin master
 	git checkout hugo
 	@echo "Deploy complete."
