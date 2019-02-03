@@ -1,0 +1,18 @@
+{{ define "main" }}
+
+<div class='project-container'>
+    {{ range $.Site.Data.projectorder.categories }}
+    <div class='project-container'>
+        <h2>{{ .name }}</h2>
+        <div class='project-container'>
+        {{ range .content }}
+            {{ with $.Site.GetPage . }}
+            {{ .Render "li" }}
+            {{ end }}
+        {{ end }}
+        </div>
+    </div>
+    {{ end }}
+</div>
+
+{{end}}

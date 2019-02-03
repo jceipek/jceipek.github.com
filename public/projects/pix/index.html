@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8">
+
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta name="viewport" content="width=device-width, initial-scale=0.6, maximum-scale=0.6, user-scalable=0">
+
+<title>Julian Ceipek  | Pix.</title>
+
+<meta NAME="robots" CONTENT="index, follow">
+
+<meta name="generator" content="Hugo 0.54.0" />
+
+
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+
+
+<link href='//fonts.googleapis.com/css?family=Dosis:300|Open+Sans:300' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href='/css/normalize.min.6dec53ee20f5bc2905289325994cab42171978d2d264472563bf2e1eab0da1cd.css'>
+
+<link rel="stylesheet" href='/css/main.min.51c4f4fa620a74db5611234bc955b77c7372b74705da62cd16963aff549f488f.css'>
+
+
+
+
+
+<body><div class='header circle'>
+    <div>
+        <div class='greeting'>Hi, I'm</div>
+        <h1 class='name'>Julian Ceipek</h1>
+        <div class='goal'>I strive to create beautiful experiences that empower people</div>
+        
+        
+        
+        
+        
+        
+    </div>
+</div>
+<div class='circle-container'>
+    <a class='circle circle--small' href='https://github.com/jceipek' style='top: -24em; left: 8em'>
+        <img src="/icons/GitHub-Mark-120px-plus.png" />
+        <span>github</span>
+    </a>
+    <a class='circle circle--small' href='documents/Julian_Ceipek_CV.pdf' style='top: -17em; left: 11em'>
+        <img style="margin-top: 0.6em;" src="/icons/resume-icon.png" />
+        <span>creds</span>
+    </a>
+    <a class='circle circle--small' href='mailto:julian.ceipek@gmail.com' style='top: -9.5em; left: 10em'>
+        <img style="margin-bottom: -.7em;" src="/icons/email-icon.png" />
+        <span>contact</span>
+    </a>
+    <a class='circle circle--small' href='/inspiration/' style='right: 9em; top: -24em;'>
+        <span>inspiration</span>
+    </a>
+    <a class='circle circle--small' href='//jceipek.com/thoughts' target="_blank" style='right: 11em; top: -17em;'>
+        <span>thoughts</span>
+    </a>
+    <div class='circle circle--focused circle--down' style='right: -4em; top: -2em;'>
+        <h3>projects</h3>
+    </div>
+</div>
+<div class='expansion-line'></div><div id="content">
+	<div class='project-expl-container'>
+		
+		<a href="/"><img src="/icons/left-icon.png" />All projects</a>
+		<div class='project-expl'>
+			
+			
+			<span class='img-container img-container--dark'>
+			<img src="/projects/pix/pix.png" /> 
+			
+			</span>
+			
+			<h2>Pix.</h2>
+			<span class='project-tagline'>16-bit runner in assembly</span>
+			<span class='project-roles'>Art, Design, Tools &amp; Implementation</span>
+			
+			<span class='project-collaborators'><span class='with'>collaborators:</span> Riley Butler, Alyssa Bawgus &amp; Jazmin Gonzalez-Rivero</span>
+			
+		    <div class='project-about'>
+
+<p>In 2012, @notch, the creator of <a href="https://minecraft.net/">Minecraft</a>, started working on 0x10<sup>c</sup>, a space game in which players could program virtual spaceships with &ldquo;DCPU-16&rdquo; processors.</p>
+
+<p>Shortly after it was announced, I teamed up with some students in my Computer Architecture class at <a href="http://olin.edu/">Olin</a> to create Pix, a 16-bit arcade game that would have run on these virtual processors. Although @notch has since cancelled 0x10<sup>c</sup>, you can still <a href="https://www.dcpu-ide.com/?program=sn6vvsxr">play Pix in an online emulator</a>.</p>
+
+<h3 id="gameplay">Gameplay</h3>
+
+<p>Due to the limitations of the processor and the time we had to develop the game, we decided to build a game with a very simple game mechanic. For inspiration, we turned to Canabalt, an endless one-button game in which the objective is to survive as long as possible by jumping over gaps and obstacles.</p>
+
+<p>In Pix, you play a thief running on rooftops. In the spirit of Canabalt, the world is procedurally generated and the objective is to run as long as possible without falling to your doom.</p>
+
+<h3 id="technical-limitations">Technical Limitations</h3>
+
+<p>The DCPU-16 specification we used does not provide audio support, so Pix doesn&rsquo;t have music or sound effects.
+The simple monitor it provides, the LEM1802, is designed to display text rather than game sprites. The screen consists of 32x12 4x8 pixel character blocks that can each have a foreground and background color. There can be no more than 128 unique blocks and no more than 16 unique colors. As a result, we had to limit the gameplay to jumping over gaps rather than diverse obstacles, and the background is a static backdrop.</p>
+
+<h3 id="tools">Tools</h3>
+
+<p>We initially had a lot of trouble creating graphics and animations for the DCPU-16 emulator because modern image editors are optimized for large images rather than hexadecimal data blocks.
+I made a Python toolkit to translate traditional image files and animation spritesheets into unique image tilesets and look-up tables that we could paste into the data portions of our assembly code.</p>
+</div>
+		</div>
+	</div>
+
+        </div></body>
+</html>

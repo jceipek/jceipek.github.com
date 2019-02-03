@@ -1,0 +1,22 @@
+{{ define "main" }}
+	<div class='project-expl-container'>
+		{{ $leftIcon := resources.Get "/icons/left-icon.png" }}
+		<a href="/"><img src="{{$leftIcon.RelPermalink}}" />All projects</a>
+		<div class='project-expl'>
+			{{ $img := .Resources.GetMatch .Params.img }}
+			{{ if $img }}
+			<span class='img-container {{ with .Params.dark }}img-container--dark{{ end }}'>
+			<img src="{{ $img.RelPermalink }}" /> {{/* TODO(JULIAN): better resource path */}}
+			{{/*TODO(JULIAN): imgsrcset and resolutions for better image loading esp in mobile; retina*/}}
+			</span>
+			{{ end }}
+			<h2>{{.Params.title}}</h2>
+			<span class='project-tagline'>{{.Params.tagline}}</span>
+			<span class='project-roles'>{{ delimit .Params.roles ", " " &amp; " }}</span>
+			{{ with .Params.collaborators }}
+			<span class='project-collaborators'><span class='with'>{{if gt (len .) 1}}collaborators:{{else}}collaborator:{{end}}</span> {{ delimit . ", " " &amp; " }}</span>
+			{{ end }}
+		    <div class='project-about'>{{ .Content }}</div>
+		</div>
+	</div>
+{{ end }}

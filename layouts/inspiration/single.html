@@ -1,0 +1,10 @@
+{{ define "main" }}
+	<div class='project-expl-container'>
+		{{ $leftIcon := resources.Get "/icons/left-icon.png" }}
+		<a href="/"><img src="{{$leftIcon.RelPermalink}}" />Back</a>
+		<div class='project-expl'>
+			<h2>{{.Params.title}}</h2>
+		    <div class='project-about'>{{ .Content }}</div>
+		</div>
+	</div>
+{{ end }}

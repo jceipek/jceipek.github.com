@@ -1,0 +1,269 @@
+@import "flex";
+
+$backing-color: #7eeffe;
+$bg-color: white;
+$important-text-color: rgb(51, 51, 51);
+$description-text-color: #898989;
+$project-bg-color: #f0f0f0;
+$project-bg-dark-color: #222222;
+$link-color: #08c;
+$visited-link-color: #CC00C9;
+$overlay-bg-color: rgba(51,51,51,0.5);
+$overlay-color: white;
+
+body {
+  background-color: $backing-color;
+  color: $important-text-color;
+  font-family: 'Open Sans', sans-serif;
+}
+.circle-container {
+  position: relative;
+  width: 1em;
+  height: 1em;
+  margin: auto;
+}
+.circle {
+  border-radius: 50%;
+  width: 24em;
+  height: 24em;
+  background-color: $bg-color;
+  margin: auto;
+
+  @include flexbox;
+  @include flex-direction(column);
+  @include align-items(center);
+  @include justify-content(center);
+}
+.circle--small, .circle--focused {
+  position: absolute;
+}
+.circle--small {
+  width: 7em;
+  height: 7em;
+}
+.circle--focused {
+  width: 9em;
+  height: 9em;
+}
+.circle div {
+  margin: auto;
+  padding: 0 .5em;
+}
+.name {
+  font-family: 'Dosis', sans-serif;
+  font-size: 3em;
+  line-height: 1.3em;
+  text-align: center;
+  text-rendering: optimizelegibility;
+  margin: 0;
+  font-weight: normal;
+}
+.greeting, .goal {
+  font-size: 1.2em;
+  line-height: 1.2em;
+  color: $description-text-color;
+  text-align: center;
+}
+.header {
+  margin-top: 3em;
+}
+.circle img {
+  @include flex(none);
+  width: 3em;
+  height: 3em;
+}
+a {
+  color: $link-color;
+  text-decoration: none;
+}
+a:visited {
+  color: $visited-link-color;
+}
+a.circle--small {
+  @include flexbox;
+  @include flex-direction(column);
+  @include align-items(center);
+  @include justify-content(center);
+
+  transition: width 0.5s, height 0.5s;
+}
+a.circle--small:hover {
+  text-decoration: none;
+  width: 8em;
+  height: 8em;
+}
+.circle--down {
+  background-image: url("{{(resources.Get `icons/down-icon.png`).RelPermalink}}");
+  background-repeat: no-repeat;
+  background-position: center 4.5em;
+  background-size: 3em;
+}
+.expansion-line {
+  border-right: 0.4em solid $bg-color;
+  margin: auto;
+  width: 0;
+  height: 15em;
+}
+.project-container {
+  background-color: $bg-color;
+  margin: auto;
+  margin-bottom: 3em;
+  padding: 2em 1em;
+
+  @include flexbox;
+  @include flex-direction(row);
+  @include align-items(center);
+  @include justify-content(center);
+  @include flex-wrap(wrap);
+}
+.project {
+  width: 20em;
+  height: 19em;
+  margin: 0.5em 2.3em;
+  position: relative;
+}
+a.project {
+  text-decoration: none;
+  color: $important-text-color;
+}
+.project h3 {
+  // text-align: right;
+  width: 100%;
+  // padding-left: 0.2em;
+
+  color: $important-text-color;
+  margin: 0;
+
+  font-family: 'Dosis', sans-serif;
+}
+.overlay {
+  background-color: $overlay-bg-color;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.3s, opacity 0.3s linear;
+  margin: 0;
+  @include flexbox;
+  @include justify-content(center);
+  @include align-items(center);
+}
+.overlay-description {
+  margin: auto;
+  color: $overlay-color;
+  font-size: 1.3em;
+}
+.project:hover .overlay {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+.project-tagline {
+  // text-align: right;
+  font-style: italic;
+}
+.project-details, .project-description {
+  padding-left: 0.2em;
+  display: block;
+}
+.project-details {
+  text-align: right;
+}
+.project-tagline, .project-collaborators, .project-roles {
+  color: $important-text-color;
+  width: 100%;
+  display: block;
+}
+.with {
+  font-weight: bolder;
+  // display: block;
+}
+.project-collaborators {
+  font-size: 0.7em;
+}
+.project img {
+  height: 10em;
+}
+
+.img-container {
+  background-color: $project-bg-color;
+  line-height: 0;
+  text-align: center;
+  display: block;
+  margin: 0.1em 0;
+}
+
+.img-container--dark {
+  background-color: $project-bg-dark-color;
+}
+
+.project-expl-container, .inspiration-container {
+max-width: 52em;
+  margin: auto;
+  background-color: $bg-color;
+  margin-bottom: 3em;
+  padding: 2em;
+}
+
+.project-expl {
+  margin-top: 1em;
+}
+
+.project-expl img {
+  height: 10em;
+}
+
+.project-expl .img-container {
+  float: left;
+  width: 20em;
+  margin-right: 1em;
+}
+
+.project-expl h2 {
+  margin: 0;
+}
+
+.project-about h3 {
+  margin: 0.7em 0 0.1em 0;
+}
+
+.project-about h4 {
+  margin: 0.7em 0 0.1em 0;
+}
+
+.project-about p {
+  margin: 0 0 0.5em 0;
+}
+
+.project-about img {
+  width: 100%;
+  height: auto;
+}
+
+.project-expl-container a img {
+  height: 0.8em;
+}
+
+.project-about {
+  padding-top: 0.5em;
+  clear: both;
+  font-size: 1.2em;
+}
+
+// From http://css-tricks.com/NetMag/FluidWidthVideo/Article-FluidWidthVideo.php
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

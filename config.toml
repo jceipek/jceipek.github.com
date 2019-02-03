@@ -1,0 +1,5 @@
+baseURL = "//jceipek.com/"
+languageCode = "en-us"
+title = "Julian Ceipek"
+theme = "jceipek"
+UglyUrls = true
