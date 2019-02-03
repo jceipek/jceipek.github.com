@@ -1,7 +1,7 @@
 window.onload=function() {
   var playing = false
     , sound = new Howl({
-        urls: ['sounds.m4a', 'sounds.ogg', 'sounds.wav'],
+        src: ['sounds.m4a', 'sounds.ogg', 'sounds.wav'],
         sprite: {
           beat: [0, 453],
           brrp: [453, 917]
