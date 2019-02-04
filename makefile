@@ -1,3 +1,4 @@
+message:="Automated commit at $(shell date)"
 deploy:
 	@echo "Beginning deploy..."
 	rm -rf public || true
@@ -9,7 +10,7 @@ deploy:
 	@echo "Emptied public"
 	rmdir public
 	git add .
-	git commit -m "Automated commit at" $(date)
+	git commit -m $(message) || (git checkout hugo && exit 1)
 	git push origin master
 	git checkout hugo
 	@echo "Deploy complete."
