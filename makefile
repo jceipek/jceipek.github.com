@@ -2,7 +2,7 @@ message:="Automated commit at $(shell date)"
 deploy:
 	@echo "Beginning deploy..."
 	rm -rf public || true
-	hugo
+	hugo --minify
 	git checkout master
 	@echo "Switched branches"
 	find . -maxdepth 1 -not -name 'public' -not -name '.git' -not -name '.gitignore' -not -name '.' -exec rm -rf '{}' +
