@@ -104,11 +104,25 @@ a.circle--small:hover {
   width: 0;
   height: 15em;
 }
-.project-container {
+
+.projects {
   background-color: $bg-color;
+  padding: 2rem;
+
+  h2 {
+    margin:0;
+    line-height: 3rem;
+  }
+}
+
+.project-category {
   margin: auto;
-  margin-bottom: 3em;
-  padding: 2em 1em;
+}
+
+.project-container {
+  margin: auto;
+  // margin-bottom: 3em;
+  // padding: 2em 1em;
 
   @include flexbox;
   @include flex-direction(row);
@@ -176,12 +190,22 @@ a.project {
   width: 100%;
   display: block;
 }
+
+.project-tagline {
+  line-height: 1.6rem;
+}
+
+.project-roles {
+  line-height: 1.4rem;
+}
+
 .with {
   font-weight: bolder;
   // display: block;
 }
 .project-collaborators {
   font-size: 0.7em;
+  padding-top: 0.4rem;
 }
 .project img {
   height: 10em;

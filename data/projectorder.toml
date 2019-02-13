@@ -1,10 +1,28 @@
 [[categories]]
+name="Games"
+content=[
+    "tup",
+    "tendar",
+    "vvr"
+]
+
+[[categories]]
+name="Robotics"
+content=[
+    "mesolite",
+    "cog",
+    "aurora",
+    "octobo"
+]
+
+[[categories]]
 name="Experiments"
 content=[
     "tetheron",
-    "livingCloud",
-    "vila",
-    "dauntingDollhouse",
+    # "livingCloud",
+    # "vila",
+    # TODO: Add Co-Operatives
+    # "dauntingDollhouse",
     "evilLairsForDummies",
     "zoolemma",
     "effect",
