@@ -14,3 +14,6 @@ deploy:
 	git push origin master
 	git checkout hugo
 	@echo "Deploy complete."
+
+watch:
+	hugo server
