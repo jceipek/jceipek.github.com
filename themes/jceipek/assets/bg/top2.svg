@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="775"
+   height="186"
+   id="svg3180">
+  <defs
+     id="defs3182">
+    <linearGradient
+       x1="530.29095"
+       y1="311.84442"
+       x2="531.91888"
+       y2="622.97144"
+       id="linearGradient3151"
+       xlink:href="#linearGradient4137"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-197.48275,-247.31115)" />
+    <linearGradient
+       id="linearGradient4137">
+      <stop
+         id="stop4139"
+         style="stop-color:#7fd3d1;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop4141"
+         style="stop-color:#a9e5d6;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect2987" />
+  </defs>
+  <metadata
+     id="metadata3185">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="matrix(1.25,0,0,1.25,-112.19593,-315.79286)"
+     id="layer1"
+     style="fill:#ffffff">
+    <path
+       d="m 89.756741,402.63429 20.457349,0 c 15.50096,0 31.11298,-0.27816 46.27784,-3.48519 15.16485,-3.20703 29.71198,-9.28704 42.6247,-17.85361 12.91272,-8.56657 24.12318,-19.46552 34.39521,-31.06209 10.27206,-11.59656 19.72754,-23.91084 30.33332,-35.20365 34.80937,-37.06429 83.74511,-62.39546 134.62101,-62.39546 50.87589,0 99.81162,25.33118 134.62099,62.39546 10.60578,11.29281 20.06125,23.60709 30.33331,35.20365 10.27205,11.59657 21.4825,22.49552 34.39522,31.06209 12.91272,8.56657 27.45986,14.64658 42.62471,17.85361 15.16485,3.20703 30.77688,3.48519 46.27783,3.48519 l 23.03851,0 -619.999999,0"
+       id="path2985"
+       style="fill:#ffffff;fill-opacity:1;stroke:none" />
+  </g>
+</svg>

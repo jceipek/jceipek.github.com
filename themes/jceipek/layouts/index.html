@@ -1,5 +1,16 @@
 {{ define "main" }}
 
+{{ range $.Site.Data.projectorder.highlights }}
+    {{/*  <div class='project-container'>  */}}
+    <div class='highlights-container'>
+        {{ range .content }}
+            {{ with $.Site.GetPage . }}
+            {{ .Render "highlight" }}
+            {{ end }}
+        {{ end }}
+    </div>
+    {{/*  </div>  */}}
+{{ end }}
 <div class='projects'>
     {{ range $.Site.Data.projectorder.categories }}
     <div class='project-category'>

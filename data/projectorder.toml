@@ -1,7 +1,14 @@
+[[highlights]]
+content=[
+    "tup",
+    "mesolite"
+]
+
+
 [[categories]]
 name="Games"
 content=[
-    "tup",
+    # "tup",
     "tendar",
     "vvr"
 ]
@@ -9,7 +16,7 @@ content=[
 [[categories]]
 name="Robotics"
 content=[
-    "mesolite",
+    # "mesolite"
     "cog",
     "aurora",
     "octobo"

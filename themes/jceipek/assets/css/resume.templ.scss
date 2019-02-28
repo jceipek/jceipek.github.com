@@ -1,0 +1,254 @@
+$tagline-color: #5081a4;
+$backing-color: #7fd3d1;
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* END RESET */
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: $backing-color;
+  // background: linear-gradient($backing-color, #a9e5d6);
+}
+#email, #location {
+  padding: 0.1em;
+}
+
+#location {
+  padding-top: 0.3rem;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(124, 124, 124);
+}
+#email {
+  color: black;
+  text-transform: uppercase;
+}
+#profile-pic {
+  float: left;
+  margin-right: 1em;
+}
+h1 {
+  font-size: 2.5em;
+  padding: 0.1em;
+  padding-bottom: .5rem;
+}
+h1, h2 {
+  font-weight: normal;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 300;
+}
+
+#container {
+  padding: 2rem;
+  max-width: 8in;
+  // margin: 2rem 0;
+  // padding: 0 2rem;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+}
+
+
+h2 {
+  margin-top: 0.5em;
+  color: rgb(124, 124, 124);
+  margin-bottom: 0.3em;
+  overflow: hidden;
+  font-size: 1.5em;
+}
+.section-title {
+  float: left;
+  margin-right: 1em;
+}
+.divider {
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: rgb(216, 216, 216);
+  display: block;
+  margin-top: 0.5em;
+  overflow: hidden;
+}
+strong {
+  color: $tagline-color;
+  font-weight: normal;
+}
+strong.role {
+  color: #000;
+  font-weight: normal;
+  font-style: italic;
+}
+strong cite {
+  font-style: italic;
+}
+.time {
+  color: rgb(124, 124, 124);
+  font-style: italic;
+}
+#goal {
+  margin-top: 0.87rem;
+}
+.section-content, .showcase {
+  margin-left: 17%;
+}
+
+.showcase {
+  padding-left: 5%;
+}
+.showcase img {
+  height: 141px;
+  padding: 0.5em;
+}
+li {
+  margin-bottom: 0.6em;
+}
+li, p {
+  line-height: 1.2em;
+}
+.time {
+  position: absolute;
+  margin-left: -8em;
+  width: 7em;
+  text-align: right;
+}
+#open-source {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+}
+#open-source img {
+  display: block;
+  padding: 0.2em;
+}
+
+#open-source a img {
+  position: relative;
+  padding-left: 5px;
+}
+
+@media all {
+  body {
+    font-size: 0.77em;
+  }
+  h1 {
+    font-size: 2.4em;
+  }
+  h2 {
+    font-size: 1.6em;
+  }
+
+  // #header {
+  //   height: 6rem;
+  // }
+
+/*  .collapsed-link {
+    display: none;
+  }*/
+  #goal {
+    margin-bottom: 2em;
+  }
+  .showcase img {
+    height: 7em;
+  }
+  #profile-pic {
+    // height: 100%;
+    height: 6rem;
+    margin-right: 0.9em;
+    margin-left: 1em;
+  }
+  #gh-logo {
+    height: 30px;
+  }
+  #lp-logo {
+    height: 15px;
+  }
+  .time {
+    font-size: 0.8em;
+    margin-left: -9em;
+  }
+  .section-title {
+    margin-right: 0.5em;
+  }
+
+  .section-content ul, .award {
+    margin-left: 1rem;
+  }
+
+  .section-content ul {
+    margin-right: 21%;
+  }
+
+  .section-content li {
+    margin: 0;
+    padding: 0.1rem 0;
+  }
+
+  #under-logo {
+    /*margin-right: 1em;*/
+    position: relative;
+    padding-right: 1em;
+  }
+}
+
+@media print {
+  body {
+    background-color: white;
+  }
+  #container {
+    padding: 0;
+  }
+  #open-source {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}

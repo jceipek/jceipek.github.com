@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Julian Ceipek CV</title>
+    <meta
+      name="description"
+      content="Julian Ceipek's Resume"
+    />
+	<meta name="viewport" content="width=device-width initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+	{{ $style := resources.Get "css/resume.templ.scss" | resources.ExecuteAsTemplate "css/main.scss" . | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+	<link rel="stylesheet" href='{{ $style.RelPermalink }}'>
+    {{/*  <link rel="stylesheet" media="screen" href="cv.css" />
+    <link rel="stylesheet" media="print" href="cv.css" />  */}}
+  </head>
+  <body>
+
+  <div id='container'>
+    <div id='header'>
+      <img id='profile-pic' src="{{ (resources.Get `resume/me.jpg`).RelPermalink }}" alt="profile">
+      <h1>{{ .Params.name }}</h1>
+      <a id='email' href='mailto:{{ .Params.email }}'>{{ .Params.email }}</a>
+	  <div id='location'>{{ .Params.location | markdownify }}</div>
+      <div id='goal'>{{ .Params.tagline | markdownify }}</div>
+      <div id='open-source'>
+        <a href='https://github.com/jceipek'><img id='gh-logo' src="data:image/svg+xml;base64,{{(resources.Get `resume/github_dark.svg`).Content | base64Encode}}" alt="my github projects"></a>
+      </div>
+    </div>
+
+    {{/*  <h2><span class='section-title'>NOTABLE COLLABORATIVE PROJECTS</span> <span class='divider'></span></h2>
+      <ul>
+		{{- range .Params.projects -}}
+		<li>{{- . | markdownify -}}</li>
+		{{- end -}}
+	</ul>  */}}
+	{{/*  <div class='showcase'>  */}}
+		{{/*  <img src="{{ (resources.Get `resume/timeline_ed.png`).RelPermalink }}" alt="Timeline">  */}}
+		{{/*  <img src="{{ (resources.Get `resume/Timeline_f.png`).RelPermalink }}" alt="Timeline">  */}}
+        {{/*  <img src="{{ (resources.Get `resume/caress-of-the-gaze.jpg`).RelPermalink }}" alt="Caress of the Gaze">  */}}
+        {{/*  <img src="{{ (resources.Get `resume/pyshiva.png`).RelPermalink }}" alt="pyShiva">  */}}
+	{{/*  </div>  */}}
+    <h2><span class='section-title'>EMPLOYMENT</span> <span class='divider'></span></h2>
+      <ul class='section-content'>
+      {{- range .Params.employment -}}
+        <li><span class='time'>{{- delimit .time "-" -}}</span> <strong class='company'>{{- .employer -}}.</strong> <strong class='role'>{{- .role -}}.</strong> {{ .overview | markdownify -}}</li>
+      {{- end -}}
+      </ul>
+    <h2><span class='section-title'>EDUCATION</span> <span class='divider'></span></h2>
+	    <ul class='section-content'>
+      {{- range .Params.education -}}
+        <li>
+          <span class='time'>{{- delimit .time "-" -}}</span> <strong class='school'>{{- .school -}}</strong>, {{ .location -}}
+          <p>GPA {{ .gpa }}. {{ .degree }}</p>
+        </li>
+      {{- end -}}
+      </ul>
+    <h2><span class='section-title'>NOTABLE ACHIEVEMENTS</span> <span class='divider'></span></h2>
+      <ul class='section-content'>
+      {{- range .Params.achievements -}}
+        <li>
+          {{/*<span class='time'>{{ delimit .time "-" }}</span>*/}} {{ .overview | markdownify }}
+          {{ with .link }}<a class='collapsed-link' href="{{ . }}">[link]</a>{{ end }}
+          {{ range .awards }}
+          <p class='award'>{{. | markdownify}}</p>
+          {{ end }}
+        </li>
+		  {{- end -}}
+      </ul>
+    <h2><span class='section-title'>DIGITAL TOOLS</span> <span class='divider'></span></h2>
+      <ul class='section-content'>
+        {{- range .Params.tools -}}
+        <li><p>{{ . | markdownify }}</p></li>
+        {{- end -}}
+      </ul>
+    </div>
+  </body>
+
+</html>

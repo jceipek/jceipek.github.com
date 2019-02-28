@@ -28,7 +28,7 @@
 <meta name="msapplication-TileImage" content="/mstile-144x144.png">
 {{/* Favicon END */}}
 
-<link href='//fonts.googleapis.com/css?family=Dosis:300|Open+Sans:300' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Dosis:400|Open+Sans:400' rel='stylesheet' type='text/css'>
 {{ $normalize := resources.Get "css/normalize.css" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href='{{ $normalize.RelPermalink }}'>
 {{ $style := resources.Get "css/main.templ.scss" | resources.ExecuteAsTemplate "css/main.scss" . | resources.ToCSS | resources.Minify | resources.Fingerprint }}
