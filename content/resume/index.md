@@ -43,6 +43,8 @@ tools= [
   role="Tech Co-lead"
   overview= """Create foundational game systems, in-house tools, native plugins, custom servers, and prototypes for critically-acclaimed AR and VR experiences supported by *Google* and *Oculus*.
   
+  ![Poster for The Under Presents VR experience](/resume/under_presents_curtain.png)
+  
   - Developed prize-winning first prototype and core multiplatform architecture for award-winning virtual reality game *Virtual Virtual Reality*, with 50k+ installs and majority 5-star ratings.
   - Spearheaded and currently lead development of multiplayer services and backend infrastructure for upcoming virtual reality live theater experience showcased at *Sundance Film Festival* and backed by *Oculus*.
   - Led  creation of sophisticated timeline editor for editing 3d recordings of actors.
@@ -56,6 +58,8 @@ tools= [
   role="Software Contractor"
   overview="""Create the "brains" for interactive garments and installations backed by Adidas, Steelcase, and Chicago's Museum of Science and Industry; and featured by outlets including *WIRED*, *CNN*, *The Guardian*, *BBC News*, *Engadget*, and *CNET*.
   
+  ![Mesolite Emotive Display Case](/resume/mesolite_silhouette.png)
+
   - In under 130 hours, engineered complete simulation suite, control system, and wifi monitoring portal for display case that reacts to human emotions. Project presented to executives at Adidas headquarters.
   - Built visual calibration tool for tuning servo motors in 30 seconds (despite no prior servo experience).
   - Achieved 20x performance boost for generative animations using game development tricks.
