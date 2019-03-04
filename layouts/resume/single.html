@@ -24,7 +24,7 @@
 	  <div id='location'>{{ .Params.location | markdownify }}</div>
       <div id='goal'>{{ .Params.tagline | markdownify }}</div>
       <div id='open-source'>
-        <a href='https://github.com/jceipek'><img id='gh-logo' src="data:image/svg+xml;base64,{{(resources.Get `resume/github_dark.svg`).Content | base64Encode}}" alt="my github projects"></a>
+        <a href='https://github.com/jceipek'><img id='gh-logo' src="data:image/svg+xml;base64,{{(resources.Get `resume/github_dark.svg`).Content | base64Encode}}" alt="my github projects">jceipek</a>
       </div>
     </div>
 
@@ -39,7 +39,8 @@
 		{{/*  <img src="{{ (resources.Get `resume/Timeline_f.png`).RelPermalink }}" alt="Timeline">  */}}
         {{/*  <img src="{{ (resources.Get `resume/caress-of-the-gaze.jpg`).RelPermalink }}" alt="Caress of the Gaze">  */}}
         {{/*  <img src="{{ (resources.Get `resume/pyshiva.png`).RelPermalink }}" alt="pyShiva">  */}}
-	{{/*  </div>  */}}
+  {{/*  </div>  */}}
+  
     <h2><span class='section-title'>EMPLOYMENT</span> <span class='divider'></span></h2>
       <ul class='section-content'>
       {{- range .Params.employment -}}
@@ -61,8 +62,12 @@
         <li>
           {{/*<span class='time'>{{ delimit .time "-" }}</span>*/}} {{ .overview | markdownify }}
           {{ with .link }}<a class='collapsed-link' href="{{ . }}">[link]</a>{{ end }}
+          {{ if .awards }}
+          <div class='awards'>
           {{ range .awards }}
           <p class='award'>{{. | markdownify}}</p>
+          {{ end }}
+          </div>
           {{ end }}
         </li>
 		  {{- end -}}

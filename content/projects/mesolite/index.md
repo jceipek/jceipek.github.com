@@ -1,10 +1,10 @@
 ---
 title: Mesolite
-tagline: adidas emotive display case
+tagline: emotive display case for Adidas
 link: 'http://behnazfarahi.com/mesolite/'
 opens_new_page: true
 link_text: see it!
-img: mesolite.jpg
+img: silhouette.gif
 dark: true
 collaborators: [Behnaz Farahi, Mitch Mastroni]
 roles:

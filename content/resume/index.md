@@ -18,7 +18,9 @@ tagline="I craft **systemic solutions** with & for **people**. I love **learning
 #]
 
 tools= [
-  "Primary prototyping languages: **TypeScript** and **Python**. Developed non-trivial programs in C#, Go, C, Objective-C, LISP, SML, MATLAB, BASIC, CoffeeScript, JavaScript, Java, and LabView and often experiment with new languages.",
+  """Primary prototyping languages: **TypeScript** and **Python**.
+  
+  Developed non-trivial programs in C#, Go, C, Objective-C, LISP, SML, MATLAB, BASIC, CoffeeScript, JavaScript, Java, and LabView. Often experiment with new languages.""",
   " Adept with **Unity**, **Inkscape**, **Blender**, **Final Cut Pro**, and **Photoshop** for 5+ years."
 ]
 
@@ -41,15 +43,15 @@ tools= [
   time=["2015", "Present"]
   employer= "Tender Claws"
   role="Tech Co-lead"
-  overview= """Create foundational game systems, in-house tools, native plugins, custom servers, and prototypes for critically-acclaimed AR and VR experiences supported by *Google* and *Oculus*.
+  overview= """
+  Create foundational game systems, in-house tools, native plugins, custom servers, and prototypes for critically-acclaimed AR and VR experiences supported by *Google* and *Oculus*.
   
-  ![Poster for The Under Presents VR experience](/resume/under_presents_curtain.png)
+  ![Stage Act for The Under Presents VR experience](content/under_presents_stage.jpg)
   
-  - Developed prize-winning first prototype and core multiplatform architecture for award-winning virtual reality game *Virtual Virtual Reality*, with 50k+ installs and majority 5-star ratings.
+  - Developed prize-winning first prototype and core multiplatform architecture for award-winning VR game *Virtual Virtual Reality*, with 50k+ installs and majority 5-star ratings.
   - Spearheaded and currently lead development of multiplayer services and backend infrastructure for upcoming virtual reality live theater experience showcased at *Sundance Film Festival* and backed by *Oculus*.
-  - Led  creation of sophisticated timeline editor for editing 3d recordings of actors.
-  
-  Amplify the efforts of my talented collaborators; learning, using, and teaching languages, techniques, and pre-release technologies as needed."""
+  - Amplify the efforts of my talented collaborators; learning, using, and teaching languages, techniques, and pre-release technologies as needed."""
+  #- Led creation of sophisticated timeline editor for editing 3d recordings of actors.
   # Preempted days of error-prone manual work with two hours of proposing, co-designing, and scripting a workflow for splitting and organizing game dialog.
   # not just collaboration, but force multiplying thing; focus on what about it gets me excited
 [[employment]]
@@ -58,7 +60,7 @@ tools= [
   role="Software Contractor"
   overview="""Create the "brains" for interactive garments and installations backed by Adidas, Steelcase, and Chicago's Museum of Science and Industry; and featured by outlets including *WIRED*, *CNN*, *The Guardian*, *BBC News*, *Engadget*, and *CNET*.
   
-  ![Mesolite Emotive Display Case](/resume/mesolite_silhouette.png)
+  ![Mesolite Emotive Display Case](content/mesolite_square.jpg)
 
   - In under 130 hours, engineered complete simulation suite, control system, and wifi monitoring portal for display case that reacts to human emotions. Project presented to executives at Adidas headquarters.
   - Built visual calibration tool for tuning servo motors in 30 seconds (despite no prior servo experience).
@@ -74,7 +76,7 @@ tools= [
   time=["2014", "Present"]
   employer="Entrepreneur"
   role="Co-founder & Tech Lead"
-  overview="""Developed and co-designed multiplayer arcade game featured at the highly selective E3 Indiecade Showcase."""
+  overview="""Co-designed and developed multiplayer arcade game featured at the highly selective E3 Indiecade Showcase."""
   #I started two game companies with creators from around the world, authored contracts, co-designed gameplay mechanics, and implemented game systems for several unreleased games. I learned the importance of scoping and negotiation.""" # Think about this...
 [[employment]]
   time=[2013]
@@ -118,8 +120,7 @@ tools= [
     "Best VR Game, **International Mobile Gaming Awards 2018**",
     "Best VR Experience, **Google Play Awards 2017**",
     "Best Mobile Interactive Experience, **Raindance Film Festival 2017**",
-    "Participants' Choice Award, **PBS POV Hackathon 10**",
-    "Numerous other awards"
+    "Participants' Choice Award, **PBS POV Hackathon 10**"
   ]
   link="https://tenderclaws.com/vvr"
 
@@ -141,3 +142,5 @@ tools= [
   overview= "Lead antagonist in first authorized stage adaptation of **<cite>Dr. Horrible's Sing-Along Blog</cite>**"
 
 +++
+
+ghjsa
