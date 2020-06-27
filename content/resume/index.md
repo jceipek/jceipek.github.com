@@ -6,7 +6,7 @@ title="Inspiration"
 type="resume"
 name="Julian V V Ceipek"
 email="julian.ceipek@gmail.com"
-location="Los Angeles, CA"
+location="San Francisco, CA"
 #tagline="I strive to create **beautiful** experiences that **empower people**." # learning, force multiplier, design for people, systems thinking. About me paragraph, consolidate into tagline.
 tagline="I craft **systemic solutions** with & for **people**. I love **learning**, **collaborating** & **teaching**." # learning, force multiplier, design for people, systems thinking. About me paragraph, consolidate into tagline.
 #projects=[ # highlights or selected projects -- 
@@ -20,7 +20,7 @@ tagline="I craft **systemic solutions** with & for **people**. I love **learning
 tools= [
   """Primary prototyping languages: **TypeScript** and **Python**.
   
-  Developed non-trivial programs in C#, Go, C, Objective-C, LISP, SML, MATLAB, BASIC, CoffeeScript, JavaScript, Java, and LabView. Often experiment with new languages.""",
+  Developed non-trivial programs in C#, Go, C, Objective-C, OCaml, LISP, SML, MATLAB, BASIC, CoffeeScript, JavaScript, Java, and LabView. Often experiment with new languages.""",
   " Adept with **Unity**, **Inkscape**, **Blender**, **Final Cut Pro**, and **Photoshop** for 5+ years."
 ]
 
@@ -40,38 +40,82 @@ tools= [
 # What impressive story could tell for each one?
 
 [[employment]]
-  time=["2015", "Present"]
+  time=[2019,2020]
+  employer= "Dark"
+  role="Engineer"
+  overview= """
+  Led initiatives to unify user experience of revolutionary "live" programming environment for backend programmers, with goal of making coding 100x easier."""
+  [employment.detail]
+    image="content/dark-square.png"
+    altImage="Dark"
+    imageCss="justify-self: right; width: auto; height: 100%;"
+    callouts=[
+      "Developed, documented, and tested standard toolkit with which customers build software used by 10s of thousands of end users.",
+      "Introduced new programming paradigms and fixed biggest pain points during regular customer interactions.",
+      "Became go-to person to fix most complex problems."
+    ]
+  #- Architected and implemented novel interaction solutions for one-of-a-kind structured code editor.
+  # Led initiatives to unify user experience of revolutionary "live" programming environment that eliminates core complexities for backend developers, with goal of making coding 100x easier.
+
+  # Became go-to person to fix most complex problems
+  # Dramatically improved new programming language usability
+  # 
+  #  - "Thoughtful deep dives to solve customer pain"
+  #  - "Encourages learning and growth, in a way that makes you actively excited to be wrong"
+  #  - "A joy to work with"
+
+  # Lead standard library project
+  # Lead project to revamp text caret placement across the editor
+  # Solved numerous problems that others had previously attempted to solve
+  #Refined integrated programming language, backend infrastructure, and online editor
+  #Holistic programming language, hosted infrastructure, and intelligent code editor
+  # Onboarded early customers, lead interviews, 
+  # - "impressed with his technical work"
+  # - "tactful and polite"
+  # - "attention to detail makes me want to improve"
+  # - "does a great job of doing something, seeing issues, explaining them clearly, and then providing resources on how we can do it better."
+
+[[employment]]
+  time=["2015", "2019"]
   employer= "Tender Claws"
   role="Tech Co-lead"
   overview= """
-  Create foundational game systems, in-house tools, native plugins, custom servers, and prototypes for critically-acclaimed AR and VR experiences supported by *Google* and *Oculus*.
-  
-  ![Stage Act for The Under Presents VR experience](content/under_presents_stage.jpg)
-  
-  - Developed prize-winning first prototype and core multiplatform architecture for award-winning VR game *Virtual Virtual Reality*, with 50k+ installs and majority 5-star ratings.
-  - Spearheaded and currently lead development of multiplayer services and backend infrastructure for upcoming virtual reality live theater experience showcased at *Sundance Film Festival* and backed by *Oculus*.
-  - Amplify the efforts of my talented collaborators; learning, using, and teaching languages, techniques, and pre-release technologies as needed."""
+  Created foundational game systems, in-house tools, native plugins, custom servers, and prototypes for critically-acclaimed AR and VR experiences supported by *Google* and *Oculus*."""
+  [employment.detail]
+    image="content/under_presents_stage.jpg"
+    altImage="Stage Act for The Under Presents VR experience"
+    callouts=[
+    "Developed prize-winning first prototype and core multiplatform architecture for award-winning VR game *Virtual Virtual Reality*, with 50k+ installs and majority 5-star ratings.",
+    "Spearheaded and lead development of multiplayer services and backend infrastructure for virtual reality live theater experience showcased at *Sundance Film Festival* and backed by *Oculus*.",
+    "Amplified the efforts of my talented collaborators; learning, using, and teaching languages, techniques, and pre-release technologies as needed."
+    ]
+
+
   #- Led creation of sophisticated timeline editor for editing 3d recordings of actors.
   # Preempted days of error-prone manual work with two hours of proposing, co-designing, and scripting a workflow for splitting and organizing game dialog.
   # not just collaboration, but force multiplying thing; focus on what about it gets me excited
+
+
 [[employment]]
   time=["2015", "Present"]
   employer="Studio Farahi"
   role="Software Contractor"
-  overview="""Create the "brains" for interactive garments and installations backed by Adidas, Steelcase, and Chicago's Museum of Science and Industry; and featured by outlets including *WIRED*, *CNN*, *The Guardian*, *BBC News*, *Engadget*, and *CNET*.
-  
-  ![Mesolite Emotive Display Case](content/mesolite_square.jpg)
+  overview="""Create the "brains" for interactive garments and installations backed by Adidas, Steelcase, and Chicago's Museum of Science and Industry; and featured by outlets including *WIRED*, *CNN*, *The Guardian*, *BBC News*, *Engadget*, and *CNET*."""
+  [employment.detail]
+  image="content/mesolite_square.jpg"
+  altImage="Mesolite Emotive Display Case"
+  callouts=[
+  "In under 130 hours, engineered complete simulation suite, control system, and wifi monitoring portal for display case that reacts to human emotions. Project presented to executives at Adidas headquarters.",
+  "Built visual calibration tool for tuning servo motors in 30 seconds (despite no prior servo experience).",
+  "Achieved 20x performance boost for generative animations using game development tricks."
+  ]
 
-  - In under 130 hours, engineered complete simulation suite, control system, and wifi monitoring portal for display case that reacts to human emotions. Project presented to executives at Adidas headquarters.
-  - Built visual calibration tool for tuning servo motors in 30 seconds (despite no prior servo experience).
-  - Achieved 20x performance boost for generative animations using game development tricks.
-
-  """
   #- In under 130 hours, engineered a complete simulation suite, control system, and wifi monitoring portal for a emotionally responsive display case with ~1.2k individually controlled LEDs, 4 microcontrollers, a Raspberry Pi, a motor, and a face sensing camera. Project presented to executives at Adidas Headquarters.
   
   # learning, designing workflows for fast iteration
   #overview="""I work closely with architect Behnaz Farahi to orchestrate the interactive behavior of experimental fashion pieces and installations backed by groups such as *Adidas* and *Chicago's Museum of Science and Industry*. I design and implement efficient workflows for animating hundreds of actuators I've never used before.""" # learning, designing workflows for fast iteration
   #overview="I work closely with architect Behnaz Farahi to orchestrate the interactive behavior of hundreds of actuators in experimental fashion pieces and installations backed by groups such as Adidas and Chicago's Museum of Science and Industry." # learning, designing workflows for fast iteration
+
 [[employment]]
   time=["2014", "Present"]
   employer="Entrepreneur"
@@ -142,5 +186,3 @@ tools= [
   overview= "Lead antagonist in first authorized stage adaptation of **<cite>Dr. Horrible's Sing-Along Blog</cite>**"
 
 +++
-
-ghjsa

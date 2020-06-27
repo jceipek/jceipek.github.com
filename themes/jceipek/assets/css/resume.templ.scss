@@ -34,6 +34,15 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
+.section-content>li {
+  display: block;
+}
+.detail {
+  display: grid;
+  grid-template-columns: 7rem 32rem;
+  column-gap: .5rem;
+  align-items: center;
+}
 ol, ul {
 	list-style: none;
 }
@@ -138,7 +147,8 @@ strong cite {
   margin-top: 0.87rem;
 }
 .section-content, .showcase {
-  margin-left: 17%;
+  // margin-left: 17%;
+  margin-left: 6.5rem;
 }
 
 .showcase {
@@ -187,11 +197,11 @@ li, p {
   }
 
   .section-content img {
-    max-width: 11rem;
-    max-height: 6.5rem;
-    float: left;
-    padding-right: 0.5rem;
+    // width: 6.5rem;
     padding-top: 0.2rem;
+    justify-self: center;
+    // height: 100%;
+    width: 100%;
   }
 
   // #header {
@@ -201,9 +211,9 @@ li, p {
 /*  .collapsed-link {
     display: none;
   }*/
-  #goal {
-    margin-bottom: 2em;
-  }
+  // #goal {
+  //   margin-bottom: 2em;
+  // }
   .showcase img {
     height: 7em;
   }
@@ -227,7 +237,10 @@ li, p {
     margin-right: 0.5em;
   }
 
-  .section-content ul, .awards {
+  .section-content ul {
+    margin-left: 0;
+  }
+  .awards {
     margin-left: 1rem;
   }
 

@@ -44,7 +44,19 @@
     <h2><span class='section-title'>EMPLOYMENT</span> <span class='divider'></span></h2>
       <ul class='section-content'>
       {{- range .Params.employment -}}
-        <li><span class='time'>{{- delimit .time "-" -}}</span> <strong class='company'>{{- .employer -}}.</strong> <strong class='role'>{{- .role -}}.</strong> {{ .overview | markdownify -}}</li>
+        <li><span class='time'>{{- delimit .time "-" -}}</span> <strong class='company'>{{- .employer -}}.</strong> <strong class='role'>{{- .role -}}.</strong>
+          <p>{{- .overview | markdownify -}}</p>
+          {{- with .detail -}}
+          <div class="detail">
+            <img alt="{{- .altImage -}}" src="{{- .image -}}" {{- with .imageCss -}}style="{{- . | safeCSS -}}"{{- end -}} />
+            <ul>
+              {{- range .callouts -}}
+              <li>{{- . | markdownify -}}</li>
+              {{- end -}}
+            </ul>
+          </div>
+          {{- end -}}
+        </li>
       {{- end -}}
       </ul>
     <h2><span class='section-title'>EDUCATION</span> <span class='divider'></span></h2>
