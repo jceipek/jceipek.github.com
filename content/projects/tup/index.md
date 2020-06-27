@@ -1,9 +1,9 @@
 ---
 title: The Under Presents
-tagline: upcoming immersive live theater experience in virtual reality
+tagline: immersive live theater in virtual reality
 link: 'https://tenderclaws.com/theunderpresents'
 opens_new_page: true
-link_text: coming soon!
+link_text: play it!
 img: theUnderPresents.png
 dark: true
 collaborators: [Tender Claws]
