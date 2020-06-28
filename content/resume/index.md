@@ -48,7 +48,7 @@ tools= [
   [employment.detail]
     image="content/dark-square.png"
     altImage="Dark"
-    imageCss="justify-self: right; width: auto; height: 100%;"
+    imageCss="justify-self: right; width: auto; height: 4.8rem;"
     callouts=[
       "Developed, documented, and tested standard toolkit with which customers build software used by 10s of thousands of end users.",
       "Introduced new programming paradigms and fixed biggest pain points during regular customer interactions.",
@@ -149,6 +149,8 @@ tools= [
 #  role= "Youth Mentor for Elementary Students"
 #  overview="I co-instructed a robotics team that achieved state-alternate status."
 
+  # Awards for games (eg Sundance). Maybe funded bys?
+  # Categories?
 [[achievements]]
   overview= "Tendar"
   awards= [
@@ -163,19 +165,17 @@ tools= [
   awards= [
     "Best VR Game, **International Mobile Gaming Awards 2018**",
     "Best VR Experience, **Google Play Awards 2017**",
-    "Best Mobile Interactive Experience, **Raindance Film Festival 2017**",
-    "Participants' Choice Award, **PBS POV Hackathon 10**"
+    "Best Mobile Interactive Experience, **Raindance Film Festival 2017**"
+    #"Participants' Choice Award, **PBS POV Hackathon 10**"
   ]
   link="https://tenderclaws.com/vvr"
 
 [[achievements]]
-  # Awards for games (eg Sundance). Maybe funded bys?
-  # Categories?
   # time= [2015]
   overview= "Awarded **USC Annenberg Graduate Fellowship**"
 [[achievements]]
   # time= [2011]
-  overview= "1<sup>st</sup> place for educational video, **Ars Science Video Contest**, physical sciences division" # include saying that educational video
+  overview= "1<sup>st</sup> place for educational video, **Ars Science Video Contest**, physical sciences division"
   link= "http://arstechnica.com/science/2011/02/ars-announces-the-science-video-contest-winners/"
 [[achievements]]
   # time= ["April 2010"]

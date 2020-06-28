@@ -45,7 +45,7 @@
       <ul class='section-content'>
       {{- range .Params.employment -}}
         <li><span class='time'>{{- delimit .time "-" -}}</span> <strong class='company'>{{- .employer -}}.</strong> <strong class='role'>{{- .role -}}.</strong>
-          <p>{{- .overview | markdownify -}}</p>
+          <p class='role-overview'>{{- .overview | markdownify -}}</p>
           {{- with .detail -}}
           <div class="detail">
             <img alt="{{- .altImage -}}" src="{{- .image -}}" {{- with .imageCss -}}style="{{- . | safeCSS -}}"{{- end -}} />
@@ -87,7 +87,7 @@
     <h2><span class='section-title'>DIGITAL TOOLS</span> <span class='divider'></span></h2>
       <ul class='section-content'>
         {{- range .Params.tools -}}
-        <li><p>{{ . | markdownify }}</p></li>
+        <li>{{ . | markdownify }}</li>
         {{- end -}}
       </ul>
     </div>

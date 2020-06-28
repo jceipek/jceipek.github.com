@@ -32,14 +32,16 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
+  transform: scale(0.93);
+  transform-origin: 50% 10%;
 }
 .section-content>li {
   display: block;
 }
 .detail {
   display: grid;
-  grid-template-columns: 7rem 32rem;
+  grid-template-columns: 6.5rem 32rem;
   column-gap: .5rem;
   align-items: center;
 }
@@ -150,6 +152,9 @@ strong cite {
   // margin-left: 17%;
   margin-left: 6.5rem;
 }
+.role-overview {
+  display: inline;
+}
 
 .showcase {
   padding-left: 5%;
@@ -198,7 +203,7 @@ li, p {
 
   .section-content img {
     // width: 6.5rem;
-    padding-top: 0.2rem;
+    // padding-top: 0.2rem;
     justify-self: center;
     // height: 100%;
     width: 100%;
