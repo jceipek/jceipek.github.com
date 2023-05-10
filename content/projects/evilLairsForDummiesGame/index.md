@@ -55,4 +55,4 @@ This variant adds a competitive twist to the Team vs Clock variant and doesn't r
 Instead of discarding their gadget and trap cards at the end of the escape phase, every player gives them to the player who, in their opinion, had the best or most creative trap solution (you can't vote for yourself!).*
 The player with the most awarded gadget and trap card pairs after an agreed-upon number of rounds wins.
 
-_* For large groups, you may want to keep track of scores using tokens or tally marks instead of cards. Then you can shuffle the gadget and trap decks to play longer._
+_\* For large groups, you may want to keep track of scores using tokens or tally marks instead of cards. Then you can shuffle the gadget and trap decks to play longer._
