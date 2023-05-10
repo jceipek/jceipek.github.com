@@ -2,6 +2,9 @@
 link: ''
 aliases:
   - projects/evilLairsForDummies.html
+  - projects/evillairsfordummies.html
+  - projects/evillairsfordummiesgame.html
+  - projects/evilLairsForDummiesGame.html
 link_text: about
 opens_new_page: false
 img: EvilLairsForDummies.png
