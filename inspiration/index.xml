@@ -1,2 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Julian Ceipek</title><link>//jceipek.com/inspiration.html</link><description>Recent content on Julian Ceipek</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="//jceipek.com/inspiration/index.xml" rel="self" type="application/rss+xml"/><item><title>Inspiration</title><link>//jceipek.com/inspiration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>//jceipek.com/inspiration/</guid><description>I like many things. Here are some of them, so they won&amp;rsquo;t get lost.
-A collection of Explorable Explanations (explorableexplanations.com) Bret Victor&amp;rsquo;s projects build on human capabilities to extend thought (worrydream.com) Chris Granger also thinks programming is broken (www.chris-granger.com) Fiction to teach rationality (hpmor.com) Math should be legible (glench.com/LegibleMathematics) A collection of resources on simulating physics &amp;ldquo;for human visual consumption&amp;rdquo; (www.physicsbasedanimation.com) Soon, this list will be much longer.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Julian Ceipek</title>
+    <link>//jceipek.com/inspiration.html</link>
+    <description>Recent content on Julian Ceipek</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="//jceipek.com/inspiration/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Inspiration</title>
+      <link>//jceipek.com/inspiration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//jceipek.com/inspiration/</guid>
+      <description>I like many things. Here are some of them, so they won&amp;rsquo;t get lost.
+ A collection of Explorable Explanations (explorableexplanations.com) Bret Victor&amp;rsquo;s projects build on human capabilities to extend thought (worrydream.com) Chris Granger also thinks programming is broken (www.chris-granger.com) Fiction to teach rationality (hpmor.com) Math should be legible (glench.com/LegibleMathematics) A collection of resources on simulating physics &amp;ldquo;for human visual consumption&amp;rdquo; (www.physicsbasedanimation.com)  Soon, this list will be much longer.</description>
+    </item>
+    
+  </channel>
+</rss>
