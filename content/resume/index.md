@@ -2,13 +2,38 @@
 aliases=[
   "resume.html"
 ]
-title="Inspiration"
+title="Resume"
 type="resume"
 name="Julian V V Ceipek"
 email="julian.ceipek@gmail.com"
-location="San Francisco, CA"
+location="Remote/Hybrid - Boston, MA"
 #tagline="I strive to create **beautiful** experiences that **empower people**." # learning, force multiplier, design for people, systems thinking. About me paragraph, consolidate into tagline.
-tagline="I craft **systemic solutions** with & for **people**. I love **learning**, **collaborating** & **teaching**." # learning, force multiplier, design for people, systems thinking. About me paragraph, consolidate into tagline.
+
+# I find solutions at the intersection of 
+tagline="""I craft **systemic solutions** with & for **people**. Software that's **usable**, **extensible**, **fast**.
+
+I love **learning**, **collaborating** & **teaching**.""" # learning, force multiplier, design for people, systems thinking. About me paragraph, consolidate into tagline.
+
+
+# I help companies grow and customers succeed by crafting
+# Need to show what can help person on other side do?
+
+# Key ideas: To make things fast, for people
+# I craft systemic solutions that work for organisations, products, and end-users that 
+# Want to create a statement that creates questions in people's minds -- tell me about yourself. Work for people and for technology. And creates value
+# for organizations that work for. Customer satisfaction or growth or cost reduction.
+# Uniquely me and communicates how it creates value for who talk to.
+
+# I help organizations develop fast, valuable software that delights customers.
+# I help organizations delight their customers with fast, usable software.
+# I help organizations delight their customers and expand their market with fast, usable software.
+# I help orgs delight their customers and expand their market with fast, usable software.
+# I help orgs delight their customers with usable, fast software.
+# I help orgs delight their customers with usable, fast, robust software.
+# I help delight customers with usable, fast, robust software.
+# I help delight customers with usable, fast, extensible software.
+
+
 #projects=[ # highlights or selected projects -- 
 #  #"A **virtual film festival** to encourage communities to reinvent K-12 education",
 #  #"A user-research-driven **automatic documentation system** concept for \"Makers\"",
@@ -20,7 +45,7 @@ tagline="I craft **systemic solutions** with & for **people**. I love **learning
 tools= [
   """Primary prototyping languages: **TypeScript** and **Python**.
   
-  Developed non-trivial programs in C#, Go, C, Objective-C, OCaml, LISP, SML, MATLAB, BASIC, CoffeeScript, JavaScript, Java, and LabView. Often experiment with new languages.""",
+  Developed non-trivial programs in C#, Go, C, Objective-C, OCaml, Odin, LISP, SML, MATLAB, BASIC, JavaScript, Java, and LabView. Often experiment with new languages.""",
   " Adept with **Unity**, **Inkscape**, **Blender**, **Final Cut Pro**, and **Photoshop** for 5+ years."
 ]
 
@@ -40,20 +65,68 @@ tools= [
 # What impressive story could tell for each one?
 
 [[employment]]
+  time=[2020,2023]
+  employer= "Lumafield"
+  role="Senior Software Engineer (5-11/2023), Software Engineer (6/2021-5/2023), Contractor (12/2020-6/2021)"
+  overview= """
+  Developed critical solutions -- volumetric renderers, touchscreen interfaces, hardware drivers, embedded software, firmware, and server backends -- that empower manufacturers with the affordable and accessible X-ray vision they need to create more reliable, cheaper, more sustainable products.
+  """
+  # Helped empower manufacturers with the affordable and accessible X-ray vision they need to create more reliable, cheaper, more sustainable products.
+  # Developed volumetric renderers, touchscreen interfaces, hardware drivers, embedded software, firmware, server backends, and tools. #X-ray CT industrial inspection, which will make 
+  # manufacturing cheaper, more sustainable, and more reliable.
+[employment.detail]
+  image="content/lumafield-airpod-scan3.png"
+  altImage="Lumafield CT Scan of Airpods"
+  imageCss="justify-self: right; width: auto; height: 6.8rem;"
+  callouts=[
+    "Enabled Lumafield's expansion into new market segments with high-volume inspection requirements; combining systemic redesigns with low-level SIMD optimizations to reduce X-ray scan times from hours to minutes while increasing data quality.",
+    "Helped customers save hundreds of thousands of dollars by creating the core WebGL2 renderer they use to inspect products and prototypes for internal defects.",
+    "Led 75% variable cost reduction project to move the 3d reconstruction pipeline from AWS servers to on-scanner CPU+GPU compute for high-volume customers."
+  ]
+
+[[employment]]
+  time=[2020,2021]
+  employer= "Lynxtool"
+  role="Founding Engineer"
+  overview= """
+  Created Pixar-inspired technologies to visualize the hidden workings of spreadsheets with a friendly web-based programming tool. Company acquired by Figma, then Adobe.
+  """
+  [employment.detail]
+    callouts=[
+      "Designed, implemented, and documented an in-browser rendering engine and user interface toolkit optimized for Lynxtool's unique layout and interaction requirements.",
+      "Enabled users to seamlessly view and edit million-row datasets in the browser by extending Lynxtool's LLVM compiler backend with recording and on-demand data streaming.",
+      "Collaboratively designed and implemented new user interface paradigms for viewing and editing intermediate calculations."
+    ]
+  
+  # Designed, implemented, and documented the render stack, IMGUI, and data tracing for an in-browser node-based programming environment, and extended its LLVM compiler backend.
+  # Company acquired by Figma, then Adobe.
+
+[[employment]]
   time=[2019,2020]
   employer= "Dark"
   role="Engineer"
   overview= """
-  Led initiatives to unify user experience of revolutionary "live" programming environment for backend programmers, with goal of making coding 100x easier."""
+  Led initiatives to unify user experience of revolutionary "live" programming environment for backend programmers, with goal of making coding 100x easier.
+  """
   [employment.detail]
-    image="content/dark-square.png"
-    altImage="Dark"
-    imageCss="justify-self: right; width: auto; height: 4.8rem;"
     callouts=[
-      "Developed, documented, and tested standard toolkit with which customers build software used by 10s of thousands of end users.",
-      "Introduced new programming paradigms and fixed biggest pain points during regular customer interactions.",
-      "Became go-to person to fix most complex problems."
+      "Developed, documented, and tested standard toolkit with which customers build software used by tens of thousands of end users.",
+      "Eliminated the biggest drain on developer resources by re-architecting Dark's unique structured code editor to consistently match user expectations.",
+      "Coached early adopters through coding their first Dark programs over video calls, identified customer pain points through regular interactions, and implemented features and fixes to address their needs."
     ]
+
+
+  #Architected and implemented novel interactions for one-of-a-kind structured live code editor, implemented the Dark programming language's standard #library functions, and identified (and fixed) customers' biggest pain points through regular customer interactions."""
+
+  # [employment.detail]
+  #   image="content/dark-square.png"
+  #   altImage="Dark"
+  #   imageCss="justify-self: right; width: auto; height: 4.8rem;"
+  #   callouts=[
+  #     "Developed, documented, and tested standard toolkit with which customers build software used by 10s of thousands of end users.",
+  #     "Introduced new programming paradigms and fixed biggest pain points during regular customer interactions.",
+  #     "Became go-to person to fix most complex problems."
+  #   ]
   #- Architected and implemented novel interaction solutions for one-of-a-kind structured code editor.
   # Led initiatives to unify user experience of revolutionary "live" programming environment that eliminates core complexities for backend developers, with goal of making coding 100x easier.
 
@@ -86,7 +159,7 @@ tools= [
     altImage="Stage Act for The Under Presents VR experience"
     callouts=[
     "Developed prize-winning first prototype and core multiplatform architecture for award-winning VR game *Virtual Virtual Reality*, with 50k+ installs and majority 5-star ratings.",
-    "Spearheaded and lead development of multiplayer services and backend infrastructure for virtual reality live theater experience showcased at *Sundance Film Festival* and backed by *Oculus*.",
+    "Spearheaded and led development of multiplayer services and backend infrastructure for virtual reality live theater experience showcased at *Sundance Film Festival* and backed by *Oculus*.",
     "Amplified the efforts of my talented collaborators; learning, using, and teaching languages, techniques, and pre-release technologies as needed."
     ]
 
@@ -106,7 +179,7 @@ tools= [
   altImage="Mesolite Emotive Display Case"
   callouts=[
   "In under 130 hours, engineered complete simulation suite, control system, and wifi monitoring portal for display case that reacts to human emotions. Project presented to executives at Adidas headquarters.",
-  "Built visual calibration tool for tuning servo motors in 30 seconds (despite no prior servo experience).",
+  "Built visual calibration tool for 30 second servo motor tuning (despite no prior servo experience).",
   "Achieved 20x performance boost for generative animations using game development tricks."
   ]
 
