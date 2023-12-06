@@ -12,9 +12,9 @@ categories:
 draft: false
 ---
 
-This post is based on an in-person presentation I gave earlier this year to an audience of software, mechanical, and electrical engineers. Its examples are software-related, but the principles should apply across domains.
+This post is based on an in-person presentation I gave earlier this year to an audience of software, mechanical, and electrical engineers. Its examples are software-related, but the principles apply across domains.
 
-In *Structured Programming with `go to` Statements*, Donald E. Knuth wrote "...premature optimization is the root of all evil", and people have been misquoting him ever since. They tend to miss both what he meant by "premature" and what has changed since he wrote those words in 1974.
+In [*Structured Programming with `go to` Statements*](https://web.archive.org/web/20160405103933/http://www.univasf.edu.br/~marcus.ramos/pc-2008-2/p261-knuth.pdf), Donald E. Knuth wrote "...premature optimization is the root of all evil", and people have been misquoting him ever since. They tend to miss both what he meant by "premature" and what has changed since he wrote those words in 1974.
 
 But I'll get back to that. First, let's consider *why* we might want to make faster systems:
 1. it leads to happier customers -- people generally don't like waiting for things, and fast systems lead to fast feedback loops
@@ -44,7 +44,7 @@ If you open up a computer, take out the CPU, dunk it in a vat of hydrochloric ac
 This chip has 4 cores:
 ![](/projects/makingfastersystems/die_shot_cores.png)
 
-The parts of each core that perform addition are the execution units. ![](/projects/makingfastersystems/die_shot_journey.png)If the execution units already have the numbers to add loaded, addition can be really fast. If they don't, they have to fetch them from the L1 data cache. If the L1 cache doesn't have the numbers, they have to fetch them from the L2 cache. If the L2 cache doesn't have the numbers, they have to fetch them from the L3 cache, which, on this chip, is shared across all 4 cores. If the L3 cache doesn't have the data, they have to fetch them from main memory. Each of these involves a longer and longer physical distance, and the data has to physically travel to where it is needed. Remember that nothing is faster than light.
+The parts of each core that perform addition are the execution units. ![](/projects/makingfastersystems/die_shot_journey.png)If the execution units already have the numbers to add loaded, addition can be really fast. If they don't, they have to fetch them from the L1 data cache. If the L1 cache doesn't have the numbers, they have to fetch them from the L2 cache. If the L2 cache doesn't have the numbers, they have to fetch them from the L3 cache, which, on this chip, is shared across all 4 cores. If the L3 cache doesn't have the data, they have to fetch them from main memory. Each of these involves a longer and longer physical distance, and the data has to physically travel to where it is needed. Physics is a hard constraint that can't be ignored. Remember that nothing is faster than light.
 
 Let's put these distances into perspective. Here I've slowed down the operations by a factor of 1 billion so that 1 nanosecond takes 1 second of real time.
 
@@ -72,7 +72,8 @@ He was writing in 1974, when memory and processor speed were about the same. Sin
 ![](/projects/makingfastersystems/processor_memory_gap.png)
 (chart from [Computer Architecture: A Quantitative Approach, 6th Edition, page 80](https://archive.org/details/computerarchitectureaquantitativeapproach6thedition/page/n111/mode/1up))
 
-In 1974, Knuth's programs executed almost directly on the CPU. A typical web application today has many more layers between its code and the CPU, including an operating system (30 million lines of code), a browser (26 million lines of code) with a virtual machine, and likely 10s-100s of 3rd party libraries. On many software projects, developers can only really control what 3rd party libraries they use and what code they write themselves, and have to understand the constraints imposed by the operating system, browser, and virtual machine.
+In 1974, Knuth's programs executed almost directly on the CPU. A typical web application today has many more layers between its code and the CPU, including an operating system (30 million lines of code), a browser (26 million lines of code) with a virtual machine, and likely 10s-100s of 3rd party libraries running on end users' computers. It likely also involves many more computers spread across datacenters throughout the world, each with their own layers of software. There's many more choices to make, and programmers need to understand the soft constraints imposed by those choices and the choices of the people who use their software. Even if the problem they are solving calls for a web application (which might not be the case!), programmers and the people they work with can still decide the programming languages and 3rd party libraries they use, the code they write themselves, and on which computers the code runs. Every decision has consequences.
+
 ## Only Do Useful Work
 Once we've understood the problem, we can use our understanding to minimize waste. The fastest thing is doing nothing. The fastest *useful* thing is doing nothing unneeded.
 
@@ -93,7 +94,7 @@ The code I inherited looked like this:
 6. Sort the copied pixels by brightness
 7. Retrieve the brightest and darkest pixels from the sorted copy
 
-This code had passed code review. It "followed best practices." It was wasteful and hard to change.
+This code had passed code review. Its code style followed "industry best practices." Unfortunately, those practices failed to produce code that minimized waste and was easy to understand and change. Improving these practices is a topic for a future article.
 
 After my improvements, it looked like this:
 1. Decompress the compressed image to main memory
@@ -101,11 +102,14 @@ After my improvements, it looked like this:
 3. Download the image from graphics memory
 4. Sequentially search the pixels in the user-specified region for the brightest and darkest pixels
 
-This is not quite the simple strategy I wanted, but this was part of a web application. The browser imposed a constraint that made the decompressed image in main memory inaccessible, so I needed to upload it and download it from graphics memory to get access to the pixels. Nonetheless, my implementation was much faster than the original.
+This is not quite the simple strategy I wanted, but it was the best I could do given the problem constraints -- it had to run in a web browser. The browser did not provide a way to directly access the image pixels after decompressing the image, so I needed to upload and download the image from graphics memory first. Nonetheless, my implementation was much faster than the original.
 
-Contrast this with a different strategy: if I had timed the original program, I might have found that the slowest individual part was sorting the pixels. I might have replaced the sorting algorithm with a faster, "optimized" algorithm for this application. That would have been a mistake, because sorting wasn't necessary. *Nothing* is faster than light.
+Contrast this with a different strategy: if I had timed the original program, I might have found that the slowest individual part was sorting the pixels. I might have tried to replace the sorting algorithm with a faster, "optimized" algorithm for this application. That would have been a mistake, because sorting wasn't necessary in the first place. Why waste time trying to make an unnecessary thing faster when you can remove it instead? *Nothing* is always faster than light.
 
-Let's return to Knuth's "...premature optimization is the root of all evil." My approach wasn't *premature*. It involved understanding the problem and trying to only do useful work.
+Let's return to Knuth's "...premature optimization is the root of all evil." Many people use this quote to justify ignoring performance altogether until it becomes a problem, with the aim of maximizing productivity. In my experience, such a strategy inevitably backfires, resulting instead in an ever-growing productivity drain interspersed with heroic rewrite efforts.
+
+The beginning of Knuth's quote reads "We _should_ forget about small efficiencies, say about 97% of the time; premature optimization is the root of all evil." He was complaining about programmers making code harder to debug and maintain in situations where their changes resulted in very minor speed improvements. He was simultaneously writing in defense of making 3% of code more difficult to understand and change if doing so could yield "small efficiencies" on the order of a 12% speed improvement. My approach in this case study wasn't *premature*. I made the program faster *by making it easier to understand and change*. Doing so involved understanding the problem and trying to only do useful work.
+
 ## Measure
 
 Professional optimizers compare:
@@ -113,15 +117,15 @@ Professional optimizers compare:
 2. How fast does it go?
 and then repeatedly measure and make changes until the actual speed approaches the estimated optimal theoretical speed.
 
-When determining these values, it's important to differentiate *latency* (how long it takes to do something) from *throughput* (how many of those things you can do in a given timeframe). If a laundromat has 3 washing machines that each take 1 hour to wash a load of laundry, it will take no less than 1 hour to wash 1 load of laundry. The latency is 1 hour. Adding washing machines won't make it go faster, but a faster washing machine would. However, with 3 machines, you can wash up to 3 loads of laundry at the same time. The throughput is 3 loads/hour.
+When determining these values, it's important to differentiate *latency* (how long it takes to do something) from *throughput* (how many of those things you can do in a given timeframe). To understand the difference between latency and throughput, think of a laundromat. If a laundromat has 3 washing machines that each take 1 hour to wash a load of laundry, it will take no less than 1 hour to wash 1 load of laundry. The latency is 1 hour. Adding washing machines won't make it go faster, but a faster washing machine would. However, with 3 machines, you can wash up to 3 loads of laundry at the same time. The throughput is 3 loads/hour.
 
-For the rest of this section, I'll use latency measurements from the "brain" of a robotic display case I programmed in 2018. Among other things, the brain was responsible for deciding the colors of 1189 individual LEDs, 30 times per second (once every 33 milliseconds) using a slow $35 computer. Determining the colors was the slowest part of the program (over 100 milliseconds), and I needed to make it much faster. How did I know to focus on this part of the program? I used profiling tools.
+For the rest of this section, I'll use latency measurements from the "brain" of a reactive robotic display case I programmed in 2018. Among other things, the brain was responsible for deciding the colors of 1189 individual LEDs, 30 times per second (once every 33 milliseconds) using a slow $35 computer. In this problem, the throughput was fixed -- the brain always needed to update all 1189 LEDs -- and the maximum acceptable latency was 33 milliseconds. Unfortunately, determining the colors was the slowest part of the program and by itself took over 100 milliseconds on the $35 computer. I needed to make it much faster. How did I know to focus on this part of the program? I used profiling tools.
 
-> "It is often a mistake to make a priori judgements about what parts of a program are really critical, since the universal experience of programmers who have been using measurement tools has been that their intuitive guesses fail."
+> "It is often a mistake to make a priori judgments about what parts of a program are really critical, since the universal experience of programmers who have been using measurement tools has been that their intuitive guesses fail."
 > 
 > -- Knuth
 
-Profiling tools often produce icicle graphs -- visualizations that show how long different parts of a process take using labeled rectangles arranged such that substeps are lower down than the steps that depend on them. In this icicle graph (produced using [viztracer](https://github.com/gaogaotiantian/viztracer) and [Spall](https://gravitymoth.com/spall/spall-web.html) on my fast 2019 laptop), we can see that `animationStep` is a substep of `animationTick`, which is itself a substep of `_run`. The yellow rectangles labeled `animationStep`  are wide, which suggests that the program is spending a lot of time in `animationStep` (around 50 milliseconds with profiler overhead).
+Profiling tools often produce icicle graphs -- visualizations that show how long different parts of a process take using labeled rectangles arranged such that substeps are lower down than the steps that depend on them. In this icicle graph (produced using [viztracer](https://github.com/gaogaotiantian/viztracer) and [Spall](https://gravitymoth.com/spall/spall-web.html) on my fast 2019 laptop), we can see that `animationStep` is a substep of `animationTick`, which is itself a substep of `_run`. The yellow rectangles labeled `animationStep` are wide, which suggests that the program is spending a lot of time in `animationStep` (around 50 milliseconds with profiler overhead).
 ![](/projects/makingfastersystems/animation_step_icicle_profile.png)
 
 When I first started practicing optimization, my approach was to measure the latency of an existing system, make some changes, measure again, and discard the changes if the newer measurement was slower. I notice many other people do this as well. This is a mistake.
@@ -132,11 +136,12 @@ If I measure three different implementations of `animationTick` once, I might ge
 - C: 1.97 milliseconds
 
 It seems like B is faster than C is much faster than A. But plotting thousands of runs for each implementation tells a different story:
-![](/projects/makingfastersystems/scatterplots_abc.png)![](/projects/makingfastersystems/scatterplot_bc.png)
+![](/projects/makingfastersystems/scatterplots_abc.png)
+![](/projects/makingfastersystems/scatterplot_callouts_bc.png)
 
-There's enough overlap between B and C that using a single measurement isn't enough.
+While A is consistently slower, there's enough overlap between B and C that comparing single measurements of each could make it seem like B is faster than C, even though it usually isn't.
 
-Another common thing people do is compute average measurements. Averages obscure distributions, and in most applications, latency outliers matter. After an update, my favorite podcast app sometimes took up to 3 seconds to respond when I tapped the play/pause button. I no longer use that app.
+Trying to avoid this trap, many people turn to average measurements. Unfortunately, averages obscure the distribution of data. In fact, vastly different datasets can have the same average, variance, and correlation (see [the Datasaurus Dozen](https://web.archive.org/web/20230829104458/https://blog.revolutionanalytics.com/2017/05/the-datasaurus-dozen.html)). In most applications, latency outliers matter. You wouldn't want a washing machine that takes an hour to wash your clothes on average but takes an entire day 10% of the time. After an update, my favorite podcast app sometimes took up to 3 seconds to respond when I tapped the play/pause button. I no longer use that app.
 
 Here, the B average of 1.21 milliseconds completely hides the latency outlier at 3.59 milliseconds:
 ![](/projects/makingfastersystems/scatterplot_bc_average.png)
@@ -160,9 +165,12 @@ I personally prefer to use the CCDF instead, which flips the y axis upside down.
 
 ![](/projects/makingfastersystems/ccdf_bc.png)
 
-Context always matters when interpreting data, and percentiles are no different. If an operation happens 1000 times during a typical user session, we can expect the p99 latency for that operation to happen around 10 times (`1000 * (1 - 0.99) = 10`) per session. If the p99 is bad, a typical user will have 10 bad experiences per session.
+Context always matters when interpreting data, and percentiles are no different. The CCDF above shows that about 1% of C runs are slower (99% are faster) than 0.7ms. How often does this p99 happen? Well, we know that `animationStep` runs 30 times a second, or 1800 times a minute (`30/second * 60 seconds/minute = 1800/minute`). 1% of 1800 is 18, so this happens around 18 times per minute. If someone views the display case for 3 minutes, we can expect them to encounter this latency or worse about 54 times (`18 * 3 = 54`). In a different context
+
+For this project, neither the people viewing the display case, nor the company displaying it, nor the artists I worked with cared how long `animationStep` takes. They would have cared if the display case appeared unresponsive or jittery (which it was before my speed improvements), so it was important for me to make sure that the overall latency of the system was always low enough to prevent that. Plotting the latency of `animationStep` and making it faster was a means to that end rather than the end itself. Doing so also had knock-on benefits. It allowed us to showcase additional reactive animations, reduced the power consumption of the computer, and produced less waste heat.
+
 ## Putting it All Together
-To make faster systems, start by **Understanding the Problem**. Identify the system inputs and outputs, and think about the hard constraints imposed by physics and the soft constraints imposed by your choices. Does it *really* make sense to build a microservice?
+To make faster systems, start by **Understanding the Problem**. Identify the system inputs and outputs, and think about the hard constraints imposed by physics and the soft constraints imposed by your choices.
 
 Then, **Only Do Useful Work**. Instead of complicated approaches, prefer simple solutions that are easy to understand, change, and optimize. Don't skip over understanding by "optimizing" part of the system that didn't need to exist in the first place. This step is not optional; it is where the biggest improvements come from.
 
