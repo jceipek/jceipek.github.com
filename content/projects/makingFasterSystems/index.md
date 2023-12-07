@@ -46,8 +46,13 @@ This chip has 4 cores:
 
 The parts of each core that perform addition are the execution units. ![](/projects/makingfastersystems/die_shot_journey.png)If the execution units already have the numbers to add loaded, addition can be really fast. If they don't, they have to fetch them from the L1 data cache. If the L1 cache doesn't have the numbers, they have to fetch them from the L2 cache. If the L2 cache doesn't have the numbers, they have to fetch them from the L3 cache, which, on this chip, is shared across all 4 cores. If the L3 cache doesn't have the data, they have to fetch them from main memory. Each of these involves a longer and longer physical distance, and the data has to physically travel to where it is needed. Physics is a hard constraint that can't be ignored. Remember that nothing is faster than light.
 
-Let's put these distances into perspective. Here I've slowed down the operations by a factor of 1 billion so that 1 nanosecond takes 1 second of real time.
+Let's put these distances into perspective with a race. 
+When you click play in the following video, the blue boxes will move from left to right.
+If they moved at their regular speeds, you wouldn't be able their speeds apart, so I've slowed everything down 1 billion times so that 1 second in the video corresponds to 1 nanosecond of real time. Can you guess how long main memory access will take? What about accessing an NVMe drive (which is faster than a hard drive or SSD)?
 
+<video controls style="width:100%;" src="/projects/makingfastersystems/MakingFasterSystemsRace.mp4"></video>
+
+To keep the video short, I've summarized all the results in this table:
 
 | Activity | Actual Time | Scaled |
 |--------------|-----------|------------|
@@ -59,8 +64,7 @@ Let's put these distances into perspective. Here I've slowed down the operations
 | NVMe Drive Access | 700,000 ns | 8.1 days |
 | BOS->SF Network Roundtrip | 80,000,000 ns | 2.5 years |
 
-
-The specific times here don't really matter and come from a computer I don't have anymore. What matters is that they span multiple orders of magnitude.
+The specific times here don't really matter and come from a computer I don't have anymore. They'd be different on a different computer. What matters is that they span multiple orders of magnitude, and switching to a newer computer won't change that. There's quite a lot of difference between seconds and years.
 
 In *Structured Programming with `go to` Statements*, Knuth wrote:
 
@@ -165,7 +169,7 @@ I personally prefer to use the CCDF instead, which flips the y axis upside down.
 
 ![](/projects/makingfastersystems/ccdf_bc.png)
 
-Context always matters when interpreting data, and percentiles are no different. The CCDF above shows that about 1% of C runs are slower (99% are faster) than 0.7ms. How often does this p99 happen? Well, we know that `animationStep` runs 30 times a second, or 1800 times a minute (`30/second * 60 seconds/minute = 1800/minute`). 1% of 1800 is 18, so this happens around 18 times per minute. If someone views the display case for 3 minutes, we can expect them to encounter this latency or worse about 54 times (`18 * 3 = 54`). In a different context
+Context always matters when interpreting data, and percentiles are no different. The CCDF above shows that about 1% of C runs are slower (99% are faster) than 0.7ms. How often does this p99 happen? Well, we know that `animationStep` runs 30 times a second, or 1800 times a minute (`30/second * 60 seconds/minute = 1800/minute`). 1% of 1800 is 18, so this happens around 18 times per minute. If someone views the display case for 3 minutes, we can expect them to encounter this latency or worse about 54 times (`18 * 3 = 54`).
 
 For this project, neither the people viewing the display case, nor the company displaying it, nor the artists I worked with cared how long `animationStep` takes. They would have cared if the display case appeared unresponsive or jittery (which it was before my speed improvements), so it was important for me to make sure that the overall latency of the system was always low enough to prevent that. Plotting the latency of `animationStep` and making it faster was a means to that end rather than the end itself. Doing so also had knock-on benefits. It allowed us to showcase additional reactive animations, reduced the power consumption of the computer, and produced less waste heat.
 

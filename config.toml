@@ -3,3 +3,6 @@ languageCode = "en-us"
 title = "Julian Ceipek"
 theme = "jceipek"
 UglyUrls = true
+
+[markup.goldmark.renderer]
+  unsafe = true
