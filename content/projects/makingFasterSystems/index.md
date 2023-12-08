@@ -48,7 +48,7 @@ The parts of each core that perform addition are the execution units. ![](/proje
 
 Let's put these distances into perspective with a race. 
 When you click play in the following video, the blue boxes will move from left to right.
-If they moved at their regular speeds, you wouldn't be able their speeds apart, so I've slowed everything down 1 billion times so that 1 second in the video corresponds to 1 nanosecond of real time. Can you guess how long main memory access will take? What about accessing an NVMe drive (which is faster than a hard drive or SSD)?
+If they moved at their regular speeds, you wouldn't be able to tell their speeds apart, so I've slowed everything down 1 billion times: 1 second in the video corresponds to 1 nanosecond of real time. Can you guess how long main memory access will take? What about accessing an NVMe drive (which is faster than a hard drive or SSD)?
 
 <video controls style="width:100%;" src="/projects/makingfastersystems/MakingFasterSystemsRace.mp4"></video>
 
@@ -76,7 +76,7 @@ He was writing in 1974, when memory and processor speed were about the same. Sin
 ![](/projects/makingfastersystems/processor_memory_gap.png)
 (chart from [Computer Architecture: A Quantitative Approach, 6th Edition, page 80](https://archive.org/details/computerarchitectureaquantitativeapproach6thedition/page/n111/mode/1up))
 
-In 1974, Knuth's programs executed almost directly on the CPU. A typical web application today has many more layers between its code and the CPU, including an operating system (30 million lines of code), a browser (26 million lines of code) with a virtual machine, and likely 10s-100s of 3rd party libraries running on end users' computers. It likely also involves many more computers spread across datacenters throughout the world, each with their own layers of software. There's many more choices to make, and programmers need to understand the soft constraints imposed by those choices and the choices of the people who use their software. Even if the problem they are solving calls for a web application (which might not be the case!), programmers and the people they work with can still decide the programming languages and 3rd party libraries they use, the code they write themselves, and on which computers the code runs. Every decision has consequences.
+In 1974, Knuth's programs executed almost directly on the CPU. A typical web application today has many more layers between its code and the CPU, including an operating system (30 million lines of code), a browser (26 million lines of code) with a virtual machine, and likely 10s-100s of 3rd party libraries running on end users' computers. It likely also involves many more computers spread across datacenters throughout the world, each with their own layers of software. There are many more choices to make, and programmers need to understand the soft constraints imposed by those choices and the choices of the people who use their software. Even if the problem they are solving calls for a web application (which might not be the case!), programmers and the people they work with can still decide the programming languages and 3rd party libraries they use, the code they write themselves, and on which computers the code runs. Every decision has consequences.
 
 ## Only Do Useful Work
 Once we've understood the problem, we can use our understanding to minimize waste. The fastest thing is doing nothing. The fastest *useful* thing is doing nothing unneeded.
@@ -100,19 +100,17 @@ The code I inherited looked like this:
 
 This code had passed code review. Its code style followed "industry best practices." Unfortunately, those practices failed to produce code that minimized waste and was easy to understand and change. Improving these practices is a topic for a future article.
 
-After my improvements, it looked like this:
+After my improvements, the code looked like this:
 1. Decompress the compressed image to main memory
 2. Upload the image to graphics memory
 3. Download the image from graphics memory
 4. Sequentially search the pixels in the user-specified region for the brightest and darkest pixels
 
-This is not quite the simple strategy I wanted, but it was the best I could do given the problem constraints -- it had to run in a web browser. The browser did not provide a way to directly access the image pixels after decompressing the image, so I needed to upload and download the image from graphics memory first. Nonetheless, my implementation was much faster than the original.
+This is not quite the simple strategy I wanted, but it was the best I could do given the problem constraints -- it had to run in a web browser. The browser did not provide a way to directly access the image pixels after decompressing the image, so I needed to upload and download the image from graphics memory first. Nonetheless, my implementation was several times faster than the original.
 
-Contrast this with a different strategy: if I had timed the original program, I might have found that the slowest individual part was sorting the pixels. I might have tried to replace the sorting algorithm with a faster, "optimized" algorithm for this application. That would have been a mistake, because sorting wasn't necessary in the first place. Why waste time trying to make an unnecessary thing faster when you can remove it instead? *Nothing* is always faster than light.
+Contrast this with a different (yet unfortunately common) strategy: if I had timed the original program, I might have found that the slowest individual part was sorting the pixels. I might have tried to replace the sorting algorithm with a faster, "optimized" algorithm for this application. That would have been a mistake, because sorting wasn't necessary in the first place. Why waste time trying to make an unnecessary thing faster when you can remove it instead? *Nothing* is always faster than light.
 
 Let's return to Knuth's "...premature optimization is the root of all evil." Many people use this quote to justify ignoring performance altogether until it becomes a problem, with the aim of maximizing productivity. In my experience, such a strategy inevitably backfires, resulting instead in an ever-growing productivity drain interspersed with heroic rewrite efforts.
-
-The beginning of Knuth's quote reads "We _should_ forget about small efficiencies, say about 97% of the time; premature optimization is the root of all evil." He was complaining about programmers making code harder to debug and maintain in situations where their changes resulted in very minor speed improvements. He was simultaneously writing in defense of making 3% of code more difficult to understand and change if doing so could yield "small efficiencies" on the order of a 12% speed improvement. My approach in this case study wasn't *premature*. I made the program faster *by making it easier to understand and change*. Doing so involved understanding the problem and trying to only do useful work.
 
 ## Measure
 
