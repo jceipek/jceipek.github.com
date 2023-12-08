@@ -138,34 +138,34 @@ If I measure three different implementations of `animationTick` once, I might ge
 - C: 1.97 milliseconds
 
 It seems like B is faster than C is much faster than A. But plotting thousands of runs for each implementation tells a different story:
-![](/projects/makingfastersystems/scatterplots_abc.png)
-![](/projects/makingfastersystems/scatterplot_callouts_bc.png)
+![A scatterplot comparing the latency of 5000 runs of implementations A, B, and C. A is clearly slow and very jittery. Most of its points are above 20ms. B and C's points are usually below 3 ms.](/projects/makingfastersystems/scatterplots_abc.png)
+![A zoomed-in version of the previous scatterplot, comparing latencies for B and C. While B is usually faster than C, the plot is annotated with two samples where that isn't the case.](/projects/makingfastersystems/scatterplot_callouts_bc.png)
 
 While A is consistently slower, there's enough overlap between B and C that comparing single measurements of each could make it seem like B is faster than C, even though it usually isn't.
 
 Trying to avoid this trap, many people turn to average measurements. Unfortunately, averages obscure the distribution of data. In fact, vastly different datasets can have the same average, variance, and correlation (see [the Datasaurus Dozen](https://web.archive.org/web/20230829104458/https://blog.revolutionanalytics.com/2017/05/the-datasaurus-dozen.html)). In most applications, latency outliers matter. You wouldn't want a washing machine that takes an hour to wash your clothes on average but takes an entire day 10% of the time. After an update, my favorite podcast app sometimes took up to 3 seconds to respond when I tapped the play/pause button. I no longer use that app.
 
 Here, the B average of 1.21 milliseconds completely hides the latency outlier at 3.59 milliseconds:
-![](/projects/makingfastersystems/scatterplot_bc_average.png)
+![The previous scatterplot annotated with the average latency for B. The average is clearly slower than most of the points and describes none of them.](/projects/makingfastersystems/scatterplot_bc_average.png)
 The median is not totally useless. While it still hides outliers, it tells us the latency that 50% of runs were faster (and slower) than:
-![](/projects/makingfastersystems/scatterplot_bc_median_average.png)
+![The previous scatterplot annotated with the average and median latency for B. The median clearly captures most of the points, but there are many points above and below it.](/projects/makingfastersystems/scatterplot_bc_median_average.png)
 But what we're really interested in is more than we can capture in a single number (or even a few numbers). We want to understand the *latency distribution*. This is where we might be tempted to reach for histograms:
-![](/projects/makingfastersystems/histograms_bc.png)
+![Two partially-overlapping histograms comparing 5000 samples of B and C, with several clearly defined peaks in each histogram.](/projects/makingfastersystems/histograms_bc.png)
 Unfortunately, histograms require picking a size for each bin, and bins don't really make sense for continuous time measurements. Histograms are perfect if we want to be able to say things like "461 of the runs with implementation B took between 1.28 and 1.29 milliseconds." I don't know about you, but that's not the kind of thing I've ever wanted to know.
-![](/projects/makingfastersystems/histograms_labeled_bar_bc.png)
+![A repeat of the previous histograms, with one of the bars annotated to show the number of runs between 1.28 and 1.29 milliseconds.](/projects/makingfastersystems/histograms_labeled_bar_bc.png)
 They also make it hard to answer the common questions we _are_ interested in, like "what percent of the runs with implementation B were faster than 1.2 milliseconds?"
-![](/projects/makingfastersystems/histograms_bc_highlighted_region.png)
+![A repeat of the previous histograms, now highlighting the bars in the B histogram that refer to latencies below 1.2 milliseconds.](/projects/makingfastersystems/histograms_bc_highlighted_region.png)
 
 To answer that question, we would have to add up the heights of all the bars we're interested in and divide by the total number of bars, which is really annoying to do by hand. Instead, we can use my favorite type of graph for latency distributions, Cumulative Distribution Functions. To produce a CDF, take an unbinned histogram and divide each bar height by the total number of bars to produce a Probability Density Function (PDF). Then plot the cumulative sum of the PDF. The result is a graph that shows all the same peaks and valleys that a histogram would:
-![](/projects/makingfastersystems/cdf_vs_histogram_bc.png)
+![A repeat of the previous histograms, overlaid with two lines representing the CDFs of B and C. The lines change slope wherever there are peaks and valleys in the corresponding histograms.](/projects/makingfastersystems/cdf_vs_histogram_bc.png)
 More importantly, the (X, Y) coordinate tells you that Y fraction of samples were faster than X time. For example, here's the answer to our question from before:
-![](/projects/makingfastersystems/cdf_vs_histogram_labeled_bc.png)
+![A repeat of the CDF+histogram combination, annotated with two orthogonal lines intersecting to show that 31.8% of B's runs took 1.20 ms or less time.](/projects/makingfastersystems/cdf_vs_histogram_labeled_bc.png)
 This is commonly written as pY for any value of Y. For example, the median is p50, the 50th percentile. If the p90 is 1.42 milliseconds, that means 90% of measurements were faster (and 10% slower) than 1.42 milliseconds.
-![](/projects/makingfastersystems/cdf_p90_p50_bc.png)
+![CDFs comparing 5000 runs of B and C. The B CDF is annotated with labels at two points. 90% of samples took 1.42 ms or less, while 50% of samples took 1.30 ms or less.](/projects/makingfastersystems/cdf_p90_p50_bc.png)
 
 I personally prefer to use the CCDF instead, which flips the y axis upside down. "I only need to make this faster in 20% of cases" makes me feel better than "I'm 80% of the way there." It's up to you. Just make sure to label your axes so everyone knows what kind of graph it is.
 
-![](/projects/makingfastersystems/ccdf_bc.png)
+![CCDFs comparing 5000 runs of B and C. The curves for each CCDF are flipped upside-down from the previous graph. A label shows that 20% of B's samples took 1.39 ms or longer.](/projects/makingfastersystems/ccdf_bc.png)
 
 Context always matters when interpreting data, and percentiles are no different. The CCDF above shows that about 1% of C runs are slower (99% are faster) than 0.7ms. How often does this p99 happen? Well, we know that `animationStep` runs 30 times a second, or 1800 times a minute (`30/second * 60 seconds/minute = 1800/minute`). 1% of 1800 is 18, so this happens around 18 times per minute. If someone views the display case for 3 minutes, we can expect them to encounter this latency or worse about 54 times (`18 * 3 = 54`).
 
