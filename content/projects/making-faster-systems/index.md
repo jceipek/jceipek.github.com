@@ -42,14 +42,14 @@ Such a computer can perform 3,000,000,000 (3 billion) additions per lane per cor
 
 If you open up a computer, take out the CPU, dunk it in a vat of hydrochloric acid, and look at it under a microscope, you'll see something similar to this:
 
-![A die shot from an Intel Tiger Lake CPU. It looks like an aerial photo of solar panels interspersed with rectangular chemical vats in different colors, but it is only 10.7 mm on a side.](/projects/makingfastersystems/die_shot.png)
+![A die shot from an Intel Tiger Lake CPU. It looks like an aerial photo of solar panels interspersed with rectangular chemical vats in different colors, but it is only 10.7 mm on a side.](/projects/making-faster-systems/die_shot.png)
 
 This chip (an 11th generation Intel CPU) has 4 cores:
-![The die shot from before, with annotations showing 4 repeated structures labeled as "cores".](/projects/makingfastersystems/die_shot_cores.png)
+![The die shot from before, with annotations showing 4 repeated structures labeled as "cores".](/projects/making-faster-systems/die_shot_cores.png)
 
 The parts of each core that perform addition are the execution units, and they're connected to a series of memory caches:
 
-![The die shot from before, now annotated with colorful blocks showing the execution units, L1 data cache, L1 instruction cache, L2 cache, and L3 cache for one of the cores. The annotations are connected with lines to show that they are connected with a path that leads to main memory, which is far away from the execution units.](/projects/makingfastersystems/die_shot_journey.png)
+![The die shot from before, now annotated with colorful blocks showing the execution units, L1 data cache, L1 instruction cache, L2 cache, and L3 cache for one of the cores. The annotations are connected with lines to show that they are connected with a path that leads to main memory, which is far away from the execution units.](/projects/making-faster-systems/die_shot_journey.png)
 
 If you've never heard of these caches before, they're similar to a library network. The L1 data cache is like a personal book collection: it's not far away but it doesn't have much space. The L3 cache on this chip is shared -- it's like the community library that might not have the book you're looking for but can request it from a neighboring library.
 
@@ -61,7 +61,7 @@ Let's put these distances into perspective with a race.
 When you click play in the following video, the blue boxes will move from left to right.
 If they moved at their regular speeds, you wouldn't be able to tell their speeds apart, so I've slowed everything down 1 billion times: 1 second in the video corresponds to 1 nanosecond of real time. Can you guess how long main memory access will take? What about accessing an NVMe drive (which is faster than a hard drive or SSD)?
 
-<video controls style="width:100%;" src="/projects/makingfastersystems/MakingFasterSystemsRace.mp4"></video>
+<video controls style="width:100%;" src="/projects/making-faster-systems/MakingFasterSystemsRace.mp4"></video>
 
 To keep the video short, I've summarized all the results in this table:
 
@@ -85,7 +85,7 @@ What do you think he would say about a 10,000+% improvement (having the numbers 
 
 He was writing in 1974, when memory and processor speed were about the same. Since then, the gap between processor and memory speed has grown many orders of magnitude apart, and we can't ignore that if we want to create fast software.
 <figure>
-  <img src="/projects/makingfastersystems/processor_memory_gap.png" alt="Chart showing the processor-memory gap. Processor and memory performance start out similar in 1980 and then diverge sharply on a log plot. As of 2015, memory performance is at 10 and processor performance is at 10,000. Both numbers are unitless." />
+  <img src="/projects/making-faster-systems/processor_memory_gap.png" alt="Chart showing the processor-memory gap. Processor and memory performance start out similar in 1980 and then diverge sharply on a log plot. As of 2015, memory performance is at 10 and processor performance is at 10,000. Both numbers are unitless." />
   <figcaption>
     (chart from <cite><a href="https://archive.org/details/computerarchitectureaquantitativeapproach6thedition/page/n111/mode/1up" target="_blank">Computer Architecture: A Quantitative Approach, 6th Edition, page 80</a></cite>)
   </figcaption>
@@ -143,7 +143,7 @@ For the rest of this section, I'll use latency measurements from the "brain" of 
 > -- Knuth
 
 Profiling tools often produce icicle graphs -- visualizations that show how long different parts of a process take using labeled rectangles arranged such that substeps are lower down than the steps that depend on them. In this icicle graph (produced using [viztracer](https://github.com/gaogaotiantian/viztracer) and [Spall](https://gravitymoth.com/spall/spall-web.html) on my fast 2019 laptop), we can see that `animationStep` is a substep of `animationTick`, which is itself a substep of `_run`. The yellow rectangles labeled `animationStep` are wide, which suggests that the program is spending a lot of time in `animationStep` (around 50 milliseconds with profiler overhead).
-![](/projects/makingfastersystems/animation_step_icicle_profile.png)
+![Profiling results showing many colorful stacked rectangles forming an icicle graph. The yellow rectangles labeled `animationStep` are clearly wide when compared with most of the other rectangles.](/projects/making-faster-systems/animation_step_icicle_profile.png)
 
 When I first started practicing optimization, my approach was to measure the latency of an existing system, make some changes, measure again, and discard the changes if the newer measurement was slower. I notice many other people do this as well. This is a mistake.
 
@@ -153,40 +153,40 @@ If I measure three different implementations of `animationTick` once, I might ge
 - C: 1.97 milliseconds
 
 It seems like B is faster than C is much faster than A. But plotting thousands of runs for each implementation tells a different story:
-![A scatterplot comparing the latency of 5000 runs of implementations A, B, and C. A is clearly slow and very jittery. Most of its points are above 20ms. B and C's points are usually below 3 ms.](/projects/makingfastersystems/scatterplots_abc.png)
-![A zoomed-in version of the previous scatterplot, comparing latencies for B and C. While B is usually faster than C, the plot is annotated with two samples where that isn't the case.](/projects/makingfastersystems/scatterplot_callouts_bc.png)
+![A scatterplot comparing the latency of 5000 runs of implementations A, B, and C. A is clearly slow and very jittery. Most of its points are above 20ms. B and C's points are usually below 3 ms.](/projects/making-faster-systems/scatterplots_abc.png)
+![A zoomed-in version of the previous scatterplot, comparing latencies for B and C. While B is usually faster than C, the plot is annotated with two samples where that isn't the case.](/projects/making-faster-systems/scatterplot_callouts_bc.png)
 
 While A is consistently slower, there's enough overlap between B and C that comparing single measurements of each could make it seem like B is faster than C, even though it usually isn't.
 
 Trying to avoid this trap, many people turn to average measurements. Unfortunately, averages obscure the distribution of data. In fact, vastly different datasets can have the same average, variance, and correlation (see [the Datasaurus Dozen](https://web.archive.org/web/20230829104458/https://blog.revolutionanalytics.com/2017/05/the-datasaurus-dozen.html)). In most applications, latency outliers matter. You wouldn't want a washing machine that takes an hour to wash your clothes on average but takes an entire day 10% of the time. After an update, my favorite podcast app sometimes took up to 3 seconds to respond when I tapped the play/pause button. I no longer use that app.
 
 Here, the B average of 1.21 milliseconds completely hides the latency outlier at 3.59 milliseconds:
-![The previous scatterplot annotated with the average latency for B. The average is clearly slower than most of the points and describes none of them.](/projects/makingfastersystems/scatterplot_bc_average.png)
+![The previous scatterplot annotated with the average latency for B. The average is clearly slower than most of the points and describes none of them.](/projects/making-faster-systems/scatterplot_bc_average.png)
 
 The median is not totally useless. While it still hides outliers, it tells us the latency that 50% of runs were faster (and slower) than:
-![The previous scatterplot annotated with the average and median latency for B. The median clearly captures most of the points, but there are many points above and below it.](/projects/makingfastersystems/scatterplot_bc_median_average.png)
+![The previous scatterplot annotated with the average and median latency for B. The median clearly captures most of the points, but there are many points above and below it.](/projects/making-faster-systems/scatterplot_bc_median_average.png)
 
 But what we're really interested in is more than we can capture in a single number (or even a few numbers). We want to understand the *latency distribution*. This is where we might be tempted to reach for histograms:
-![Two partially-overlapping histograms comparing 5000 samples of B and C, with several clearly defined peaks in each histogram.](/projects/makingfastersystems/histograms_bc.png)
+![Two partially-overlapping histograms comparing 5000 samples of B and C, with several clearly defined peaks in each histogram.](/projects/making-faster-systems/histograms_bc.png)
 
 Unfortunately, histograms require picking a size for each bin, and bins don't really make sense for continuous time measurements. Histograms are perfect if we want to be able to say things like "461 of the runs with implementation B took between 1.28 and 1.29 milliseconds." I don't know about you, but that's not the kind of thing I've ever wanted to know.
-![A repeat of the previous histograms, with one of the bars annotated to show the number of runs between 1.28 and 1.29 milliseconds.](/projects/makingfastersystems/histograms_labeled_bar_bc.png)
+![A repeat of the previous histograms, with one of the bars annotated to show the number of runs between 1.28 and 1.29 milliseconds.](/projects/making-faster-systems/histograms_labeled_bar_bc.png)
 
 They also make it hard to answer the common questions we _are_ interested in, like "what percent of the runs with implementation B were faster than 1.2 milliseconds?"
-![A repeat of the previous histograms, now highlighting the bars in the B histogram that refer to latencies below 1.2 milliseconds.](/projects/makingfastersystems/histograms_bc_highlighted_region.png)
+![A repeat of the previous histograms, now highlighting the bars in the B histogram that refer to latencies below 1.2 milliseconds.](/projects/making-faster-systems/histograms_bc_highlighted_region.png)
 
 To answer that question, we would have to add up the heights of all the bars we're interested in and divide by the total number of bars, which is really annoying to do by hand. Instead, we can use my favorite type of graph for latency distributions, Cumulative Distribution Functions. To produce a CDF, take an unbinned histogram and divide each bar height by the total number of bars to produce a Probability Density Function (PDF). Then plot the cumulative sum of the PDF. The result is a graph that shows all the same peaks and valleys that a histogram would:
-![A repeat of the previous histograms, overlaid with two lines representing the CDFs of B and C. The lines change slope wherever there are peaks and valleys in the corresponding histograms.](/projects/makingfastersystems/cdf_vs_histogram_bc.png)
+![A repeat of the previous histograms, overlaid with two lines representing the CDFs of B and C. The lines change slope wherever there are peaks and valleys in the corresponding histograms.](/projects/making-faster-systems/cdf_vs_histogram_bc.png)
 
 More importantly, the (X, Y) coordinate tells you that Y fraction of samples were faster than X time. For example, here's the answer to our question from before:
-![A repeat of the CDF+histogram combination, annotated with two orthogonal lines intersecting to show that 31.8% of B's runs took 1.20 ms or less time.](/projects/makingfastersystems/cdf_vs_histogram_labeled_bc.png)
+![A repeat of the CDF+histogram combination, annotated with two orthogonal lines intersecting to show that 31.8% of B's runs took 1.20 ms or less time.](/projects/making-faster-systems/cdf_vs_histogram_labeled_bc.png)
 
 This is commonly written as pY for any value of Y. For example, the median is p50, the 50th percentile. If the p90 is 1.42 milliseconds, that means 90% of measurements were faster (and 10% slower) than 1.42 milliseconds.
-![CDFs comparing 5000 runs of B and C. The B CDF is annotated with labels at two points. 90% of samples took 1.42 ms or less, while 50% of samples took 1.30 ms or less.](/projects/makingfastersystems/cdf_p90_p50_bc.png)
+![CDFs comparing 5000 runs of B and C. The B CDF is annotated with labels at two points. 90% of samples took 1.42 ms or less, while 50% of samples took 1.30 ms or less.](/projects/making-faster-systems/cdf_p90_p50_bc.png)
 
 I personally prefer to use the CCDF instead, which flips the y axis upside down. "I only need to make this faster in 20% of cases" makes me feel better than "I'm 80% of the way there." It's up to you. Just make sure to label your axes so everyone knows what kind of graph it is.
 
-![CCDFs comparing 5000 runs of B and C. The curves for each CCDF are flipped upside-down from the previous graph. A label shows that 20% of B's samples took 1.39 ms or longer.](/projects/makingfastersystems/ccdf_bc.png)
+![CCDFs comparing 5000 runs of B and C. The curves for each CCDF are flipped upside-down from the previous graph. A label shows that 20% of B's samples took 1.39 ms or longer.](/projects/making-faster-systems/ccdf_bc.png)
 
 Context always matters when interpreting data, and percentiles are no different. The CCDF above shows that about 1% of C runs are slower (99% are faster) than 0.7ms. How often does this p99 happen? Well, we know that `animationStep` runs 30 times a second, or 1800 times a minute (`30/second * 60 seconds/minute = 1800/minute`). 1% of 1800 is 18, so this happens around 18 times per minute. If someone views the display case for 3 minutes, we can expect them to encounter this latency or worse about 54 times (`18 * 3 = 54`).
 
