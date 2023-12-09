@@ -1,26 +1,26 @@
 ---
 link: ''
-link_text: coming soon!
+link_text: read the essay
 img: ""
 dark: false
 title: Making Faster Systems
 collaborators: []
-tagline: programming
+tagline: ""
 roles: []
 categories:
   - education
 draft: false
 ---
 
-This post is based on an in-person presentation I gave earlier this year to an audience of software, mechanical, and electrical engineers. Its examples are software-related, but the principles apply across domains.
+*This essay is based on a 2023 in-person presentation I gave to an audience of software, mechanical, and electrical engineers. Its examples are software-related, but the principles apply across domains.*
 
 In [*Structured Programming with `go to` Statements*](https://web.archive.org/web/20160405103933/http://www.univasf.edu.br/~marcus.ramos/pc-2008-2/p261-knuth.pdf), Donald E. Knuth wrote "...premature optimization is the root of all evil", and people have been misquoting him ever since. They tend to miss both what he meant by "premature" and what has changed since he wrote those words in 1974.
 
 But I'll get back to that. First, let's consider *why* we might want to make faster systems:
-1. it leads to happier customers -- people generally don't like waiting for things, and fast systems lead to fast feedback loops
-2. it leads to happier companies -- happier customers ideally lead to higher profits. In the case of client-server software, companies pay for the resources they use, and faster systems tend to use fewer resources. Which company *doesn't* want to decrease their cloud spend?
-3. it leads to a happier planet -- reducing resource consumption reduces environmental impact
-4. it leads to a happier *you*, because making systems faster is fun and rewarding
+1. It leads to happier customers -- people generally don't like waiting for things, and fast systems lead to fast feedback loops.
+2. It leads to happier companies -- happier customers ideally lead to higher profits. In the case of client-server software, companies pay for the resources they use, and faster systems tend to use fewer resources. Which company *doesn't* want to decrease their cloud spend?
+3. It leads to a happier planet -- reducing resource consumption reduces environmental impact.
+4. It leads to a happier *you*, because making systems faster is fun and rewarding.
 
 If we want to make faster systems, we need to:
 - **Understand the Problem**
@@ -28,8 +28,11 @@ If we want to make faster systems, we need to:
 - **Measure**
 ## Understand the Problem
 At their simplest, we can think of systems as transforming inputs into outputs. Two systems with the same inputs and outputs can have vastly different performance characteristics.
+
 We all know that nothing is faster than light. That is also true of software systems, which operate on physical computers, as much as marketing terms like "serverless" would have you think otherwise.
+
 Every computer has one or more CPUs (central processing units) that process inputs into outputs. To make faster software systems, we have to understand how fast the computers that execute them are.
+
 Computers are really fast. For example, adding two numbers together might take 0.33 nanoseconds. To put that in perspective:
 - 1000 nanoseconds = 1 microsecond
 - 1000 microseconds = 1 millisecond
@@ -39,12 +42,20 @@ Such a computer can perform 3,000,000,000 (3 billion) additions per lane per cor
 
 If you open up a computer, take out the CPU, dunk it in a vat of hydrochloric acid, and look at it under a microscope, you'll see something similar to this:
 
-![](/projects/makingfastersystems/die_shot.png)
+![A die shot from an Intel Tiger Lake CPU. It looks like an aerial photo of solar panels interspersed with rectangular chemical vats in different colors, but it is only 10.7 mm on a side.](/projects/makingfastersystems/die_shot.png)
 
-This chip has 4 cores:
-![](/projects/makingfastersystems/die_shot_cores.png)
+This chip (an 11th generation Intel CPU) has 4 cores:
+![The die shot from before, with annotations showing 4 repeated structures labeled as "cores".](/projects/makingfastersystems/die_shot_cores.png)
 
-The parts of each core that perform addition are the execution units. ![](/projects/makingfastersystems/die_shot_journey.png)If the execution units already have the numbers to add loaded, addition can be really fast. If they don't, they have to fetch them from the L1 data cache. If the L1 cache doesn't have the numbers, they have to fetch them from the L2 cache. If the L2 cache doesn't have the numbers, they have to fetch them from the L3 cache, which, on this chip, is shared across all 4 cores. If the L3 cache doesn't have the data, they have to fetch them from main memory. Each of these involves a longer and longer physical distance, and the data has to physically travel to where it is needed. Physics is a hard constraint that can't be ignored. Remember that nothing is faster than light.
+The parts of each core that perform addition are the execution units, and they're connected to a series of memory caches:
+
+![The die shot from before, now annotated with colorful blocks showing the execution units, L1 data cache, L1 instruction cache, L2 cache, and L3 cache for one of the cores. The annotations are connected with lines to show that they are connected with a path that leads to main memory, which is far away from the execution units.](/projects/makingfastersystems/die_shot_journey.png)
+
+If you've never heard of these caches before, they're similar to a library network. The L1 data cache is like a personal book collection: it's not far away but it doesn't have much space. The L3 cache on this chip is shared -- it's like the community library that might not have the book you're looking for but can request it from a neighboring library.
+
+When adding numbers, if the execution units have already loaded the numbers to add, addition can be really fast. If they don't, they have to fetch them from the small nearby piece of memory called the L1 data cache. If the L1 cache doesn't have the numbers, they have to fetch them from the L2 cache. If the L2 cache doesn't have the numbers, they have to fetch them from the L3 cache, which, on this chip, is shared across all 4 cores. If the L3 cache doesn't have the data, they have to fetch them from main memory.
+
+Each of these involves a longer and longer physical distance to a place with more storage, and the data has to physically travel to where it is needed. Physics is a hard constraint that can't be ignored. Remember: nothing is faster than light.
 
 Let's put these distances into perspective with a race. 
 When you click play in the following video, the blue boxes will move from left to right.
@@ -73,8 +84,12 @@ In *Structured Programming with `go to` Statements*, Knuth wrote:
 What do you think he would say about a 10,000+% improvement (having the numbers in the L1 cache vs fetching them from memory)?
 
 He was writing in 1974, when memory and processor speed were about the same. Since then, the gap between processor and memory speed has grown many orders of magnitude apart, and we can't ignore that if we want to create fast software.
-![](/projects/makingfastersystems/processor_memory_gap.png)
-(chart from [Computer Architecture: A Quantitative Approach, 6th Edition, page 80](https://archive.org/details/computerarchitectureaquantitativeapproach6thedition/page/n111/mode/1up))
+<figure>
+  <img src="/projects/makingfastersystems/processor_memory_gap.png" alt="Chart showing the processor-memory gap. Processor and memory performance start out similar in 1980 and then diverge sharply on a log plot. As of 2015, memory performance is at 10 and processor performance is at 10,000. Both numbers are unitless." />
+  <figcaption>
+    (chart from <cite><a href="https://archive.org/details/computerarchitectureaquantitativeapproach6thedition/page/n111/mode/1up" target="_blank">Computer Architecture: A Quantitative Approach, 6th Edition, page 80</a></cite>)
+  </figcaption>
+</figure>
 
 In 1974, Knuth's programs executed almost directly on the CPU. A typical web application today has many more layers between its code and the CPU, including an operating system (30 million lines of code), a browser (26 million lines of code) with a virtual machine, and likely 10s-100s of 3rd party libraries running on end users' computers. It likely also involves many more computers spread across datacenters throughout the world, each with their own layers of software. There are many more choices to make, and programmers need to understand the soft constraints imposed by those choices and the choices of the people who use their software. Even if the problem they are solving calls for a web application (which might not be the case!), programmers and the people they work with can still decide the programming languages and 3rd party libraries they use, the code they write themselves, and on which computers the code runs. Every decision has consequences.
 
@@ -147,19 +162,25 @@ Trying to avoid this trap, many people turn to average measurements. Unfortunate
 
 Here, the B average of 1.21 milliseconds completely hides the latency outlier at 3.59 milliseconds:
 ![The previous scatterplot annotated with the average latency for B. The average is clearly slower than most of the points and describes none of them.](/projects/makingfastersystems/scatterplot_bc_average.png)
+
 The median is not totally useless. While it still hides outliers, it tells us the latency that 50% of runs were faster (and slower) than:
 ![The previous scatterplot annotated with the average and median latency for B. The median clearly captures most of the points, but there are many points above and below it.](/projects/makingfastersystems/scatterplot_bc_median_average.png)
+
 But what we're really interested in is more than we can capture in a single number (or even a few numbers). We want to understand the *latency distribution*. This is where we might be tempted to reach for histograms:
 ![Two partially-overlapping histograms comparing 5000 samples of B and C, with several clearly defined peaks in each histogram.](/projects/makingfastersystems/histograms_bc.png)
+
 Unfortunately, histograms require picking a size for each bin, and bins don't really make sense for continuous time measurements. Histograms are perfect if we want to be able to say things like "461 of the runs with implementation B took between 1.28 and 1.29 milliseconds." I don't know about you, but that's not the kind of thing I've ever wanted to know.
 ![A repeat of the previous histograms, with one of the bars annotated to show the number of runs between 1.28 and 1.29 milliseconds.](/projects/makingfastersystems/histograms_labeled_bar_bc.png)
+
 They also make it hard to answer the common questions we _are_ interested in, like "what percent of the runs with implementation B were faster than 1.2 milliseconds?"
 ![A repeat of the previous histograms, now highlighting the bars in the B histogram that refer to latencies below 1.2 milliseconds.](/projects/makingfastersystems/histograms_bc_highlighted_region.png)
 
 To answer that question, we would have to add up the heights of all the bars we're interested in and divide by the total number of bars, which is really annoying to do by hand. Instead, we can use my favorite type of graph for latency distributions, Cumulative Distribution Functions. To produce a CDF, take an unbinned histogram and divide each bar height by the total number of bars to produce a Probability Density Function (PDF). Then plot the cumulative sum of the PDF. The result is a graph that shows all the same peaks and valleys that a histogram would:
 ![A repeat of the previous histograms, overlaid with two lines representing the CDFs of B and C. The lines change slope wherever there are peaks and valleys in the corresponding histograms.](/projects/makingfastersystems/cdf_vs_histogram_bc.png)
+
 More importantly, the (X, Y) coordinate tells you that Y fraction of samples were faster than X time. For example, here's the answer to our question from before:
 ![A repeat of the CDF+histogram combination, annotated with two orthogonal lines intersecting to show that 31.8% of B's runs took 1.20 ms or less time.](/projects/makingfastersystems/cdf_vs_histogram_labeled_bc.png)
+
 This is commonly written as pY for any value of Y. For example, the median is p50, the 50th percentile. If the p90 is 1.42 milliseconds, that means 90% of measurements were faster (and 10% slower) than 1.42 milliseconds.
 ![CDFs comparing 5000 runs of B and C. The B CDF is annotated with labels at two points. 90% of samples took 1.42 ms or less, while 50% of samples took 1.30 ms or less.](/projects/makingfastersystems/cdf_p90_p50_bc.png)
 
@@ -183,3 +204,9 @@ In 1974, Knuth wrote "...premature optimization is the root of all evil." Comput
 > Ignoring reality is the root of all evil.
 > 
 > -- Julian Ceipek, 2023
+
+-------
+
+<small>
+Thanks to Casey Muratori, Mike Acton, and Gil Tene for teaching me new ways of thinking about software performance. Thanks to Cypress Frankenfeld, Clemens Ceipek, and Elissa Ye for feedback on this essay.
+</small>

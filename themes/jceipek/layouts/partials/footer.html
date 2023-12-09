@@ -1,12 +1,14 @@
-<a class='circle circle--small circle--left circle--bottom' href='https://github.com/jceipek'>
-    <img src="data:image/svg+xml;base64,{{(resources.Get `icons/github.svg`).Content | base64Encode}}" />
-    <span>github</span>
-</a>
-<a class='circle circle--small circle--bottom' href='documents/Julian_Ceipek_CV.pdf'>
-    <img style="margin-top: 0.6em;" src="data:image/svg+xml;base64,{{(resources.Get `icons/resume.svg`).Content | base64Encode}}" />
-    <span>resume</span>
-</a>
-<a class='circle circle--small circle--right circle--bottom' href='mailto:julian.ceipek@gmail.com'>
-    <img style="margin-bottom: -0.2em;" src="data:image/svg+xml;base64,{{(resources.Get `icons/contact.svg`).Content | base64Encode}}" />
-    <span>contact</span>
-</a>
+<footer>
+    <a class="circle circle--small circle--left circle--bottom" href="{{.Site.Params.githubLink}}">
+        <img src="data:image/svg+xml;base64,{{(resources.Get `icons/github.svg`).Content | base64Encode}}" />
+        <span>github</span>
+    </a>
+    <a class="circle circle--small circle--bottom" href="{{.Site.Params.resumeLink}}">
+        <img style="margin-top: 0.6em;" src="data:image/svg+xml;base64,{{(resources.Get `icons/resume.svg`).Content | base64Encode}}" />
+        <span>resume</span>
+    </a>
+    <a class="circle circle--small circle--right circle--bottom" href="{{.Site.Params.mailtoLink}}">
+        <img style="margin-bottom: -0.2em;" src="data:image/svg+xml;base64,{{(resources.Get `icons/contact.svg`).Content | base64Encode}}" />
+        <span>contact</span>
+    </a>
+</footer>

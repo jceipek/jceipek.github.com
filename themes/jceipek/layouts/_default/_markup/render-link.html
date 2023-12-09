@@ -1,0 +1,2 @@
+{{/* Render external links with target blank. Adapted from https://agrimprasad.com/post/hugo-goldmark-markdown/ but works for inner html content. */}}
+<a href="{{ .Destination | safeURL }}"{{ with .Title}} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }} target="_blank"{{ end }}>{{ .Text | markdownify }}</a>

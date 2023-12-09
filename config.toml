@@ -6,3 +6,8 @@ UglyUrls = true
 
 [markup.goldmark.renderer]
   unsafe = true
+
+[Params]
+    resumeLink="/documents/Julian_Ceipek_Resume_11_20_2023.pdf"
+    githubLink="https://github.com/jceipek"
+    mailtoLink="mailto:julian.ceipek@gmail.com"

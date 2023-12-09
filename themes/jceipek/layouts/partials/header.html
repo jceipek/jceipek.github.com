@@ -17,21 +17,21 @@
             <p>Hi, I'm</p>
             <h1 class='name'><span class='name--first'>Julian</span> <span class='name--last'>Ceipek</span></h1>
             <div class='mission'><p>I &hearts; learning, collaborating &amp; teaching.</p>
-            <p>I craft systems with &amp; for people.</p></div>
+                <p>I craft systems with &amp; for people.</p></div>
         </div>
     </div>
 </div>
 <div class='links-container'>
     <div class='links'>
-        <a class='circle circle--small circle--left' href='https://github.com/jceipek'>
+        <a class='circle circle--small circle--left' href="{{.Site.Params.githubLink}}">
             <img src="data:image/svg+xml;base64,{{(resources.Get `icons/github.min.svg`).Content | base64Encode}}" />
             <span>github</span>
         </a>
-        <a class='circle circle--small circle--center' href='documents/Julian_Ceipek_Resume_11_20_2023.pdf'>
+        <a class='circle circle--small circle--center' href="{{.Site.Params.resumeLink}}">
             <img style="margin-top: 0.6em;" src="data:image/svg+xml;base64,{{(resources.Get `icons/resume.min.svg`).Content | base64Encode}}" />
             <span>resume</span>
         </a>
-        <a class='circle circle--small circle--right' href='mailto:julian.ceipek@gmail.com'>
+        <a class='circle circle--small circle--right' href="{{.Site.Params.mailtoLink}}">
             <img style="margin-bottom: -0.2em;" src="data:image/svg+xml;base64,{{(resources.Get `icons/contact.min.svg`).Content | base64Encode}}" />
             <span>contact</span>
         </a>
