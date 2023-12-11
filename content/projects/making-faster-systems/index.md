@@ -51,9 +51,7 @@ The parts of each core that perform addition are the execution units, and they'r
 
 ![The die shot from before, now annotated with colorful blocks showing the execution units, L1 data cache, L1 instruction cache, L2 cache, and L3 cache for one of the cores. The annotations are connected with lines to show that they are connected with a path that leads to main memory, which is far away from the execution units.](/projects/making-faster-systems/die_shot_journey.png)
 
-If you've never heard of these caches before, they're similar to a library network. The L1 data cache is like a personal book collection: it's not far away but it doesn't have much space. The L3 cache on this chip is shared -- it's like the community library that might not have the book you're looking for but can request it from a neighboring library.
-
-When adding numbers, if the execution units have already loaded the numbers to add, addition can be really fast. If they don't, they have to fetch them from the small nearby piece of memory called the L1 data cache. If the L1 cache doesn't have the numbers, they have to fetch them from the L2 cache. If the L2 cache doesn't have the numbers, they have to fetch them from the L3 cache, which, on this chip, is shared across all 4 cores. If the L3 cache doesn't have the data, they have to fetch them from main memory.
+When adding numbers, if the execution units have already loaded the numbers to add, addition can be really fast. If they don't, they have to fetch them from the small nearby piece of memory called the L1 data cache. If the L1 cache doesn't have the numbers, they have to fetch them from the larger L2 cache. If the L2 cache doesn't have the numbers, they have to fetch them from the L3 cache, which, on this chip, is shared across all 4 cores. If the L3 cache doesn't have the data, they have to fetch them from main memory.
 
 Each of these involves a longer and longer physical distance to a place with more storage, and the data has to physically travel to where it is needed. Physics is a hard constraint that can't be ignored. Remember: nothing is faster than light.
 
