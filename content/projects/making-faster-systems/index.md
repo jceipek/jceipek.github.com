@@ -206,5 +206,5 @@ In 1974, Knuth wrote "...premature optimization is the root of all evil." Comput
 -------
 
 <small>
-Thanks to Casey Muratori, Mike Acton, and Gil Tene for teaching me new ways of thinking about software performance. Thanks to Cypress Frankenfeld, Clemens Ceipek, and Elissa Ye for feedback on this essay.
+Thanks to Casey Muratori, Mike Acton, and Gil Tene for teaching me new ways of thinking about software performance. Thanks to Cypress Frankenfeld, Clemens Ceipek, Elissa Ye, and Brendan Ritter for feedback on this essay.
 </small>
