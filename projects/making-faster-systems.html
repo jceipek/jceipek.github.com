@@ -91,8 +91,7 @@
 <img src=/projects/making-faster-systems/die_shot_cores.png alt="The die shot from before, with annotations showing 4 repeated structures labeled as &ldquo;cores&rdquo;."></p>
 <p>The parts of each core that perform addition are the execution units, and they&rsquo;re connected to a series of memory caches:</p>
 <p><img src=/projects/making-faster-systems/die_shot_journey.png alt="The die shot from before, now annotated with colorful blocks showing the execution units, L1 data cache, L1 instruction cache, L2 cache, and L3 cache for one of the cores. The annotations are connected with lines to show that they are connected with a path that leads to main memory, which is far away from the execution units."></p>
-<p>If you&rsquo;ve never heard of these caches before, they&rsquo;re similar to a library network. The L1 data cache is like a personal book collection: it&rsquo;s not far away but it doesn&rsquo;t have much space. The L3 cache on this chip is shared &ndash; it&rsquo;s like the community library that might not have the book you&rsquo;re looking for but can request it from a neighboring library.</p>
-<p>When adding numbers, if the execution units have already loaded the numbers to add, addition can be really fast. If they don&rsquo;t, they have to fetch them from the small nearby piece of memory called the L1 data cache. If the L1 cache doesn&rsquo;t have the numbers, they have to fetch them from the L2 cache. If the L2 cache doesn&rsquo;t have the numbers, they have to fetch them from the L3 cache, which, on this chip, is shared across all 4 cores. If the L3 cache doesn&rsquo;t have the data, they have to fetch them from main memory.</p>
+<p>When adding numbers, if the execution units have already loaded the numbers to add, addition can be really fast. If they don&rsquo;t, they have to fetch them from the small nearby piece of memory called the L1 data cache. If the L1 cache doesn&rsquo;t have the numbers, they have to fetch them from the larger L2 cache. If the L2 cache doesn&rsquo;t have the numbers, they have to fetch them from the L3 cache, which, on this chip, is shared across all 4 cores. If the L3 cache doesn&rsquo;t have the data, they have to fetch them from main memory.</p>
 <p>Each of these involves a longer and longer physical distance to a place with more storage, and the data has to physically travel to where it is needed. Physics is a hard constraint that can&rsquo;t be ignored. Remember: nothing is faster than light.</p>
 <p>Let&rsquo;s put these distances into perspective with a race.
 When you click play in the following video, the blue boxes will move from left to right.
@@ -250,7 +249,7 @@ and then repeatedly measure and make changes until the actual speed approaches t
 </blockquote>
 <hr>
 <small>
-Thanks to Casey Muratori, Mike Acton, and Gil Tene for teaching me new ways of thinking about software performance. Thanks to Cypress Frankenfeld, Clemens Ceipek, and Elissa Ye for feedback on this essay.
+Thanks to Casey Muratori, Mike Acton, and Gil Tene for teaching me new ways of thinking about software performance. Thanks to Cypress Frankenfeld, Clemens Ceipek, Elissa Ye, and Brendan Ritter for feedback on this essay.
 </small></div>
 </div>
 </div>
