@@ -24,7 +24,7 @@
 <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;500&family=Open+Sans:ital,wght@0,400;0,600;1,400&family=Source+Code+Pro&display=swap" rel=stylesheet>
 <link rel=stylesheet href=/css/normalize.min.6dec53ee20f5bc2905289325994cab42171978d2d264472563bf2e1eab0da1cd.css>
-<link rel=stylesheet href=/css/main.min.a7e91fea4c569a767b53fa6814e1f5fd5d049e74f334fe43645bc75a5f09ac0d.css>
+<link rel=stylesheet href=/css/main.min.2cba3ab98229d23be9eae9224de109e14c6097b39097cab44bbad4126bc4631a.css>
 <body>
 <div class=header-container>
 <div class=header>
@@ -55,6 +55,9 @@
 <div class=project-expl-container>
 <a href=/><img src=/icons/left-icon.png>All projects</a>
 <div class=project-expl>
+<span class="img-container img-container--dark">
+<img src=/projects/making-faster-systems/thumb.png>
+</span>
 <h2>Making Faster Systems</h2>
 <span class=project-tagline></span>
 <span class=project-roles></span>
@@ -63,9 +66,9 @@
 <a href=https://web.archive.org/web/20160405103933/http://www.univasf.edu.br/~marcus.ramos/pc-2008-2/p261-knuth.pdf target=_blank><em>Structured Programming with <code>go to</code> Statements</em></a>, Donald E. Knuth wrote &ldquo;&mldr;premature optimization is the root of all evil&rdquo;, and people have been misquoting him ever since. They tend to miss both what he meant by &ldquo;premature&rdquo; and what has changed since he wrote those words in 1974.</p>
 <p>But I&rsquo;ll get back to that. First, let&rsquo;s consider <em>why</em> we might want to make faster systems:</p>
 <ol>
-<li>It leads to happier customers &ndash; people generally don&rsquo;t like waiting for things, and fast systems lead to fast feedback loops.</li>
-<li>It leads to happier companies &ndash; happier customers ideally lead to higher profits. In the case of client-server software, companies pay for the resources they use, and faster systems tend to use fewer resources. Which company <em>doesn&rsquo;t</em> want to decrease their cloud spend?</li>
-<li>It leads to a happier planet &ndash; reducing resource consumption reduces environmental impact.</li>
+<li>It leads to happier customers &mdash; people generally don&rsquo;t like waiting for things, and fast systems lead to fast feedback loops.</li>
+<li>It leads to happier companies &mdash; happier customers ideally lead to higher profits. In the case of client-server software, companies pay for the resources they use, and faster systems tend to use fewer resources. What company <em>doesn&rsquo;t</em> want to decrease their cloud spend?</li>
+<li>It leads to a happier planet &mdash; reducing resource consumption reduces environmental impact.</li>
 <li>It leads to a happier <em>you</em>, because making systems faster is fun and rewarding.</li>
 </ol>
 <p>If we want to make faster systems, we need to:</p>
@@ -185,23 +188,23 @@ If they moved at their regular speeds, you wouldn&rsquo;t be able to tell their 
 <li>Download the image from graphics memory</li>
 <li>Sequentially search the pixels in the user-specified region for the brightest and darkest pixels</li>
 </ol>
-<p>This is not quite the simple strategy I wanted, but it was the best I could do given the problem constraints &ndash; it had to run in a web browser. The browser did not provide a way to directly access the image pixels after decompressing the image, so I needed to upload and download the image from graphics memory first. Nonetheless, my implementation was several times faster than the original.</p>
+<p>This is not quite the simple strategy I wanted, but it was the best I could do given the problem constraints &mdash; it had to run in a web browser. The browser did not provide a way to directly access the image pixels after decompressing the image, so I needed to upload and download the image from graphics memory first. Nonetheless, my implementation was several times faster than the original.</p>
 <p>Contrast this with a different (yet unfortunately common) strategy: if I had timed the original program, I might have found that the slowest individual part was sorting the pixels. I might have tried to replace the sorting algorithm with a faster, &ldquo;optimized&rdquo; algorithm for this application. That would have been a mistake, because sorting wasn&rsquo;t necessary in the first place. Why waste time trying to make an unnecessary thing faster when you can remove it instead? <em>Nothing</em> is always faster than light.</p>
 <p>Let&rsquo;s return to Knuth&rsquo;s &ldquo;&mldr;premature optimization is the root of all evil.&rdquo; Many people use this quote to justify ignoring performance altogether until it becomes a problem, with the aim of maximizing productivity. In my experience, such a strategy inevitably backfires, resulting instead in an ever-growing productivity drain interspersed with heroic rewrite efforts.</p>
 <h2 id=measure>Measure</h2>
 <p>Professional optimizers compare:</p>
 <ol>
 <li>How fast could it go?</li>
-<li>How fast does it go?
-and then repeatedly measure and make changes until the actual speed approaches the estimated optimal theoretical speed.</li>
+<li>How fast does it go?</li>
 </ol>
+<p>and then repeatedly measure and make changes until the actual speed approaches the estimated optimal theoretical speed.</p>
 <p>When determining these values, it&rsquo;s important to differentiate <em>latency</em> (how long it takes to do something) from <em>throughput</em> (how many of those things you can do in a given timeframe). To understand the difference between latency and throughput, think of a laundromat. If a laundromat has 3 washing machines that each take 1 hour to wash a load of laundry, it will take no less than 1 hour to wash 1 load of laundry. The latency is 1 hour. Adding washing machines won&rsquo;t make it go faster, but a faster washing machine would. However, with 3 machines, you can wash up to 3 loads of laundry at the same time. The throughput is 3 loads/hour.</p>
-<p>For the rest of this section, I&rsquo;ll use latency measurements from the &ldquo;brain&rdquo; of a reactive robotic display case I programmed in 2018. Among other things, the brain was responsible for deciding the colors of 1189 individual LEDs, 30 times per second (once every 33 milliseconds) using a slow $35 computer. In this problem, the throughput was fixed &ndash; the brain always needed to update all 1189 LEDs &ndash; and the maximum acceptable latency was 33 milliseconds. Unfortunately, determining the colors was the slowest part of the program and by itself took over 100 milliseconds on the $35 computer. I needed to make it much faster. How did I know to focus on this part of the program? I used profiling tools.</p>
+<p>For the rest of this section, I&rsquo;ll use latency measurements from the &ldquo;brain&rdquo; of a reactive robotic display case I programmed in 2018. Among other things, the brain was responsible for deciding the colors of 1189 individual LEDs, 30 times per second (once every 33 milliseconds) using a slow $35 computer. In this problem, the throughput was fixed &mdash; the brain always needed to update all 1189 LEDs &mdash; and the maximum acceptable latency was 33 milliseconds. Unfortunately, determining the colors was the slowest part of the program and by itself took over 100 milliseconds on the $35 computer. I needed to make it much faster. How did I know to focus on this part of the program? I used profiling tools.</p>
 <blockquote>
 <p>&ldquo;It is often a mistake to make a priori judgments about what parts of a program are really critical, since the universal experience of programmers who have been using measurement tools has been that their intuitive guesses fail.&rdquo;</p>
 <p>&ndash; Knuth</p>
 </blockquote>
-<p>Profiling tools often produce icicle graphs &ndash; visualizations that show how long different parts of a process take using labeled rectangles arranged such that substeps are lower down than the steps that depend on them. In this icicle graph (produced using
+<p>Profiling tools often produce icicle graphs &mdash; visualizations that show how long different parts of a process take using labeled rectangles arranged such that substeps are lower down than the steps that depend on them. In this icicle graph (produced using
 <a href=https://github.com/gaogaotiantian/viztracer target=_blank>viztracer</a> and
 <a href=https://gravitymoth.com/spall/spall-web.html target=_blank>Spall</a> on my fast 2019 laptop), we can see that <code>animationStep</code> is a substep of <code>animationTick</code>, which is itself a substep of <code>_run</code>. The yellow rectangles labeled <code>animationStep</code> are wide, which suggests that the program is spending a lot of time in <code>animationStep</code> (around 50 milliseconds with profiler overhead).
 <img src=/projects/making-faster-systems/animation_step_icicle_profile.png alt="Profiling results showing many colorful stacked rectangles forming an icicle graph. The yellow rectangles labeled animationStep are clearly wide when compared with most of the other rectangles."></p>
