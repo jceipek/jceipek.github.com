@@ -116,10 +116,6 @@ a.project {
   color: $important-text-color;
 }
 .project h3 {
-  // text-align: right;
-  width: 100%;
-  // padding-left: 0.2em;
-
   color: $important-text-color;
   margin: 0;
 
@@ -371,6 +367,27 @@ max-width: 52em;
     height: 100%;
     width: 100%;
   }
+
+  .interior {
+    // background-color: $overlay-bg-color;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  
+    margin: 0;
+    @include flexbox;
+    @include justify-content(flex-start);
+    @include align-items(end);
+  }
+
+  .interior h3 {
+    background-color: black;
+    color: white;
+    padding: 0.4rem 0.4rem 0.4rem 2rem;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
 }
 
 .highlight-summary {

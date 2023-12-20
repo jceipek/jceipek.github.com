@@ -1,8 +1,8 @@
 ---
 link: ''
-link_text: read the essay
-img: ""
-dark: false
+link_text: read my essay
+img: "thumb.png"
+dark: true
 title: Making Faster Systems
 collaborators: []
 tagline: ""
@@ -17,9 +17,9 @@ draft: false
 In [*Structured Programming with `go to` Statements*](https://web.archive.org/web/20160405103933/http://www.univasf.edu.br/~marcus.ramos/pc-2008-2/p261-knuth.pdf), Donald E. Knuth wrote "...premature optimization is the root of all evil", and people have been misquoting him ever since. They tend to miss both what he meant by "premature" and what has changed since he wrote those words in 1974.
 
 But I'll get back to that. First, let's consider *why* we might want to make faster systems:
-1. It leads to happier customers -- people generally don't like waiting for things, and fast systems lead to fast feedback loops.
-2. It leads to happier companies -- happier customers ideally lead to higher profits. In the case of client-server software, companies pay for the resources they use, and faster systems tend to use fewer resources. Which company *doesn't* want to decrease their cloud spend?
-3. It leads to a happier planet -- reducing resource consumption reduces environmental impact.
+1. It leads to happier customers --- people generally don't like waiting for things, and fast systems lead to fast feedback loops.
+2. It leads to happier companies --- happier customers ideally lead to higher profits. In the case of client-server software, companies pay for the resources they use, and faster systems tend to use fewer resources. What company *doesn't* want to decrease their cloud spend?
+3. It leads to a happier planet --- reducing resource consumption reduces environmental impact.
 4. It leads to a happier *you*, because making systems faster is fun and rewarding.
 
 If we want to make faster systems, we need to:
@@ -119,7 +119,7 @@ After my improvements, the code looked like this:
 3. Download the image from graphics memory
 4. Sequentially search the pixels in the user-specified region for the brightest and darkest pixels
 
-This is not quite the simple strategy I wanted, but it was the best I could do given the problem constraints -- it had to run in a web browser. The browser did not provide a way to directly access the image pixels after decompressing the image, so I needed to upload and download the image from graphics memory first. Nonetheless, my implementation was several times faster than the original.
+This is not quite the simple strategy I wanted, but it was the best I could do given the problem constraints --- it had to run in a web browser. The browser did not provide a way to directly access the image pixels after decompressing the image, so I needed to upload and download the image from graphics memory first. Nonetheless, my implementation was several times faster than the original.
 
 Contrast this with a different (yet unfortunately common) strategy: if I had timed the original program, I might have found that the slowest individual part was sorting the pixels. I might have tried to replace the sorting algorithm with a faster, "optimized" algorithm for this application. That would have been a mistake, because sorting wasn't necessary in the first place. Why waste time trying to make an unnecessary thing faster when you can remove it instead? *Nothing* is always faster than light.
 
@@ -130,17 +130,18 @@ Let's return to Knuth's "...premature optimization is the root of all evil." Man
 Professional optimizers compare:
 1. How fast could it go?
 2. How fast does it go?
+
 and then repeatedly measure and make changes until the actual speed approaches the estimated optimal theoretical speed.
 
 When determining these values, it's important to differentiate *latency* (how long it takes to do something) from *throughput* (how many of those things you can do in a given timeframe). To understand the difference between latency and throughput, think of a laundromat. If a laundromat has 3 washing machines that each take 1 hour to wash a load of laundry, it will take no less than 1 hour to wash 1 load of laundry. The latency is 1 hour. Adding washing machines won't make it go faster, but a faster washing machine would. However, with 3 machines, you can wash up to 3 loads of laundry at the same time. The throughput is 3 loads/hour.
 
-For the rest of this section, I'll use latency measurements from the "brain" of a reactive robotic display case I programmed in 2018. Among other things, the brain was responsible for deciding the colors of 1189 individual LEDs, 30 times per second (once every 33 milliseconds) using a slow $35 computer. In this problem, the throughput was fixed -- the brain always needed to update all 1189 LEDs -- and the maximum acceptable latency was 33 milliseconds. Unfortunately, determining the colors was the slowest part of the program and by itself took over 100 milliseconds on the $35 computer. I needed to make it much faster. How did I know to focus on this part of the program? I used profiling tools.
+For the rest of this section, I'll use latency measurements from the "brain" of a reactive robotic display case I programmed in 2018. Among other things, the brain was responsible for deciding the colors of 1189 individual LEDs, 30 times per second (once every 33 milliseconds) using a slow $35 computer. In this problem, the throughput was fixed --- the brain always needed to update all 1189 LEDs --- and the maximum acceptable latency was 33 milliseconds. Unfortunately, determining the colors was the slowest part of the program and by itself took over 100 milliseconds on the $35 computer. I needed to make it much faster. How did I know to focus on this part of the program? I used profiling tools.
 
 > "It is often a mistake to make a priori judgments about what parts of a program are really critical, since the universal experience of programmers who have been using measurement tools has been that their intuitive guesses fail."
 > 
 > -- Knuth
 
-Profiling tools often produce icicle graphs -- visualizations that show how long different parts of a process take using labeled rectangles arranged such that substeps are lower down than the steps that depend on them. In this icicle graph (produced using [viztracer](https://github.com/gaogaotiantian/viztracer) and [Spall](https://gravitymoth.com/spall/spall-web.html) on my fast 2019 laptop), we can see that `animationStep` is a substep of `animationTick`, which is itself a substep of `_run`. The yellow rectangles labeled `animationStep` are wide, which suggests that the program is spending a lot of time in `animationStep` (around 50 milliseconds with profiler overhead).
+Profiling tools often produce icicle graphs --- visualizations that show how long different parts of a process take using labeled rectangles arranged such that substeps are lower down than the steps that depend on them. In this icicle graph (produced using [viztracer](https://github.com/gaogaotiantian/viztracer) and [Spall](https://gravitymoth.com/spall/spall-web.html) on my fast 2019 laptop), we can see that `animationStep` is a substep of `animationTick`, which is itself a substep of `_run`. The yellow rectangles labeled `animationStep` are wide, which suggests that the program is spending a lot of time in `animationStep` (around 50 milliseconds with profiler overhead).
 ![Profiling results showing many colorful stacked rectangles forming an icicle graph. The yellow rectangles labeled `animationStep` are clearly wide when compared with most of the other rectangles.](/projects/making-faster-systems/animation_step_icicle_profile.png)
 
 When I first started practicing optimization, my approach was to measure the latency of an existing system, make some changes, measure again, and discard the changes if the newer measurement was slower. I notice many other people do this as well. This is a mistake.

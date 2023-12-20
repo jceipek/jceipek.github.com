@@ -1,9 +1,17 @@
 [[highlights]]
 content=[
-    "dark",
-    "mesolite"
+    "x-ray-vision",
+    "making-faster-systems",
 ]
 
+
+[[categories]]
+name="Programming Environments"
+content=[
+    "lynxtool",
+    "installation-visualizer",
+    "dark",
+]
 
 [[categories]]
 name="Games"
@@ -16,7 +24,7 @@ content=[
 [[categories]]
 name="Robotics"
 content=[
-    # "mesolite"
+    "mesolite",
     "cog",
     "aurora",
     "octobo"
