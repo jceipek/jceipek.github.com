@@ -12,7 +12,7 @@ categories:
 draft: false
 ---
 
-*This essay is based on a 2023 in-person presentation I gave to an audience of software, mechanical, and electrical engineers. Its examples are software-related, but the principles apply across domains.*
+*This essay is inspired by a 2023 in-person presentation I gave to an audience of software, mechanical, and electrical engineers. While its examples are software-related, the principles apply across domains.*
 
 In [*Structured Programming with `go to` Statements*](https://web.archive.org/web/20160405103933/http://www.univasf.edu.br/~marcus.ramos/pc-2008-2/p261-knuth.pdf), Donald E. Knuth wrote "...premature optimization is the root of all evil", and people have been misquoting him ever since. They tend to miss both what he meant by "premature" and what has changed since he wrote those words in 1974.
 
@@ -22,11 +22,20 @@ But I'll get back to that. First, let's consider *why* we might want to make fas
 3. It leads to a happier planet --- reducing resource consumption reduces environmental impact.
 4. It leads to a happier *you*, because making systems faster is fun and rewarding.
 
-If we want to make faster systems, we need to:
+For a concrete example of why making faster systems matters, consider my work at Lumafield: reducing the time to inspect products from hours to under a minute allowed the company to serve customers in entirely new market segments (see [*Empowering Manufacturers with X-ray Vision*](/projects/x-ray-vision.html)).
+
+When Knuth scorned "premature optimization," he was referring to the practice of making small micro-optimizations throughout a program until the code becomes impossible to understand or change. While micro-optimizations are sometimes justified, making faster systems encompasses a broad spectrum of activities.
+
+There are three fundamental steps we need to take if we want to make faster systems:
 - **Understand the Problem**
 - **Only Do Useful Work**
 - **Measure**
+
+Unfortunately I think they're too often neglected.
+
 ## Understand the Problem
+The purpose of human-designed systems is to solve problems. To build a fast system, we have to understand the problem we are solving, which includes understanding what we hope to achieve and the constraints under which we are operating.
+
 At their simplest, we can think of systems as transforming inputs into outputs. Two systems with the same inputs and outputs can have vastly different performance characteristics.
 
 We all know that nothing is faster than light. That is also true of software systems, which operate on physical computers, as much as marketing terms like "serverless" would have you think otherwise.
@@ -89,7 +98,7 @@ He was writing in 1974, when memory and processor speed were about the same. Sin
   </figcaption>
 </figure>
 
-In 1974, Knuth's programs executed almost directly on the CPU. A typical web application today has many more layers between its code and the CPU, including an operating system (30 million lines of code), a browser (26 million lines of code) with a virtual machine, and likely 10s-100s of 3rd party libraries running on end users' computers. It likely also involves many more computers spread across datacenters throughout the world, each with their own layers of software. There are many more choices to make, and programmers need to understand the soft constraints imposed by those choices and the choices of the people who use their software. Even if the problem they are solving calls for a web application (which might not be the case!), programmers and the people they work with can still decide the programming languages and 3rd party libraries they use, the code they write themselves, and on which computers the code runs. Every decision has consequences.
+In 1974, Knuth's programs executed almost directly on the CPU. A typical web application today has many more layers between its code and the CPU, including an operating system (30 million lines of code), a browser (26 million lines of code) with a virtual machine, and likely 10s-100s of 3rd party libraries running on end users' computers. It likely also involves many more computers spread across datacenters throughout the world, each with their own layers of software. There are many more choices to make, and programmers need to understand the soft constraints imposed by those choices and the choices of the people who use their software. Even if the problem they are solving calls for a web application (not all problems call for a web application!), programmers and the people they work with can still decide the programming languages and 3rd party libraries they use, the code they write themselves, and on which computers the code runs. Every decision has consequences.
 
 ## Only Do Useful Work
 Once we've understood the problem, we can use our understanding to minimize waste. The fastest thing is doing nothing. The fastest *useful* thing is doing nothing unneeded.
@@ -126,14 +135,16 @@ Contrast this with a different (yet unfortunately common) strategy: if I had tim
 Let's return to Knuth's "...premature optimization is the root of all evil." Many people use this quote to justify ignoring performance altogether until it becomes a problem, with the aim of maximizing productivity. In my experience, such a strategy inevitably backfires, resulting instead in an ever-growing productivity drain interspersed with heroic rewrite efforts.
 
 ## Measure
+Measuring is crucial for making faster systems. It lets us understand how fast our systems are in practice, which lets us make comparisons:
 
-Professional optimizers compare:
-1. How fast could it go?
-2. How fast does it go?
+1. We can compare two systems to understand which is faster.
+2. If we can estimate the theoretical optimal speed of a system, we can compare that estimate to our real system's speed to understand how much better it could be with additional effort.
 
-and then repeatedly measure and make changes until the actual speed approaches the estimated optimal theoretical speed.
+With comparisons in hand, we can iterate. When we make changes,
+1. how much faster or slower is the new system than the old one?
+2. how close is our new system to the theoretical top speed?
 
-When determining these values, it's important to differentiate *latency* (how long it takes to do something) from *throughput* (how many of those things you can do in a given timeframe). To understand the difference between latency and throughput, think of a laundromat. If a laundromat has 3 washing machines that each take 1 hour to wash a load of laundry, it will take no less than 1 hour to wash 1 load of laundry. The latency is 1 hour. Adding washing machines won't make it go faster, but a faster washing machine would. However, with 3 machines, you can wash up to 3 loads of laundry at the same time. The throughput is 3 loads/hour.
+When measuring "speed", it's important to differentiate *latency* (how long it takes to do something) from *throughput* (how many of those things you can do in a given timeframe). To understand the difference between latency and throughput, think of a laundromat. If a laundromat has 3 washing machines that each take 1 hour to wash a load of laundry, it will take no less than 1 hour to wash 1 load of laundry. The latency is 1 hour. Adding washing machines won't make it go faster, but a faster washing machine would. However, with 3 machines, you can wash up to 3 loads of laundry at the same time. The throughput is 3 loads/hour.
 
 For the rest of this section, I'll use latency measurements from the "brain" of a reactive robotic display case I programmed in 2018. Among other things, the brain was responsible for deciding the colors of 1189 individual LEDs, 30 times per second (once every 33 milliseconds) using a slow $35 computer. In this problem, the throughput was fixed --- the brain always needed to update all 1189 LEDs --- and the maximum acceptable latency was 33 milliseconds. Unfortunately, determining the colors was the slowest part of the program and by itself took over 100 milliseconds on the $35 computer. I needed to make it much faster. How did I know to focus on this part of the program? I used profiling tools.
 
@@ -196,7 +207,9 @@ To make faster systems, start by **Understanding the Problem**. Identify the sys
 
 Then, **Only Do Useful Work**. Instead of complicated approaches, prefer simple solutions that are easy to understand, change, and optimize. Don't skip over understanding by "optimizing" part of the system that didn't need to exist in the first place. This step is not optional; it is where the biggest improvements come from.
 
-Finally, **Measure**. True optimization involves iteratively comparing how fast a system is to how fast it should be, and making changes until you're satisfied. Use profiling tools to identify the slow parts of the system and plot all the data to understand whether you're actually making improvements. CDFs and CCDFs are great tools for this. Use the problem context to understand if the system is fast enough. Events that sound rare when summarized with percentiles might happen frequently in practice.
+Finally, **Measure**. When you make changes to your system, determine how the new system compares to the old one and how close it is to the theoretical top speed. Understand whether you care about latency, throughput, or both. Use profiling tools to identify the slow parts of the system and plot all the data to understand whether you're actually making improvements. CDFs and CCDFs are great tools for this. Use the problem context to understand if the system is fast enough. Events that sound rare when summarized with percentiles might happen frequently in practice.
+
+It seems self-evident that making faster systems is about taking slow systems and speeding them up, but it doesn't have to be. It can also involve making a system that is faster *than a slow system would have been*. This might sound like a pedantic distinction, but I think the change in framing is important: it shifts the activity from cleaning up a mess after the fact to making better decisions.
 
 In 1974, Knuth wrote "...premature optimization is the root of all evil." Computing has changed since 1974, and many people don't understand what he meant by "premature". Maybe it's time for a new phrase:
 
@@ -207,5 +220,5 @@ In 1974, Knuth wrote "...premature optimization is the root of all evil." Comput
 -------
 
 <small>
-Thanks to Casey Muratori, Mike Acton, and Gil Tene for teaching me new ways of thinking about software performance. Thanks to Cypress Frankenfeld, Clemens Ceipek, Elissa Ye, and Brendan Ritter for feedback on this essay.
+Thanks to Casey Muratori, Mike Acton, and Gil Tene for teaching me new ways of thinking about software performance. Thanks to Cypress Frankenfeld, Lishan AZ, Clemens Ceipek, Elissa Ye, and Brendan Ritter for feedback on this essay.
 </small>
