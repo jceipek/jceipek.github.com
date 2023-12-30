@@ -4,22 +4,13 @@
 <title>Julian Ceipek | Making Faster Systems</title>
 <meta name=robots content="index, follow">
 <meta name=generator content="Hugo 0.87.0">
-<link rel=apple-touch-icon sizes=57x57 href=/apple-touch-icon-57x57.png>
-<link rel=apple-touch-icon sizes=114x114 href=/apple-touch-icon-114x114.png>
-<link rel=apple-touch-icon sizes=72x72 href=/apple-touch-icon-72x72.png>
-<link rel=apple-touch-icon sizes=144x144 href=/apple-touch-icon-144x144.png>
-<link rel=apple-touch-icon sizes=60x60 href=/apple-touch-icon-60x60.png>
-<link rel=apple-touch-icon sizes=120x120 href=/apple-touch-icon-120x120.png>
-<link rel=apple-touch-icon sizes=76x76 href=/apple-touch-icon-76x76.png>
-<link rel=apple-touch-icon sizes=152x152 href=/apple-touch-icon-152x152.png>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon-180x180.png>
-<link rel=icon type=image/png href=/favicon-192x192.png sizes=192x192>
-<link rel=icon type=image/png href=/favicon-160x160.png sizes=160x160>
-<link rel=icon type=image/png href=/favicon-96x96.png sizes=96x96>
-<link rel=icon type=image/png href=/favicon-16x16.png sizes=16x16>
-<link rel=icon type=image/png href=/favicon-32x32.png sizes=32x32>
-<meta name=msapplication-TileColor content="#da532c">
-<meta name=msapplication-TileImage content="/mstile-144x144.png">
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<meta name=msapplication-TileColor content="#00aba9">
+<meta name=theme-color content="#ffffff">
 <link rel=preconnect href=https://fonts.googleapis.com>
 <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;500&family=Open+Sans:ital,wght@0,400;0,600;1,400&family=Source+Code+Pro&display=swap" rel=stylesheet>
@@ -61,7 +52,7 @@
 <h2>Making Faster Systems</h2>
 <span class=project-tagline></span>
 <span class=project-roles></span>
-<div class=project-about><p><em>This essay is based on a 2023 in-person presentation I gave to an audience of software, mechanical, and electrical engineers. Its examples are software-related, but the principles apply across domains.</em></p>
+<div class=project-about><p><em>This essay is inspired by a 2023 in-person presentation I gave to an audience of software, mechanical, and electrical engineers. While its examples are software-related, the principles apply across domains.</em></p>
 <p>In
 <a href=https://web.archive.org/web/20160405103933/http://www.univasf.edu.br/~marcus.ramos/pc-2008-2/p261-knuth.pdf target=_blank><em>Structured Programming with <code>go to</code> Statements</em></a>, Donald E. Knuth wrote &ldquo;&mldr;premature optimization is the root of all evil&rdquo;, and people have been misquoting him ever since. They tend to miss both what he meant by &ldquo;premature&rdquo; and what has changed since he wrote those words in 1974.</p>
 <p>But I&rsquo;ll get back to that. First, let&rsquo;s consider <em>why</em> we might want to make faster systems:</p>
@@ -71,13 +62,18 @@
 <li>It leads to a happier planet &mdash; reducing resource consumption reduces environmental impact.</li>
 <li>It leads to a happier <em>you</em>, because making systems faster is fun and rewarding.</li>
 </ol>
-<p>If we want to make faster systems, we need to:</p>
+<p>For a concrete example of why making faster systems matters, consider my work at Lumafield: reducing the time to inspect products from hours to under a minute allowed the company to serve customers in entirely new market segments (see
+<a href=/projects/x-ray-vision.html><em>Empowering Manufacturers with X-ray Vision</em></a>).</p>
+<p>When Knuth scorned &ldquo;premature optimization,&rdquo; he was referring to the practice of making small micro-optimizations throughout a program until the code becomes impossible to understand or change. While micro-optimizations are sometimes justified, making faster systems encompasses a broad spectrum of activities.</p>
+<p>There are three fundamental steps we need to take if we want to make faster systems:</p>
 <ul>
 <li><strong>Understand the Problem</strong></li>
 <li><strong>Only Do Useful Work</strong></li>
 <li><strong>Measure</strong></li>
 </ul>
+<p>Unfortunately I think they&rsquo;re too often neglected.</p>
 <h2 id=understand-the-problem>Understand the Problem</h2>
+<p>The purpose of human-designed systems is to solve problems. To build a fast system, we have to understand the problem we are solving, which includes understanding what we hope to achieve and the constraints under which we are operating.</p>
 <p>At their simplest, we can think of systems as transforming inputs into outputs. Two systems with the same inputs and outputs can have vastly different performance characteristics.</p>
 <p>We all know that nothing is faster than light. That is also true of software systems, which operate on physical computers, as much as marketing terms like &ldquo;serverless&rdquo; would have you think otherwise.</p>
 <p>Every computer has one or more CPUs (central processing units) that process inputs into outputs. To make faster software systems, we have to understand how fast the computers that execute them are.</p>
@@ -160,7 +156,7 @@ If they moved at their regular speeds, you wouldn&rsquo;t be able to tell their 
 (chart from <cite><a href=https://archive.org/details/computerarchitectureaquantitativeapproach6thedition/page/n111/mode/1up target=_blank>Computer Architecture: A Quantitative Approach, 6th Edition, page 80</a></cite>)
 </figcaption>
 </figure>
-<p>In 1974, Knuth&rsquo;s programs executed almost directly on the CPU. A typical web application today has many more layers between its code and the CPU, including an operating system (30 million lines of code), a browser (26 million lines of code) with a virtual machine, and likely 10s-100s of 3rd party libraries running on end users' computers. It likely also involves many more computers spread across datacenters throughout the world, each with their own layers of software. There are many more choices to make, and programmers need to understand the soft constraints imposed by those choices and the choices of the people who use their software. Even if the problem they are solving calls for a web application (which might not be the case!), programmers and the people they work with can still decide the programming languages and 3rd party libraries they use, the code they write themselves, and on which computers the code runs. Every decision has consequences.</p>
+<p>In 1974, Knuth&rsquo;s programs executed almost directly on the CPU. A typical web application today has many more layers between its code and the CPU, including an operating system (30 million lines of code), a browser (26 million lines of code) with a virtual machine, and likely 10s-100s of 3rd party libraries running on end users' computers. It likely also involves many more computers spread across datacenters throughout the world, each with their own layers of software. There are many more choices to make, and programmers need to understand the soft constraints imposed by those choices and the choices of the people who use their software. Even if the problem they are solving calls for a web application (not all problems call for a web application!), programmers and the people they work with can still decide the programming languages and 3rd party libraries they use, the code they write themselves, and on which computers the code runs. Every decision has consequences.</p>
 <h2 id=only-do-useful-work>Only Do Useful Work</h2>
 <p>Once we&rsquo;ve understood the problem, we can use our understanding to minimize waste. The fastest thing is doing nothing. The fastest <em>useful</em> thing is doing nothing unneeded.</p>
 <p>To illustrate this, I&rsquo;ll use a case study from a web project where I needed to find the brightest and darkest pixels in a user-specified region of an image. The inputs were the compressed image in main memory and the coordinates of the region. The desired outputs were the brightest and darkest pixel of the image.</p>
@@ -192,13 +188,17 @@ If they moved at their regular speeds, you wouldn&rsquo;t be able to tell their 
 <p>Contrast this with a different (yet unfortunately common) strategy: if I had timed the original program, I might have found that the slowest individual part was sorting the pixels. I might have tried to replace the sorting algorithm with a faster, &ldquo;optimized&rdquo; algorithm for this application. That would have been a mistake, because sorting wasn&rsquo;t necessary in the first place. Why waste time trying to make an unnecessary thing faster when you can remove it instead? <em>Nothing</em> is always faster than light.</p>
 <p>Let&rsquo;s return to Knuth&rsquo;s &ldquo;&mldr;premature optimization is the root of all evil.&rdquo; Many people use this quote to justify ignoring performance altogether until it becomes a problem, with the aim of maximizing productivity. In my experience, such a strategy inevitably backfires, resulting instead in an ever-growing productivity drain interspersed with heroic rewrite efforts.</p>
 <h2 id=measure>Measure</h2>
-<p>Professional optimizers compare:</p>
+<p>Measuring is crucial for making faster systems. It lets us understand how fast our systems are in practice, which lets us make comparisons:</p>
 <ol>
-<li>How fast could it go?</li>
-<li>How fast does it go?</li>
+<li>We can compare two systems to understand which is faster.</li>
+<li>If we can estimate the theoretical optimal speed of a system, we can compare that estimate to our real system&rsquo;s speed to understand how much better it could be with additional effort.</li>
 </ol>
-<p>and then repeatedly measure and make changes until the actual speed approaches the estimated optimal theoretical speed.</p>
-<p>When determining these values, it&rsquo;s important to differentiate <em>latency</em> (how long it takes to do something) from <em>throughput</em> (how many of those things you can do in a given timeframe). To understand the difference between latency and throughput, think of a laundromat. If a laundromat has 3 washing machines that each take 1 hour to wash a load of laundry, it will take no less than 1 hour to wash 1 load of laundry. The latency is 1 hour. Adding washing machines won&rsquo;t make it go faster, but a faster washing machine would. However, with 3 machines, you can wash up to 3 loads of laundry at the same time. The throughput is 3 loads/hour.</p>
+<p>With comparisons in hand, we can iterate. When we make changes,</p>
+<ol>
+<li>how much faster or slower is the new system than the old one?</li>
+<li>how close is our new system to the theoretical top speed?</li>
+</ol>
+<p>When measuring &ldquo;speed&rdquo;, it&rsquo;s important to differentiate <em>latency</em> (how long it takes to do something) from <em>throughput</em> (how many of those things you can do in a given timeframe). To understand the difference between latency and throughput, think of a laundromat. If a laundromat has 3 washing machines that each take 1 hour to wash a load of laundry, it will take no less than 1 hour to wash 1 load of laundry. The latency is 1 hour. Adding washing machines won&rsquo;t make it go faster, but a faster washing machine would. However, with 3 machines, you can wash up to 3 loads of laundry at the same time. The throughput is 3 loads/hour.</p>
 <p>For the rest of this section, I&rsquo;ll use latency measurements from the &ldquo;brain&rdquo; of a reactive robotic display case I programmed in 2018. Among other things, the brain was responsible for deciding the colors of 1189 individual LEDs, 30 times per second (once every 33 milliseconds) using a slow $35 computer. In this problem, the throughput was fixed &mdash; the brain always needed to update all 1189 LEDs &mdash; and the maximum acceptable latency was 33 milliseconds. Unfortunately, determining the colors was the slowest part of the program and by itself took over 100 milliseconds on the $35 computer. I needed to make it much faster. How did I know to focus on this part of the program? I used profiling tools.</p>
 <blockquote>
 <p>&ldquo;It is often a mistake to make a priori judgments about what parts of a program are really critical, since the universal experience of programmers who have been using measurement tools has been that their intuitive guesses fail.&rdquo;</p>
@@ -244,7 +244,8 @@ If they moved at their regular speeds, you wouldn&rsquo;t be able to tell their 
 <h2 id=putting-it-all-together>Putting it All Together</h2>
 <p>To make faster systems, start by <strong>Understanding the Problem</strong>. Identify the system inputs and outputs, and think about the hard constraints imposed by physics and the soft constraints imposed by your choices.</p>
 <p>Then, <strong>Only Do Useful Work</strong>. Instead of complicated approaches, prefer simple solutions that are easy to understand, change, and optimize. Don&rsquo;t skip over understanding by &ldquo;optimizing&rdquo; part of the system that didn&rsquo;t need to exist in the first place. This step is not optional; it is where the biggest improvements come from.</p>
-<p>Finally, <strong>Measure</strong>. True optimization involves iteratively comparing how fast a system is to how fast it should be, and making changes until you&rsquo;re satisfied. Use profiling tools to identify the slow parts of the system and plot all the data to understand whether you&rsquo;re actually making improvements. CDFs and CCDFs are great tools for this. Use the problem context to understand if the system is fast enough. Events that sound rare when summarized with percentiles might happen frequently in practice.</p>
+<p>Finally, <strong>Measure</strong>. When you make changes to your system, determine how the new system compares to the old one and how close it is to the theoretical top speed. Understand whether you care about latency, throughput, or both. Use profiling tools to identify the slow parts of the system and plot all the data to understand whether you&rsquo;re actually making improvements. CDFs and CCDFs are great tools for this. Use the problem context to understand if the system is fast enough. Events that sound rare when summarized with percentiles might happen frequently in practice.</p>
+<p>It seems self-evident that making faster systems is about taking slow systems and speeding them up, but it doesn&rsquo;t have to be. It can also involve making a system that is faster <em>than a slow system would have been</em>. This might sound like a pedantic distinction, but I think the change in framing is important: it shifts the activity from cleaning up a mess after the fact to making better decisions.</p>
 <p>In 1974, Knuth wrote &ldquo;&mldr;premature optimization is the root of all evil.&rdquo; Computing has changed since 1974, and many people don&rsquo;t understand what he meant by &ldquo;premature&rdquo;. Maybe it&rsquo;s time for a new phrase:</p>
 <blockquote>
 <p>Ignoring reality is the root of all evil.</p>
@@ -252,7 +253,7 @@ If they moved at their regular speeds, you wouldn&rsquo;t be able to tell their 
 </blockquote>
 <hr>
 <small>
-Thanks to Casey Muratori, Mike Acton, and Gil Tene for teaching me new ways of thinking about software performance. Thanks to Cypress Frankenfeld, Clemens Ceipek, Elissa Ye, and Brendan Ritter for feedback on this essay.
+Thanks to Casey Muratori, Mike Acton, and Gil Tene for teaching me new ways of thinking about software performance. Thanks to Cypress Frankenfeld, Lishan AZ, Clemens Ceipek, Elissa Ye, and Brendan Ritter for feedback on this essay.
 </small></div>
 </div>
 </div>
