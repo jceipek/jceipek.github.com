@@ -22,8 +22,10 @@ content=[
 ]
 
 [[categories]]
-name="Robotics"
+name="Robotics & Installations"
 content=[
+    "returning-the-gaze",
+    "iridescence",
     "mesolite",
     "cog",
     "aurora",

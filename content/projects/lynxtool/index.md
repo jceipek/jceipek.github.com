@@ -2,7 +2,7 @@
 title: Lynx
 tagline: exposing spreadsheets' hidden workings
 link: ''
-opens_new_page: true
+opens_new_page: false
 link_text: learn more
 img: thumb.png
 dark: false

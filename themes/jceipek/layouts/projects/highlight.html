@@ -12,23 +12,23 @@
         <h3>{{.Title}}</h3>
         <span class="project-tagline">{{.Param "tagline"}}</span>
     </span>  */}}
-    <span class="project-description">
+    {{/*  <span class="project-description">
         <span class="project-tagline">{{.Param "tagline"}}</span>
-    </span>
+    </span>  */}}
     <span class="img-container {{ with .Params.dark }}img-container--dark{{ end }}">
         {{ $img := .Resources.GetMatch .Params.img }}
         {{ if $img }}
-        <img src="{{ $img.RelPermalink }}" /> {{/* TODO(JULIAN): better resource path */}}
+        <img src="{{ $img.RelPermalink }}" height="{{ $img.Height }}" width="{{ $img.Width }}" /> {{/* TODO(JULIAN): better resource path */}}
         {{/*TODO(JULIAN): imgsrcset and resolutions for better image loading esp in mobile; retina*/}}
         {{ end }}
     </span>
     {{/*  <span class="highlight-summary">
     {{- .Content -}}
     </span>  */}}
-    <span class="project-details">
+{{/*      <span class="project-details">
         <span class="project-roles">{{ delimit .Params.roles ", " " &amp; " }}</span>
         {{ with .Params.collaborators }}
         <span class="project-collaborators"><span class="with">with</span> {{ delimit . ", " " &amp; " }}</span>
         {{ end }}
-    </span>
+    </span>  */}}
 </a>

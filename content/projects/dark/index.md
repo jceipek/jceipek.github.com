@@ -2,7 +2,7 @@
 title: Dark
 tagline: holistic language, editor, and infrastructure
 link: ''
-opens_new_page: true
+opens_new_page: false
 link_text: learn more
 img: DarkEditor.png
 dark: true
