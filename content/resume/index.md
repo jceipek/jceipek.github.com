@@ -89,7 +89,7 @@ tools= [
   employer= "Lynxtool"
   role="Founding Engineer"
   overview= """
-  Created Pixar-inspired technologies to visualize the hidden workings of spreadsheets with a friendly web-based programming tool. Company acquired by Figma, then Adobe.
+  Created Pixar-inspired technologies to visualize the hidden workings of spreadsheets with a friendly web-based programming tool. Company acquired by Figma.
   """
   [employment.detail]
     callouts=[
