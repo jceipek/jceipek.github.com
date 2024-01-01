@@ -20,11 +20,11 @@
                     {{ $img_orig := $src_img.Process "webp" }}
                     {{ $img_600 := $src_img.Resize "600x webp" }}
                     {{ $img_1200 := $src_img.Resize "1200x webp" }}
-                    <source type="image/webp" srcset="{{$img_600.RelPermalink}} {{$img_600.Width}}w, {{$img_1200.RelPermalink}} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" />
+                    <source type="image/webp" srcset="{{$img_600.RelPermalink}} {{$img_600.Width}}w, {{$img_1200.RelPermalink}} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" sizes="284px" />
                     {{ $img_orig := $src_img }}
                     {{ $img_600 := $src_img.Resize "600x jpeg" }}
                     {{ $img_1200 := $src_img.Resize "1200x jpeg" }}
-                    <img srcset="{{ $img_600.RelPermalink }} {{$img_600.Width}}w, {{ $img_1200.RelPermalink }} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" src="{{ $img_600.RelPermalink }}" />
+                    <img srcset="{{ $img_600.RelPermalink }} {{$img_600.Width}}w, {{ $img_1200.RelPermalink }} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" src="{{ $img_600.RelPermalink }}" sizes="284px" />
                 </picture>
             {{ end }}
         {{/*  <img src="{{ $img.RelPermalink }}" />   */}}{{/* TODO(JULIAN): better resource path */}}

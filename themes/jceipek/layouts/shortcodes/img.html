@@ -4,9 +4,9 @@
     {{ $img_orig := $src_img.Process "webp" }}
     {{ $img_600 := $src_img.Resize "600x webp" }}
     {{ $img_1200 := $src_img.Resize "1200x webp" }}
-    <source type="image/webp" srcset="{{$img_600.RelPermalink}} {{$img_600.Width}}w, {{$img_1200.RelPermalink}} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" />
+    <source type="image/webp" srcset="{{$img_600.RelPermalink}} {{$img_600.Width}}w, {{$img_1200.RelPermalink}} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" sizes="(min-width: 960px) 832px, calc(93.13vw - 43px)" />
     {{ $img_orig := $src_img }}
     {{ $img_600 := $src_img.Resize "600x jpeg" }}
     {{ $img_1200 := $src_img.Resize "1200x jpeg" }}
-    <img alt="{{ $img_alt }}" srcset="{{ $img_600.RelPermalink }} {{$img_600.Width}}w, {{ $img_1200.RelPermalink }} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" src="{{ $img_600.RelPermalink }}" />
+    <img alt="{{ $img_alt }}" srcset="{{ $img_600.RelPermalink }} {{$img_600.Width}}w, {{ $img_1200.RelPermalink }} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" src="{{ $img_600.RelPermalink }}" sizes="(min-width: 960px) 832px, calc(93.13vw - 43px)" />
 </picture>

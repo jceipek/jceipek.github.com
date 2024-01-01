@@ -22,11 +22,11 @@
                 {{ $img_orig := $src_img.Process "webp" }}
                 {{ $img_600 := $src_img.Resize "600x webp" }}
                 {{ $img_1200 := $src_img.Resize "1200x webp" }}
-                <source type="image/webp" srcset="{{$img_600.RelPermalink}} {{$img_600.Width}}w, {{$img_1200.RelPermalink}} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" sizes="{{ $img_orig.Width }}px" />
+                <source type="image/webp" srcset="{{$img_600.RelPermalink}} {{$img_600.Width}}w, {{$img_1200.RelPermalink}} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" sizes="(min-width: 1000px) calc(50vw - 62px), calc(100vw - 64px)" />
                 {{ $img_orig := $src_img }}
                 {{ $img_600 := $src_img.Resize "600x jpeg" }}
                 {{ $img_1200 := $src_img.Resize "1200x jpeg" }}
-                <img srcset="{{ $img_600.RelPermalink }} {{$img_600.Width}}w, {{ $img_1200.RelPermalink }} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" src="{{ $img_600.RelPermalink }}" height="{{ $img_orig.Height }}" width="{{ $img_orig.Width }}" sizes="{{ $img_orig.Width }}px" />
+                <img srcset="{{ $img_600.RelPermalink }} {{$img_600.Width}}w, {{ $img_1200.RelPermalink }} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" src="{{ $img_600.RelPermalink }}" height="{{ $img_orig.Height }}" width="{{ $img_orig.Width }}" sizes="(min-width: 1000px) calc(50vw - 62px), calc(100vw - 64px)" />
             </picture>
         {{ end }}
     </span>
