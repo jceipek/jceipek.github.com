@@ -16,10 +16,18 @@
         <span class="project-tagline">{{.Param "tagline"}}</span>
     </span>  */}}
     <span class="img-container {{ with .Params.dark }}img-container--dark{{ end }}">
-        {{ $img := .Resources.GetMatch .Params.img }}
-        {{ if $img }}
-        <img src="{{ $img.RelPermalink }}" height="{{ $img.Height }}" width="{{ $img.Width }}" /> {{/* TODO(JULIAN): better resource path */}}
-        {{/*TODO(JULIAN): imgsrcset and resolutions for better image loading esp in mobile; retina*/}}
+        {{ $src_img := .Resources.GetMatch .Params.img }}
+        {{ if $src_img }}
+            <picture>
+                {{ $img_orig := $src_img.Process "webp" }}
+                {{ $img_600 := $src_img.Resize "600x webp" }}
+                {{ $img_1200 := $src_img.Resize "1200x webp" }}
+                <source type="image/webp" srcset="{{$img_600.RelPermalink}} {{$img_600.Width}}w, {{$img_1200.RelPermalink}} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" sizes="{{ $img_orig.Width }}px" />
+                {{ $img_orig := $src_img }}
+                {{ $img_600 := $src_img.Resize "600x jpeg" }}
+                {{ $img_1200 := $src_img.Resize "1200x jpeg" }}
+                <img srcset="{{ $img_600.RelPermalink }} {{$img_600.Width}}w, {{ $img_1200.RelPermalink }} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" src="{{ $img_600.RelPermalink }}" height="{{ $img_orig.Height }}" width="{{ $img_orig.Width }}" sizes="{{ $img_orig.Width }}px" />
+            </picture>
         {{ end }}
     </span>
     {{/*  <span class="highlight-summary">

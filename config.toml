@@ -4,6 +4,10 @@ title = "Julian Ceipek"
 theme = "jceipek"
 UglyUrls = true
 
+[outputFormats]
+  [outputFormats.html]
+    isPlainText = true
+
 [markup.goldmark.renderer]
   unsafe = true
 

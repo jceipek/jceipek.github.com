@@ -1,0 +1,12 @@
+{{ $src_img := .Page.Resources.GetMatch (.Get "src") }}
+{{ $img_alt := .Get "alt" }}
+<picture>
+    {{ $img_orig := $src_img.Process "webp" }}
+    {{ $img_600 := $src_img.Resize "600x webp" }}
+    {{ $img_1200 := $src_img.Resize "1200x webp" }}
+    <source type="image/webp" srcset="{{$img_600.RelPermalink}} {{$img_600.Width}}w, {{$img_1200.RelPermalink}} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" />
+    {{ $img_orig := $src_img }}
+    {{ $img_600 := $src_img.Resize "600x jpeg" }}
+    {{ $img_1200 := $src_img.Resize "1200x jpeg" }}
+    <img alt="{{ $img_alt }}" srcset="{{ $img_600.RelPermalink }} {{$img_600.Width}}w, {{ $img_1200.RelPermalink }} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" src="{{ $img_600.RelPermalink }}" />
+</picture>
