@@ -2,6 +2,8 @@
 link: ''
 link_text: read my essay
 img: "thumb.png"
+img_alt: "A field of glowing translucent fibers beckons in the darkness."
+description: "Three oft-forgotten steps for making faster, simpler systems that benefit you, your customers, and the planet."
 dark: true
 title: Making Faster Systems
 collaborators: []

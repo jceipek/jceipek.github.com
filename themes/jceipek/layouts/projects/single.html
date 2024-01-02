@@ -1,14 +1,29 @@
-{{ define "main" }}
-	<div class='project-expl-container'>
-		{{ $leftIcon := resources.Get "/icons/left-icon.png" }}
-		<a href="/"><img src="{{$leftIcon.RelPermalink}}" />All projects</a>
-		<div class='project-expl'>
-			{{ $src_img := .Resources.GetMatch .Params.img }}
-			{{ if $src_img }}
-			<span class='img-container {{ with .Params.dark }}img-container--dark{{ end }}'>
+{{ define "metas" }}
+<meta property="og:title" content="{{- .Params.Title -}}"/>
+<meta property="og:type" content="website" />
+{{ $src_img := .Resources.GetMatch .Params.img }}
+{{ if $src_img -}}
+	<meta property="og:image" content="{{- $src_img.Permalink -}}"/>
+{{- end }}
+{{ if .Param "description" -}}
+	<meta property="og:description" content="{{- .Param `description` -}}"/>
+{{- else }}
+	<meta property="og:description" content="{{.Params.tagline}}"/>
+{{- end }}
+<meta property="og:url" content="{{- .Permalink -}}"/>
+{{ end }}
 
+{{ define "main" }}
+<div class="project-expl-container">
+	{{ $leftIcon := resources.Get "/icons/left-icon.png" }}
+	<a href="/"><img src="{{$leftIcon.RelPermalink}}" alt="Back Arrow" />All projects</a>
+	<div class="project-expl">
+		{{ $src_img := .Resources.GetMatch .Params.img }}
+		{{ $img_alt := (or (.Params.img_alt) "") }}
+		{{ if $src_img }}
+		<span class="img-container {{ with .Params.dark }}img-container--dark{{ end }}">
 				{{ if eq $src_img.MediaType.SubType "svg" }}
-					<img src="{{ $src_img.RelPermalink }}" />
+					<img alt="{{ $img_alt }}" src="{{ $src_img.RelPermalink }}" />
             	{{ else }}
 					<picture>
 						{{ $img_orig := $src_img.Process "webp" }}
@@ -18,18 +33,18 @@
 						{{ $img_orig := $src_img }}
 						{{ $img_600 := $src_img.Resize "600x jpeg" }}
 						{{ $img_1200 := $src_img.Resize "1200x jpeg" }}
-						<img srcset="{{ $img_600.RelPermalink }} {{$img_600.Width}}w, {{ $img_1200.RelPermalink }} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" src="{{ $img_600.RelPermalink }}" sizes="284px" />
+						<img alt="{{ $img_alt }}" srcset="{{ $img_600.RelPermalink }} {{$img_600.Width}}w, {{ $img_1200.RelPermalink }} {{$img_1200.Width}}w, {{$img_orig.RelPermalink}} {{$img_orig.Width}}w" src="{{ $img_600.RelPermalink }}" sizes="284px" />
 					</picture>
 				{{ end }}
 			</span>
 			{{ end }}
 			<h2>{{.Params.title}}</h2>
-			<span class='project-tagline'>{{.Params.tagline}}</span>
-			<span class='project-roles'>{{ delimit .Params.roles ", " " &amp; " }}</span>
+			<span class="project-tagline">{{.Params.tagline}}</span>
+			<span class="project-roles">{{ delimit .Params.roles ", " " &amp; " }}</span>
 			{{ with .Params.collaborators }}
-			<span class='project-collaborators'><span class='with'>{{if gt (len .) 1}}collaborators:{{else}}collaborator:{{end}}</span> {{ delimit . ", " " &amp; " }}</span>
+			<span class="project-collaborators"><span class="with">{{if gt (len .) 1}}collaborators:{{else}}collaborator:{{end}}</span> {{ delimit . ", " " &amp; " }}</span>
 			{{ end }}
-		    <div class='project-about'>{{ .Content }}</div>
+		    <div class="project-about">{{ .Content }}</div>
 		</div>
 	</div>
 {{ end }}

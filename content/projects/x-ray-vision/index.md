@@ -2,8 +2,10 @@
 title: Empowering Manufacturers with X-ray Vision
 link: ''
 opens_new_page: false
-link_text: explore my work @ Lumafield
+link_text: explore my impact @ Lumafield
 img: 'Open Neptune scanner with robotic arm.jpg'
+img_alt: "A sleek robotic arm mounted in front of an open-doored matte-black machine displaying an X-ray of an automotive part on an inset touchscreen prepares to reach for a shelf of similar parts to scan. A nearby graphical analysis dashboard displays quality control results from the past six scanned parts."
+description: "How I saved Lumafield's customers hundreds of thousands of dollars and helped the company enter an entirely new market segment."
 dark: true
 collaborators: []
 tagline: ''
