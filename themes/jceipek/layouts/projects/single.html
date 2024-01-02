@@ -2,7 +2,10 @@
 <meta property="og:title" content="{{- .Params.Title -}}"/>
 <meta property="og:type" content="website" />
 {{ $src_img := .Resources.GetMatch .Params.img }}
-{{ if $src_img -}}
+{{ $og_img := .Resources.GetMatch .Params.og_img }}
+{{ if $og_img -}}
+	<meta property="og:image" content="{{- $og_img.Permalink -}}"/>
+{{ else if $src_img }}
 	<meta property="og:image" content="{{- $src_img.Permalink -}}"/>
 {{- end }}
 {{ if .Param "description" -}}
