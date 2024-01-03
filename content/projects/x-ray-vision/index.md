@@ -59,7 +59,7 @@ After the success of the tradeshow demo, I helped turn fast scanning into a prod
 This work enables [Triton](https://web.archive.org/web/20231219193002/https://www.lumafield.com/article/introducing-triton-production-ready-automated-ct-inspection), Lumafield's production-ready industrial CT machine for factories, to scan parts in under a minute.
 
 ## Reducing Internal Costs
-Uncompressed per-scan data occupies 10s to 100s of gigabytes and needs extensive processing to extract actionable 3D data and insights. Transferring and processing all this data can get expensive when using third party datacenters like those provided by Amazon, particularly for high-volume customers. I led a 75% variable cost reduction project that allowed us to optionally move Lumafield's 3D reconstruction pipeline from AWS servers to on-scanner CPU+GPU compute in exchange for a relatively small increase in scanner cost. During the project, I...
+Uncompressed per-scan data occupies 10s to 100s of gigabytes and needs extensive processing to extract actionable 3D data and insights. Transferring and processing all this data can get expensive when using third party datacenters like those provided by Amazon, particularly for high-volume customers. I led a 75% variable cost reduction project that allowed us to optionally move Lumafield's 3D reconstruction pipeline from AWS servers to on-scanner CPU+GPU compute in exchange for a relatively small increase in fixed scanner cost. During the project, I...
 - established project milestones and test plans
 - designed the software architecture with input from the embedded and backend software teams
 - identified and delegated required hardware, electrical, and software tasks across teams
