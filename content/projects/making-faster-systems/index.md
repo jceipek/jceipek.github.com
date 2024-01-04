@@ -219,6 +219,8 @@ In 1974, Knuth wrote "...premature optimization is the root of all evil." Comput
 > 
 > -- Julian Ceipek, 2023
 
+Go forth, and make faster systems!
+
 -------
 
 <small>
