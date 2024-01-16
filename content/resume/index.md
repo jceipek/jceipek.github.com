@@ -45,7 +45,7 @@ I love **learning**, **collaborating** & **teaching**.""" # learning, force mult
 tools= [
   """Primary prototyping languages: **TypeScript** and **Python**.
   
-  Developed non-trivial programs in C#, Go, C, Objective-C, OCaml, Odin, LISP, SML, MATLAB, BASIC, JavaScript, Java, and LabView. Often experiment with new languages.""",
+  Developed non-trivial programs in C#, Go, C/C++, Objective-C, OCaml, Odin, LISP, SML, MATLAB, BASIC, JavaScript, Java, and LabView. Often experiment with new languages.""",
   " Adept with **Unity**, **Inkscape**, **Blender**, **Final Cut Pro**, and **Photoshop** for 5+ years."
 ]
 
