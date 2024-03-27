@@ -79,7 +79,7 @@ tools= [
   altImage="Lumafield CT Scan of Airpods"
   imageCss="justify-self: right; width: auto; height: 6.8rem;"
   callouts=[
-    "Enabled Lumafield's expansion into new market segments with high-volume inspection requirements; combining systemic redesigns with low-level SIMD optimizations to reduce X-ray scan times from hours to minutes while increasing data quality.",
+    "Enabled Lumafield's expansion into new market segments with high-volume inspection requirements; combining systemic redesigns with low-level SIMD optimizations to reduce X-ray scan times from hours to under a minute while increasing data quality.",
     "Helped customers save hundreds of thousands of dollars by creating the core WebGL2 renderer they use to inspect products and prototypes for internal defects.",
     "Led 75% variable cost reduction project to move the 3d reconstruction pipeline from AWS servers to on-scanner CPU+GPU compute for high-volume customers."
   ]
