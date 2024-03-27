@@ -262,8 +262,10 @@ li, p {
   }
 
   .award:not(:last-child) ::after {
-    content: " | ";
+    content: "|";
     color: rgb(124, 124, 124);
+    padding-left: 3px;
+    padding-right: 3px;
   }
 
   .section-content ul {
